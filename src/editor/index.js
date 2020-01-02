@@ -1,6 +1,8 @@
 import React, { useMemo, useState, useCallback } from 'react'
 import { Slate, Editable, withReact } from 'slate-react'
 import { createEditor, Transforms, Editor, Text, Node } from 'slate'
+import { withHistory } from 'slate-history'
+
 import { isActiveBlock, isActiveFormat } from './untils'
 import BlockSettings from '../blocks'
 import FormatSettings from '../formats'
@@ -14,7 +16,7 @@ const defaultInitParams = {
 export default initParams => {
   const params = Object.assign(defaultInitParams, initParams)
 
-  const editor = useMemo(() => withReact(createEditor()), [])
+  const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [value, setValue] = useState(params.content)
 
   const renderElement = useCallback(props => {
