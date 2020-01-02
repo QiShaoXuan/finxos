@@ -1,4 +1,35 @@
+import React, { useCallback } from 'react'
 import { Editor } from 'slate'
+import BlockSettings from '../blocks'
+import FormatSettings from '../formats'
+
+export const renderElement = props => {
+  const {
+    element: { type },
+  } = props
+
+  const RenderSetting =
+    BlockSettings.find(v => {
+      return v.name === type
+    }) || BlockSettings.find(v => v.name === 'paragraph')
+
+  return <RenderSetting.render {...props} />
+}
+
+export const renderLeaf = props => {
+  const RenderFormats = FormatSettings.filter(v => props.leaf[v.name])
+
+  return (
+    <span {...props.attributes}>
+      {RenderFormats.reduce(
+        (children, Format) => (
+          <Format.render {...props.attributes}>{children}</Format.render>
+        ),
+        props.children
+      )}
+    </span>
+  )
+}
 
 export const isActiveBlock = (editor, blockName) => {
   const [match] = Editor.nodes(editor, {

@@ -4,9 +4,9 @@ export default {
   name: 'bold',
   title: '粗体',
   render: props => {
-    return <strong {...props.attributes}>{props.children}</strong>
+    return <code {...props.attributes}>{props.children}</code>
   },
   shortcut: event => {
-    return event.ctrlKey && event.key === 'b'
+    return event.ctrlKey && event.key === '`'
   },
 }

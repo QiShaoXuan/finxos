@@ -1,12 +1,11 @@
 import React, { useMemo, useState, useCallback } from 'react'
+import { createEditor, Transforms, Editor, Text, Node, Range } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
-import { createEditor, Transforms, Editor, Text, Node } from 'slate'
 import { withHistory } from 'slate-history'
 
-import { isActiveBlock, isActiveFormat } from './untils'
-import BlockSettings from '../blocks'
-import FormatSettings from '../formats'
+import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils'
 
+import ToolBar from '../components/toolbar'
 import './style.scss'
 
 const defaultInitParams = {
@@ -18,41 +17,33 @@ export default initParams => {
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [value, setValue] = useState(params.content)
-
-  const renderElement = useCallback(props => {
-    const {
-      element: { type },
-    } = props
-
-    const RenderSetting =
-      BlockSettings.find(v => {
-        return v.name === type
-      }) || BlockSettings.find(v => v.name === 'paragraph')
-
-    return <RenderSetting.render {...props} />
-  }, [])
-
-  const renderLeaf = useCallback(props => {
-    const RenderFormats = FormatSettings.filter(v => props.leaf[v.name])
-
-    return (
-      <span {...props.attributes}>
-        {RenderFormats.reduce(
-          (children, Format) => (
-            <Format.render {...props.attributes}>{children}</Format.render>
-          ),
-          props.children
-        )}
-      </span>
-    )
-  }, [])
+  const [toolBarVisible, setToolBarVisible] = useState(false)
 
   return (
-    <Slate editor={editor} value={value} onChange={value => setValue(value)}>
+    <Slate
+      editor={editor}
+      value={value}
+      onChange={value => {
+        setValue(value)
+
+        const { selection } = editor
+        const {start} = Range.edges(selection)
+console.log('Editor',Editor)
+
+        console.log(Editor.before(editor, start, { unit: 'word' }))
+
+
+        if (selection) {
+          setToolBarVisible(!Range.isCollapsed(selection))
+        }
+
+      }}
+    >
+      <ToolBar visible={toolBarVisible}></ToolBar>
       <Editable
         editor={editor}
-        renderElement={renderElement}
-        renderLeaf={renderLeaf}
+        renderElement={useCallback(renderElement, [])}
+        renderLeaf={useCallback(renderLeaf, [])}
         onKeyDown={event => {
           const renderBlock = BlockSettings.find(v => v.shortcut && v.shortcut(event))
           const renderFormat = FormatSettings.find(v => v.shortcut && v.shortcut(event))
@@ -63,17 +54,17 @@ export default initParams => {
             return
           }
 
-          if (renderBlock) {
-            event.preventDefault()
-            const isActive = isActiveBlock(editor, renderBlock.name)
-            Transforms.setNodes(
-              editor,
-              { type: isActive ? null : renderBlock.name },
-              {
-                match: n => Editor.isBlock(editor, n),
-              }
-            )
-          }
+          // if (renderBlock) {
+          //   event.preventDefault()
+          //   const isActive = isActiveBlock(editor, renderBlock.name)
+          //   Transforms.setNodes(
+          //     editor,
+          //     { type: isActive ? null : renderBlock.name },
+          //     {
+          //       match: n => Editor.isBlock(editor, n),
+          //     }
+          //   )
+          // }
 
           if (renderFormat) {
             event.preventDefault()
