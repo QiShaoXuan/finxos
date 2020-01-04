@@ -3,7 +3,10 @@ import { createEditor, Transforms, Editor, Text, Node, Range } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 import { withHistory } from 'slate-history'
 
-import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils'
+import { renderElement, renderLeaf, isActiveBlock, isActiveFormat,getCurrentCaretPositionStyle } from './untils'
+
+import BlockSettings from '../blocks'
+import FormatSettings from '../formats'
 
 import ToolBar from '../components/toolbar'
 import './style.scss'
@@ -17,7 +20,9 @@ export default initParams => {
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), [])
   const [value, setValue] = useState(params.content)
+
   const [toolBarVisible, setToolBarVisible] = useState(false)
+  const [toolBarPosition, settoolBarPosition] = useState(null)
 
   return (
     <Slate
@@ -27,19 +32,15 @@ export default initParams => {
         setValue(value)
 
         const { selection } = editor
-        const {start} = Range.edges(selection)
-console.log('Editor',Editor)
-
-        console.log(Editor.before(editor, start, { unit: 'word' }))
-
-
         if (selection) {
           setToolBarVisible(!Range.isCollapsed(selection))
+          if (!Range.isCollapsed(selection)) {
+            settoolBarPosition(getCurrentCaretPositionStyle())
+          }
         }
-
       }}
     >
-      <ToolBar visible={toolBarVisible}></ToolBar>
+      <ToolBar visible={toolBarVisible} position={toolBarPosition}></ToolBar>
       <Editable
         editor={editor}
         renderElement={useCallback(renderElement, [])}
