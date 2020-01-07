@@ -2,10 +2,8 @@ import React, { useCallback } from 'react'
 import { Editor } from 'slate'
 
 import BlockRender from '../tools/block-render'
-import BlockSettings from '../blocks'
-import FormatSettings from '../formats'
 
-export const renderElement = props => {
+export const renderElement = (props, BlockSettings) => {
   const {
     element: { type },
   } = props
@@ -18,7 +16,7 @@ export const renderElement = props => {
   return <BlockRender {...props} RenderSetting={RenderSetting} />
 }
 
-export const renderLeaf = props => {
+export const renderLeaf = (props, FormatSettings) => {
   const RenderFormats = FormatSettings.filter(v => props.leaf[v.name])
 
   return (
@@ -46,4 +44,3 @@ export const isActiveFormat = (editor, format) => {
   })
   return !!match
 }
-

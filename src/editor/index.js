@@ -11,6 +11,8 @@ import FormatSettings from '../formats'
 
 import ToolBar from '../components/toolbar'
 import './style.scss'
+import BlockMenu from '../components/block-menu'
+import Header from '../components/header'
 
 const defaultInitParams = {
   content: [],
@@ -44,11 +46,19 @@ export default initParams => {
         }
       }}
     >
+      <Header>
+        <BlockMenu BlockSettings={BlockSettings} />
+        {/*<div>*/}
+        {/*  {config.selectedBlocks.map(v => (*/}
+        {/*    <span key={v}>{v}</span>*/}
+        {/*  ))}*/}
+        {/*</div>*/}
+      </Header>
       <ToolBar visible={toolBarVisible} position={toolBarPosition} formatSettings={FormatSettings}></ToolBar>
       <Editable
         editor={editor}
-        renderElement={useCallback(renderElement, [])}
-        renderLeaf={useCallback(renderLeaf, [])}
+        renderElement={useCallback(props => renderElement(props, BlockSettings), [])}
+        renderLeaf={useCallback(props => renderLeaf(props, FormatSettings), [])}
         onKeyDown={event => {
           const renderBlock = BlockSettings.find(v => v.shortcut && v.shortcut(event))
           const renderFormat = FormatSettings.find(v => v.shortcut && v.shortcut(event))

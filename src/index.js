@@ -2,6 +2,7 @@ import React, { useReducer } from 'react'
 import { ConfigContext, ConfigReducer } from './store'
 import Editor from './editor'
 import Header from './components/header'
+import BlockMenu from './components/block-menu'
 import { Button } from './components/button'
 
 import 'antd/dist/antd.css'
@@ -22,14 +23,6 @@ export default props => {
       }}
     >
       <div className="finxos-container">
-        <Header>
-          <Button type="primary">Primary</Button>
-          <div>
-            {config.selectedBlocks.map(v => (
-              <span key={v}>{v}</span>
-            ))}
-          </div>
-        </Header>
         <div className="finxos-wrapper">
           <Editor {...props} />
         </div>
