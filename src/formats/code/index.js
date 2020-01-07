@@ -1,8 +1,9 @@
 import React from 'react'
 
 export default {
-  name: 'bold',
-  title: '粗体',
+  name: 'code',
+  title: '代码段',
+  icon: () => <img src={require('./code.svg')} alt="" />,
   render: props => {
     return <code {...props.attributes}>{props.children}</code>
   },
@@ -10,3 +11,4 @@ export default {
     return event.ctrlKey && event.key === '`'
   },
 }
+<Icon type="" />

@@ -25,6 +25,19 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
+        test: /\.css/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+            },
+          },
+          'css-loader',
+          'postcss-loader',
+        ],
+      },
+      {
         test: /\.scss$/,
         use: [
           {
@@ -34,6 +47,7 @@ module.exports = {
             },
           },
           'css-loader',
+          'postcss-loader',
           'sass-loader',
         ],
       },

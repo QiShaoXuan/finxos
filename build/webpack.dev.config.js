@@ -13,9 +13,10 @@ module.exports = webpackMerge(baseWebpackConfig, {
       inject: true,
     }),
   ],
+  devtool: 'inline-source-map',
   devServer: {
     historyApiFallback: true,
-    hot: true,
+    // hot: true,
     contentBase: false,
     compress: true,
     publicPath: '/',

@@ -6,11 +6,20 @@ import './assets/styles/reset.scss'
 const content = [
   {
     type: 'paragraph',
-    children: [{ text: 'A line of text in a paragraph.' }],
+    children: [
+      // {
+      //   type: 'code',
+      //   children: [{
+      //     type: 'paragraph',
+      //     children: [{ text: 'inner paragraph' }],
+      //   }],
+      // },
+      { text: 'A line of text in a paragraph.' },
+    ],
   },
   {
     type: 'code',
-    children: [{ text: 'A line of text in a paragraph.' }],
+    children: [{ text: 'outer code' }],
   },
 ]
 class App extends React.Component {

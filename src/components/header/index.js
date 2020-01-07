@@ -1,6 +1,6 @@
 import React from 'react'
 import './style.scss'
 
-export default () => {
-  return <div className="finxos-header"></div>
+export default props => {
+  return <div className="finxos-header">{props.children}</div>
 }

@@ -3,7 +3,8 @@ import { createEditor, Transforms, Editor, Text, Node, Range } from 'slate'
 import { Slate, Editable, withReact } from 'slate-react'
 import { withHistory } from 'slate-history'
 
-import { renderElement, renderLeaf, isActiveBlock, isActiveFormat,getCurrentCaretPositionStyle } from './untils'
+import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils'
+import getCurrentCaretPositionStyle from '../tools/caret-position'
 
 import BlockSettings from '../blocks'
 import FormatSettings from '../formats'
@@ -31,16 +32,19 @@ export default initParams => {
       onChange={value => {
         setValue(value)
 
-        const { selection } = editor
+        const { selection, children } = editor
+
         if (selection) {
           setToolBarVisible(!Range.isCollapsed(selection))
           if (!Range.isCollapsed(selection)) {
             settoolBarPosition(getCurrentCaretPositionStyle())
           }
+        } else {
+          setToolBarVisible(false)
         }
       }}
     >
-      <ToolBar visible={toolBarVisible} position={toolBarPosition}></ToolBar>
+      <ToolBar visible={toolBarVisible} position={toolBarPosition} formatSettings={FormatSettings}></ToolBar>
       <Editable
         editor={editor}
         renderElement={useCallback(renderElement, [])}
