@@ -1,23 +1,22 @@
-import React, { useContext } from 'react'
-
-import { useSelected, useFocused } from 'slate-react'
-import { ConfigContext } from '../../store/index'
+import React, { useContext, useEffect } from 'react'
+import { useSelectedBlocks } from '../../hooks/use-active-blocks'
+import { useSelected, useFocused, useSlate } from 'slate-react'
 
 export default props => {
-  const { RenderSetting } = props
+  const { RenderSetting, attributes } = props
+
+  const { updateSelectedBlocks } = useSelectedBlocks()
+
   const focused = useFocused()
   const selected = useSelected()
-  console.log('focused',focused)
-  
-  
-console.log('selected',selected)
 
-  const { configDispatch } = useContext(ConfigContext)
-
-  // configDispatch({
-  //   type: focused && selected ? 'addSelectedBlock' : 'removeSelectedBlock',
-  //   data: RenderSetting.name,
-  // })
+  updateSelectedBlocks({
+    action: focused && selected ? 'add' : "remove",
+    data: {
+      attributes,
+      RenderSetting,
+    },
+  })
 
   return (
     <>

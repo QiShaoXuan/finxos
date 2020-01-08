@@ -1,7 +1,8 @@
 import React, { useMemo, useState, useCallback } from 'react'
 import { createEditor, Transforms, Editor, Text, Node, Range } from 'slate'
-import { Slate, Editable, withReact } from 'slate-react'
+import { Slate, Editable, withReact, useFocused, useSelected } from 'slate-react'
 import { withHistory } from 'slate-history'
+import { useSelectedBlocks } from '../hooks/use-active-blocks'
 
 import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils'
 import getCurrentCaretPositionStyle from '../tools/caret-position'
@@ -26,15 +27,21 @@ export default initParams => {
 
   const [toolBarVisible, setToolBarVisible] = useState(false)
   const [toolBarPosition, settoolBarPosition] = useState(null)
-
+  const { selectedBlocks } = useSelectedBlocks()
   return (
     <Slate
       editor={editor}
       value={value}
       onChange={value => {
         setValue(value)
-
+        // -------------------- set toolbar visible and position ----------------------
         const { selection, children } = editor
+        console.log('Node', Node)
+
+        // console.log('get',node)
+        //
+        //  console.log('node',  Editor.node(editor, path))
+        //  console.log('leaves', Array.from( Node.levels(editor, path)))
 
         if (selection) {
           setToolBarVisible(!Range.isCollapsed(selection))
@@ -44,6 +51,7 @@ export default initParams => {
         } else {
           setToolBarVisible(false)
         }
+        // -------------------- END - set toolbar visible and position ----------------------
       }}
     >
       <Header>

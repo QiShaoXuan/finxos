@@ -12,7 +12,7 @@ export const renderElement = (props, BlockSettings) => {
     BlockSettings.find(v => {
       return v.name === type
     }) || BlockSettings.find(v => v.name === 'paragraph')
-
+// return     <RenderSetting.render {...props} />
   return <BlockRender {...props} RenderSetting={RenderSetting} />
 }
 
