@@ -1,8 +1,8 @@
 .finxos-toolbar {
   position: fixed;
   .toolbar-wrapper {
-    width: 100px;
-    height: 30px;
+    height: 38px;
+    display: flex;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -10,5 +10,31 @@
     box-shadow: -4px 4px 12px rgba(0, 0, 0, 0.1), 0px 0px 2px rgba(0, 0, 0, 0.08);
     background: #fff;
     border-radius: 4px;
+    padding: 5px;
+  }
+  .toolbar-button {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 2px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    &.active {
+      background: #eee;
+      svg {
+        color: #5c6369;
+        fill: #5c6369;
+      }
+    }
+    svg {
+      width: 16px;
+      height: 16px;
+      color: #bfc2c5;
+      fill: #bfc2c5;
+    }
   }
 }

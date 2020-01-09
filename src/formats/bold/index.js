@@ -1,9 +1,11 @@
 import React from 'react';
+import Icon from './bold.svg';
+import __ from '@Finxos/i18n';
 
 export default {
   name: 'bold',
-  title: '加粗',
-  icon: () => <img src={require('./bold.svg')} alt="" />,
+  title: __('Bold'),
+  icon: Icon,
   render: props => {
     return <strong {...props.attributes}>{props.children}</strong>;
   },

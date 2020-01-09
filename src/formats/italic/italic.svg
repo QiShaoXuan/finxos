@@ -1,18 +1,1 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
-    <title>画板备份 31</title>
-    <desc>Created with Sketch.</desc>
-    <g id="画板备份-31" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="编组-13" transform="translate(3.000000, 1.000000)">
-            <g id="编组-8">
-                <g id="编组-15" fill="#5A6067">
-                    <polygon id="矩形" points="0 0 9 0 9 1 0 1"></polygon>
-                    <polygon id="矩形" points="5 1 6 1 4 12 3 12"></polygon>
-                    <polygon id="矩形复制-24" points="0 12 9 12 9 13 0 13"></polygon>
-                </g>
-                <g id="编组-4"></g>
-            </g>
-        </g>
-    </g>
-</svg>
+<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="200px" height="200.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#515151" d="M779.71 129.73V44.17H523.03v85.56h70.83L362.89 898.61h-96.54v85.56h256.68v-85.56H452.2l230.98-768.88z" /></svg>

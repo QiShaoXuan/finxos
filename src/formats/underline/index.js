@@ -1,20 +1,19 @@
 import React from 'react';
-import Icon from './code.svg';
+import Icon from './underline.svg';
 import __ from '@Finxos/i18n';
-
 import './style.scss';
 export default {
-  name: 'code',
-  title: __('Code'),
+  name: 'underline',
+  title: __('Underline'),
   icon: Icon,
   render: props => {
     return (
-      <code className="finxos-line-code" {...props.attributes}>
+      <span className="finxos-underline" {...props.attributes}>
         {props.children}
-      </code>
+      </span>
     );
   },
   shortcut: event => {
-    return event.ctrlKey && event.key === '`';
+    return event.ctrlKey && event.key === 'u';
   },
 };

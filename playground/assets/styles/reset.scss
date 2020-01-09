@@ -68,14 +68,6 @@ iframe,
 abbr {
   border: 0;
 }
-i,
-cite,
-em,
-var,
-address,
-dfn {
-  font-style: normal;
-}
 [hidefocus],
 summary {
   outline: 0;
@@ -129,10 +121,8 @@ strong,
 b {
   font-weight: bold;
 }
-del,
 ins,
 u,
-s,
 a,
 a:hover {
   text-decoration: none;
@@ -148,10 +138,7 @@ legend {
   color: #333;
   outline: 0;
 }
-a,
-a:hover {
-  color: #333;
-}
+
 html,
 body {
   height: 100%;

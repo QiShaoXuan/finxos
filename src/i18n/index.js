@@ -1,3 +1,3 @@
-export const __ = str => {
+export default str => {
   return str;
 };

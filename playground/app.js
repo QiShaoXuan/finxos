@@ -38,12 +38,12 @@ class App extends React.Component {
   render() {
     return (
       <div className="editor-container">
-        <FinxosSlate content={content}>
+        <FinxosSlate content={content} blocks={BlockSettings} formats={FormatSettings}>
           <Header portal={document.body}>
             <BlockMenu BlockSettings={BlockSettings} />
           </Header>
-          <ToolBar fromats={FormatSettings} />
-          <FinxosEditable blocks={BlockSettings} formats={FormatSettings} />
+          <ToolBar />
+          <FinxosEditable />
         </FinxosSlate>
       </div>
     );
