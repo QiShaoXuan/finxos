@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
+
 import { Editor, Range } from 'slate';
 import { useSlate, ReactEditor, useFocused } from 'slate-react';
 
@@ -24,9 +26,10 @@ export default props => {
     }
   }, [selection, focused]);
 
-  return (
+  return createPortal(
     <div className="finxos-toolbar" style={{ ...position() }}>
       <div className="toolbar-wrapper"></div>
-    </div>
+    </div>,
+    document.body
   );
 };

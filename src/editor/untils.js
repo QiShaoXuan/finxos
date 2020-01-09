@@ -12,7 +12,6 @@ export const renderElement = (props, BlockSettings) => {
     BlockSettings.find(v => {
       return v.name === type;
     }) || BlockSettings.find(v => v.name === 'paragraph');
-  // return     <RenderSetting.render {...props} />
   return <BlockRender {...props} RenderSetting={RenderSetting} />;
 };
 
@@ -34,13 +33,6 @@ export const renderLeaf = (props, FormatSettings) => {
 export const isActiveBlock = (editor, blockName) => {
   const [match] = Editor.nodes(editor, {
     match: n => n.type === blockName,
-  });
-  return !!match;
-};
-
-export const isActiveFormat = (editor, format) => {
-  const [match] = Editor.nodes(editor, {
-    match: n => n[format] === true,
   });
   return !!match;
 };

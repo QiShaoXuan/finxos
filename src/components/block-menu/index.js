@@ -5,7 +5,7 @@ import { Menu, Dropdown, Button } from 'antd';
 import createBlock from '../../tools/create-block.js';
 
 export default props => {
-  const editor = useSlate(``);
+  const editor = useSlate();
 
   const { BlockSettings } = props;
   const menu = (
