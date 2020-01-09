@@ -12,7 +12,7 @@ export const renderElement = (props, BlockSettings) => {
     BlockSettings.find(v => {
       return v.name === type
     }) || BlockSettings.find(v => v.name === 'paragraph')
-// return     <RenderSetting.render {...props} />
+  // return     <RenderSetting.render {...props} />
   return <BlockRender {...props} RenderSetting={RenderSetting} />
 }
 
@@ -43,4 +43,11 @@ export const isActiveFormat = (editor, format) => {
     match: n => n[format] === true,
   })
   return !!match
+}
+
+export const compose = (composeFns = [], target) => {
+  if (!target) {
+    return null
+  }
+  return composeFns.reverse().reduce((handler, fn) => fn(handler), target)
 }

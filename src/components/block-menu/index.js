@@ -5,7 +5,7 @@ import { useSlate } from 'slate-react'
 import { Menu, Dropdown, Button } from 'antd'
 import createBlock from '../../tools/create-block'
 export default props => {
-  const editor = useSlate()
+  const editor = useSlate(``)
 
   const { BlockSettings } = props
   const menu = (
