@@ -1,23 +1,23 @@
-import React, { useCallback } from 'react'
-import { Editor } from 'slate'
+import React, { useCallback } from 'react';
+import { Editor } from 'slate';
 
-import BlockRender from '../tools/block-render'
+import BlockRender from '../tools/block-render.js';
 
 export const renderElement = (props, BlockSettings) => {
   const {
     element: { type },
-  } = props
+  } = props;
 
   const RenderSetting =
     BlockSettings.find(v => {
-      return v.name === type
-    }) || BlockSettings.find(v => v.name === 'paragraph')
+      return v.name === type;
+    }) || BlockSettings.find(v => v.name === 'paragraph');
   // return     <RenderSetting.render {...props} />
-  return <BlockRender {...props} RenderSetting={RenderSetting} />
-}
+  return <BlockRender {...props} RenderSetting={RenderSetting} />;
+};
 
 export const renderLeaf = (props, FormatSettings) => {
-  const RenderFormats = FormatSettings.filter(v => props.leaf[v.name])
+  const RenderFormats = FormatSettings.filter(v => props.leaf[v.name]);
 
   return (
     <span {...props.attributes}>
@@ -28,26 +28,26 @@ export const renderLeaf = (props, FormatSettings) => {
         props.children
       )}
     </span>
-  )
-}
+  );
+};
 
 export const isActiveBlock = (editor, blockName) => {
   const [match] = Editor.nodes(editor, {
     match: n => n.type === blockName,
-  })
-  return !!match
-}
+  });
+  return !!match;
+};
 
 export const isActiveFormat = (editor, format) => {
   const [match] = Editor.nodes(editor, {
     match: n => n[format] === true,
-  })
-  return !!match
-}
+  });
+  return !!match;
+};
 
 export const compose = (composeFns = [], target) => {
   if (!target) {
-    return null
+    return null;
   }
-  return composeFns.reverse().reduce((handler, fn) => fn(handler), target)
-}
+  return composeFns.reverse().reduce((handler, fn) => fn(handler), target);
+};

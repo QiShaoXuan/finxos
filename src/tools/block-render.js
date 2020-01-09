@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react'
-import { useSelectedBlocks } from '../../hooks/use-active-blocks'
+import { useSelectedBlocks } from '../hooks/use-active-blocks'
 import { useSelected, useFocused, useSlate } from 'slate-react'
 
 export default props => {

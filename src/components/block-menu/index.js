@@ -1,13 +1,13 @@
-import React from 'react'
-import { Transforms } from 'slate'
-import { useSlate } from 'slate-react'
+import React from 'react';
+import { useSlate } from 'slate-react';
 
-import { Menu, Dropdown, Button } from 'antd'
-import createBlock from '../../tools/create-block'
+import { Menu, Dropdown, Button } from 'antd';
+import createBlock from '../../tools/create-block.js';
+
 export default props => {
-  const editor = useSlate(``)
+  const editor = useSlate(``);
 
-  const { BlockSettings } = props
+  const { BlockSettings } = props;
   const menu = (
     <Menu>
       {BlockSettings.map(block => (
@@ -16,10 +16,10 @@ export default props => {
         </Menu.Item>
       ))}
     </Menu>
-  )
+  );
   return (
     <Dropdown overlay={menu} placement="bottomLeft">
       <Button>添加</Button>
     </Dropdown>
-  )
-}
+  );
+};

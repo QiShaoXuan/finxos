@@ -1,17 +1,7 @@
 import { Editable, useSlate } from 'slate-react';
-import React, { useMemo, useState, useCallback } from 'react';
-import { createEditor, Transforms, Editor, Text, Node, Range } from 'slate';
-import { Slate, withReact, useFocused, useSelected } from 'slate-react';
-import { withHistory } from 'slate-history';
-import { useSelectedBlocks } from '../hooks/use-active-blocks';
+import React, { useCallback } from 'react';
 
-import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils';
-import getCurrentCaretPositionStyle from '../tools/caret-position';
-
-import BlockSettings from '../blocks';
-import FormatSettings from '../formats';
-
-import ToolBar from '../components/toolbar';
+import { renderElement, renderLeaf } from './untils';
 import './style.scss';
 
 export default props => {
