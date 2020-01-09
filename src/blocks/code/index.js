@@ -10,9 +10,6 @@ export default {
       </pre>
     )
   },
-  shortcut: event => {
-    return event.ctrlKey && event.key === '`'
-  },
   transform: props => {
     return 'code'
   },

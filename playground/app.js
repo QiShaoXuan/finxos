@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import Finxos from '../src';
-import './assets/styles/reset.scss';
+import { FinxosSlate, FinxosEditable } from '@Finxos/editor';
+import Header from '@Finxos/components/header';
+import BlockMenu from '@Finxos/components/block-menu';
+import ToolBar from '@Finxos/components/toolbar';
 
+import 'antd/dist/antd.css';
+import './style.scss';
+import BlockSettings from '@Finxos/blocks';
+import FormatSettings from '@Finxos/formats';
+import './assets/styles/reset.scss';
+import './style.scss';
 const content = [
   {
     type: 'paragraph',
@@ -25,12 +33,19 @@ const content = [
     children: [{ text: 'outer code' }],
   },
 ];
+
 class App extends React.Component {
   render() {
     return (
-      <>
-        <Finxos content={content} />
-      </>
+      <div className="editor-container">
+        <FinxosSlate content={content}>
+          <Header portal={document.body}>
+            <BlockMenu BlockSettings={BlockSettings} />
+          </Header>
+          <ToolBar fromats={FormatSettings} />
+          <FinxosEditable blocks={BlockSettings} formats={FormatSettings} />
+        </FinxosSlate>
+      </div>
     );
   }
 }

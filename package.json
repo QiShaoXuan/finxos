@@ -61,6 +61,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
-    "antd": "^3.26.6"
+    "antd": "^3.26.6",
+    "lodash": "^4.17.15"
   }
 }

@@ -9,6 +9,7 @@ export default {
     const selected = useSelected();
     return <p {...props.attributes}>{props.children}</p>;
   },
+  formats:[''],
   transform: props => {
     return 'default';
   },

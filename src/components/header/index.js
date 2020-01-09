@@ -1,6 +1,9 @@
-import React from 'react'
-import './style.scss'
+import React from 'react';
+import { createPortal } from 'react-dom';
+
+import './style.scss';
 
 export default props => {
-  return <div className="finxos-header">{props.children}</div>
-}
+  const { portal = document.body } = props;
+  return createPortal(<div className="finxos-header">{props.children}</div>, portal);
+};
