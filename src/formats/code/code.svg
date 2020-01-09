@@ -1,1 +1,15 @@
-<?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg class="icon" width="200px" height="200.00px" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path fill="#333333" d="M958.17 447.4L760.69 249.92l-65.82 65.83 197.47 197.47L694.87 710.7l65.82 65.82 197.48-197.47 65.83-65.83zM263.3 249.92L65.82 447.4 0 513.22l65.82 65.83L263.3 776.52l65.82-65.82-197.47-197.48 197.47-197.47zM343.247 949.483L590.96 52.19l89.72 24.768-247.713 897.295z" /></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="26px" viewBox="0 0 26 26" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>画板备份 6</title>
+    <desc>Created with Sketch.</desc>
+    <g id="画板备份-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组-5" transform="translate(5.000000, 4.000000)">
+            <path d="M10.5922094,1 L1,1 L1,17 L15,17 L15,5.42136957 L10.5922094,1 Z" id="形状结合" stroke="#5A6067" stroke-width="2" fill="#5A6067"></path>
+            <polygon id="矩形" fill="#F7F7F7" points="11 1 15 5 11 5"></polygon>
+            <polygon id="路径" fill="#F7F7F7" fill-rule="nonzero" transform="translate(4.250000, 12.165064) rotate(-45.000000) translate(-4.250000, -12.165064) " points="3.5 11.4150635 6 11.4150635 6 10.4150635 2.5 10.4150635 2.5 13.9150635 3.5 13.9150635"></polygon>
+            <polygon id="路径备份" fill="#F7F7F7" fill-rule="nonzero" transform="translate(11.923564, 12.165064) rotate(-225.000000) translate(-11.923564, -12.165064) " points="11.1735638 11.4150635 13.6735638 11.4150635 13.6735638 10.4150635 10.1735638 10.4150635 10.1735638 13.9150635 11.1735638 13.9150635"></polygon>
+            <polygon id="矩形" fill="#FFFFFF" transform="translate(8.268403, 12.265283) rotate(-330.000000) translate(-8.268403, -12.265283) " points="7.76840331 9.76528324 8.76840331 9.76528324 8.76840331 14.7652832 7.76840331 14.7652832"></polygon>
+        </g>
+    </g>
+</svg>

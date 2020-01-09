@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="25px" height="25px" viewBox="0 0 25 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61 (89581) - https://sketch.com -->
+    <title>画板备份 13</title>
+    <desc>Created with Sketch.</desc>
+    <g id="画板备份-13" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组备份" transform="translate(1.000000, 1.000000)">
+            <path d="M0,0 L23,0 L23,23 L0,23 L0,0 Z M1,1 L1,22 L22,22 L22,1 L1,1 Z" id="矩形" fill="#DEDFE1" fill-rule="nonzero"></path>
+            <g id="编组-4复制-5" transform="translate(5.000000, 6.000000)">
+                <polygon id="矩形" fill="#5A6067" points="9 -2.27318164e-13 10 -2.27318164e-13 10 11 9 11"></polygon>
+                <path d="M5.5,5.5 L5.5,0.5 L3,0.5 C1.61928813,0.5 0.5,1.61928813 0.5,3 C0.5,4.38071187 1.61928813,5.5 3,5.5 L5.5,5.5 Z" id="矩形" stroke="#5A6067"></path>
+                <polygon id="矩形复制-2" fill="#5A6067" points="5 6 6 6 6 11 5 11"></polygon>
+                <rect id="矩形" fill="#5A6067" x="5" y="0" width="8" height="1"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
