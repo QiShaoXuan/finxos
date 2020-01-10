@@ -1,18 +1,16 @@
-import { Text, Transforms } from 'slate';
+import { Editor } from 'slate';
 import isActiveFormat from './is-format-active';
 
-const defaultOptions = { match: n => Text.isText(n), split: true };
-
-export const applyFormat = (editor, formatSetting, options) => {
-  Transforms.setNodes(editor, { [formatSetting.name]: formatSetting }, Object.assign(defaultOptions, options));
+export const applyFormat = (editor, formatSetting) => {
+  Editor.addMark(editor, formatSetting.name, formatSetting);
 };
 
-export const removeFormat = (editor, formatSetting, options) => {
-  Transforms.setNodes(editor, { [formatSetting.name]: null }, Object.assign(defaultOptions, options));
+export const removeFormat = (editor, formatSetting) => {
+  Editor.removeMark(editor, formatSetting.name, formatSetting);
 };
 
-export const toggleFormat = (editor, formatSetting, options) => {
+export const toggleFormat = (editor, formatSetting) => {
   return isActiveFormat(editor, formatSetting.name)
-    ? removeFormat(editor, formatSetting, options)
-    : applyFormat(editor, formatSetting, options);
+    ? removeFormat(editor, formatSetting)
+    : applyFormat(editor, formatSetting);
 };

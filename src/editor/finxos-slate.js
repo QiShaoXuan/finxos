@@ -6,7 +6,7 @@ import SelectedBlocksProvider from '@Finxos/hooks/use-active-blocks';
 import SettingsProvider from '@Finxos/hooks/use-setting';
 import { defaultBlock } from '@Finxos/blocks';
 import { compose } from './untils';
-
+import TestButton from '@Finxos/components/test-button';
 const initialSetting = {
   blocks: [defaultBlock],
   formats: [],
@@ -28,6 +28,7 @@ export default props => {
             }}
           >
             {props.children}
+            <TestButton />
           </Slate>
         </SelectedBlocksProvider>
       </SettingsProvider>

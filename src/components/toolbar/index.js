@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused } from 'slate-react';
@@ -11,13 +11,12 @@ import './style.scss';
 export default props => {
   const { formats } = useSettingContext();
 
-
   const editor = useSlate();
   const focused = useFocused();
 
   const { selection } = editor;
 
-  const position = useCallback(() => {
+  const position = () => {
     if (focused && selection && !Range.isCollapsed(selection)) {
       const domSelection = window.getSelection();
       const domRange = domSelection && domSelection.getRangeAt(0);
@@ -29,7 +28,7 @@ export default props => {
     } else {
       return { left: 0, top: 0 };
     }
-  }, [selection, focused]);
+  };
 
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position() }}>

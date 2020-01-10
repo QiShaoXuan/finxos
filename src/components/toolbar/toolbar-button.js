@@ -1,5 +1,5 @@
 import React from 'react';
-import {toggleFormat} from '@Finxos/tools/handle-format';
+import { removeFormat, applyFormat } from '@Finxos/tools/handle-format';
 import isActiveFormat from '@Finxos/tools/is-format-active';
 import { useSlate } from 'slate-react';
 
@@ -10,7 +10,13 @@ export default props => {
   const isActive = isActiveFormat(editor, format.name);
 
   return (
-    <div className={`toolbar-button ${isActive ? 'active' : ''}`} onClick={() => toggleFormat(editor, format)}>
+    <div
+      className={`toolbar-button ${isActive ? 'active' : ''}`}
+      onMouseDown={e => {
+        e.preventDefault();
+        isActive ? removeFormat(editor, format) : applyFormat(editor, format);
+      }}
+    >
       {<format.icon />}
     </div>
   );
