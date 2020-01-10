@@ -1,4 +1,5 @@
-import Paragraph from './paragraph'
-import CodeSetting from './code'
+import paragraph from './paragraph';
+import codeSetting from './code';
 
-export default [CodeSetting, Paragraph]
+export const defaultBlock = paragraph;
+export default [paragraph, codeSetting];

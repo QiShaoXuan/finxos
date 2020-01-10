@@ -3,22 +3,20 @@ import { Editable, useSlate } from 'slate-react';
 import React, { useCallback } from 'react';
 import { renderElement, renderLeaf } from './untils';
 import toggleFormat from '@Finxos/tools/toogle-format';
-import { useFormatSettingsContext } from '@Finxos/hooks/use-format-settings';
-import { useBlockSettingsContext } from '@Finxos/hooks/use-block-settings';
+import { useSettingContext } from '@Finxos/hooks/use-setting';
 import './style.scss';
 
 export default props => {
   const editor = useSlate();
-  const formatSettings = useFormatSettingsContext();
-  const blockSettings = useBlockSettingsContext();
+  const { blocks, formats } = useSettingContext();
 
   return (
     <Editable
       editor={editor}
-      renderElement={useCallback(props => renderElement(props, blockSettings), [])}
-      renderLeaf={useCallback(props => renderLeaf(props, formatSettings), [])}
+      renderElement={useCallback(props => renderElement(props, blocks), [])}
+      renderLeaf={useCallback(props => renderLeaf(props, formats), [])}
       onKeyDown={event => {
-        const renderFormat = formatSettings.find(v => v.shortcut && v.shortcut(event));
+        const renderFormat = formats.find(v => v.shortcut && v.shortcut(event));
         if (!renderFormat) {
           return;
         }

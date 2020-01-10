@@ -2,14 +2,15 @@ import React, { useCallback } from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused } from 'slate-react';
-import { useFormatSettingsContext } from '@Finxos/hooks/use-format-settings';
+import { useSettingContext } from '@Finxos/hooks/use-setting';
 
 import ToolbarButton from './toolbar-button';
 
 import './style.scss';
 
 export default props => {
-  const formatSettings = useFormatSettingsContext();
+  const { formats } = useSettingContext();
+
 
   const editor = useSlate();
   const focused = useFocused();
@@ -33,7 +34,7 @@ export default props => {
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position() }}>
       <div className="toolbar-wrapper">
-        {formatSettings.map(format => (
+        {formats.map(format => (
           <ToolbarButton format={format} key={format.name} />
         ))}
       </div>
