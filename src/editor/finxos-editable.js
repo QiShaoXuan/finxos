@@ -2,7 +2,7 @@ import { Editable, useSlate } from 'slate-react';
 
 import React, { useCallback } from 'react';
 import { renderElement, renderLeaf } from './untils';
-import toggleFormat from '@Finxos/tools/toogle-format';
+import { toggleFormat } from '@Finxos/tools/handle-format';
 import { useSettingContext } from '@Finxos/hooks/use-setting';
 import './style.scss';
 
@@ -14,14 +14,14 @@ export default props => {
     <Editable
       editor={editor}
       renderElement={useCallback(props => renderElement(props, blocks), [])}
-      renderLeaf={useCallback(props => renderLeaf(props, formats), [])}
+      renderLeaf={useCallback(renderLeaf, [])}
       onKeyDown={event => {
         const renderFormat = formats.find(v => v.shortcut && v.shortcut(event));
         if (!renderFormat) {
           return;
         }
         event.preventDefault();
-        toggleFormat(editor, renderFormat.name);
+        toggleFormat(editor, renderFormat);
       }}
     />
   );

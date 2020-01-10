@@ -15,17 +15,19 @@ export const renderElement = (props, BlockSettings) => {
   return <BlockRender {...props} RenderSetting={RenderSetting} />;
 };
 
-export const renderLeaf = (props, FormatSettings) => {
-  const RenderFormats = FormatSettings.filter(v => props.leaf[v.name]);
+export const renderLeaf = props => {
+  let ActiveFormats = [];
+  for (let key in props.leaf) {
+    if (key !== 'text' && props.leaf[key] !== null) {
+      ActiveFormats.push(props.leaf[key]);
+    }
+  }
 
   return (
     <span {...props.attributes}>
-      {RenderFormats.reduce(
-        (children, Format) => (
-          <Format.render {...props.attributes}>{children}</Format.render>
-        ),
-        props.children
-      )}
+      {ActiveFormats.reduce((children, Format) => {
+        return <Format.render {...Format.attributes}>{children}</Format.render>;
+      }, props.children)}
     </span>
   );
 };

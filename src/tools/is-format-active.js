@@ -5,7 +5,7 @@ export default (editor, format, options = {}) => {
     editor,
     Object.assign(
       {
-        match: n => n[format] === true,
+        match: n => n[format] && n[format] !== null,
       },
       options
     )

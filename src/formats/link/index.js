@@ -12,6 +12,9 @@ export default {
   name,
   title: __('Link'),
   icon: Icon,
+  attributes: {
+    url: '',
+  },
   render: props => {
     const editor = useSlate();
 
@@ -19,13 +22,12 @@ export default {
     const { selection } = editor;
 
     const a = useCallback(() => {
-     console.log(' isActiveFormat(editor, name)', isActiveFormat(editor, name))
-     ;
+      console.log(' isActiveFormat(editor, name)', isActiveFormat(editor, name));
     }, [selection, focused]);
-console.log('props',props)
+    console.log('props', props);
 
     return (
-      <a className="finxos-link" aa={a()} {...props.attributes}>
+      <a className="finxos-link" aa={a()} {...props}>
         {props.children}
       </a>
     );
