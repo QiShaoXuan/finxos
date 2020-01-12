@@ -3,6 +3,7 @@ import { Editor } from 'slate';
 
 import BlockRender from '../tools/block-render.js';
 
+let num = 1;
 export const renderElement = (props, BlockSettings) => {
   const {
     element: { type },
@@ -20,13 +21,20 @@ export const renderLeaf = props => {
   for (let key in props.leaf) {
     if (key !== 'text' && props.leaf[key] !== null) {
       ActiveFormats.push(props.leaf[key]);
+      if (key === 'link') {
+        num += 1;
+      }
     }
   }
 
   return (
     <span {...props.attributes}>
       {ActiveFormats.reduce((children, Format) => {
-        return <Format.render {...Format.attributes}>{children}</Format.render>;
+        return (
+          <Format.render {...Format.attributes} data-num={num}>
+            {children}
+          </Format.render>
+        );
       }, props.children)}
     </span>
   );
