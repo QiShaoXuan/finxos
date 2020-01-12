@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { removeFormat, applyFormat } from '@Finxos/tools/handle-format';
 import isActiveFormat from '@Finxos/tools/is-format-active';
 import { useSlate } from 'slate-react';
 
+let num = 1;
 export default props => {
   const editor = useSlate();
 
-  const { format } = props;
+  let { format } = props;
   const isActive = isActiveFormat(editor, format.name);
 
   return (
@@ -14,7 +15,11 @@ export default props => {
       className={`toolbar-button ${isActive ? 'active' : ''}`}
       onMouseDown={e => {
         e.preventDefault();
-        isActive ? removeFormat(editor, format) : applyFormat(editor, format);
+        num += 1;
+        isActive
+          ? removeFormat(editor, format)
+          : applyFormat(editor, format.name, format.attributes ? Object.assign({}, format.attributes) : true);
+        // isActive ? removeFormat(editor, format) : applyFormat(editor, format.name, { url: num });
       }}
     >
       {<format.icon />}

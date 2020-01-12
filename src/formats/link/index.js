@@ -12,8 +12,8 @@ const name = 'link';
 const TooltipContent = () => {
   return (
     <div className="finxos-link-tooltip__content">
-      <Input size="small" placeholder="small size" />
-      <Button size="small" icon="enter" style={{ marginLeft: 8 }} />
+      <Input size="small" placeholder={__('input href')} />
+      <Button size="small" icon="enter" style={{ marginLeft: 8, flexShrink: 0 }} />
       <Tooltip title={__('Open in New Tab')}>
         <Switch size="small" defaultChecked style={{ marginLeft: 8 }} />
       </Tooltip>
@@ -31,17 +31,27 @@ export default {
   render: props => {
     const editor = useSlate();
     const formats = getCurrentFormats(editor);
-console.log('props',props)
+    const tooltipVisible = !!(formats[name] && props.attributes === formats[name]);
+    if (formats[name]) {
+      console.log(formats[name], props.attributes === formats[name]);
+    }
 
     return (
-      <>
+      <Tooltip
+        title={TooltipContent}
+        overlayStyle={{ maxWidth: 500 }}
+        visible={tooltipVisible}
+        overlayClassName="finxos-link-tooltip"
+        placement="bottom"
+        trigger="click"
+      >
         <a className="finxos-link" {...props}>
           {props.children}
         </a>
-      </>
+      </Tooltip>
     );
   },
   shortcut: event => {
-    return event.ctrlKey && event.key === 'u';
+    return event.ctrlKey && event.key === 'l';
   },
 };

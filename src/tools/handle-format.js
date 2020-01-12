@@ -1,8 +1,8 @@
 import { Editor } from 'slate';
 import isActiveFormat from './is-format-active';
 
-export const applyFormat = (editor, formatSetting) => {
-  Editor.addMark(editor, formatSetting.name, formatSetting);
+export const applyFormat = (editor, name, attributes) => {
+  Editor.addMark(editor, name, attributes);
 };
 
 export const removeFormat = (editor, formatSetting) => {
