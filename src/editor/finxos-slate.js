@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useRef } from 'react';
 import { createEditor } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import SelectedBlocksProvider from '@Finxos/hooks/use-active-blocks';
-import SettingsProvider from '@Finxos/hooks/use-setting';
+import ControlsProvider from '@Finxos/hooks/use-controls';
 import { defaultBlock } from '@Finxos/blocks';
 import { compose } from './untils';
 import TestButton from '@Finxos/components/test-button';
@@ -16,9 +16,11 @@ export default props => {
   const { content, className = '', blocks, formats } = props;
   const editor = useMemo(() => compose([withHistory, withReact], createEditor()), []);
   const [value, setValue] = useState(content);
+  const container = useRef(null);
+
   return (
-    <div className={`finxos-container ${className}`}>
-      <SettingsProvider setting={{ blocks, formats }}>
+    <div className={`finxos-container ${className}`} ref={container}>
+      <ControlsProvider value={{ settings: { blocks, formats }, containerRef: container }}>
         <SelectedBlocksProvider>
           <Slate
             editor={editor}
@@ -31,7 +33,7 @@ export default props => {
             <TestButton />
           </Slate>
         </SelectedBlocksProvider>
-      </SettingsProvider>
+      </ControlsProvider>
     </div>
   );
 };

@@ -1,7 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { Editor } from 'slate';
 
-import BlockRender from '../tools/block-render.js';
+import BlockRender from '@Finxos/tools/block-render.js';
+import getCurrentFormats from '@Finxos/tools/get-current-formats';
+import { useFocused, useSlate } from 'slate-react';
 
 export const renderElement = (props, BlockSettings) => {
   const {
@@ -16,7 +18,11 @@ export const renderElement = (props, BlockSettings) => {
 };
 
 export const renderLeaf = (props, FormatSettings) => {
+  const editor = useSlate();
+  const currentFormats = getCurrentFormats(editor);
+
   let ActiveFormats = [];
+
   for (let key in props.leaf) {
     if (key !== 'text') {
       let format = FormatSettings.find(v => v.name === key);
@@ -29,7 +35,16 @@ export const renderLeaf = (props, FormatSettings) => {
   return (
     <span {...props.attributes}>
       {ActiveFormats.reduce((children, Format) => {
-        return <Format.render attributes={props.leaf[Format.name]}>{children}</Format.render>;
+        return (
+          <Format.render
+            attributes={props.leaf[Format.name]}
+            controls={{
+              isActive: Boolean(currentFormats[Format.name] && props.leaf[Format.name] === currentFormats[Format.name]),
+            }}
+          >
+            {children}
+          </Format.render>
+        );
       }, props.children)}
     </span>
   );
