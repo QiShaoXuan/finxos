@@ -13,7 +13,7 @@ const focusInputFocus = container => {
 
 export default props => {
   const editor = useSlate();
-  const { attributes, onFocus, onPressEnter, addingLink, setAddingLink, onBlur } = props;
+  const { attributes, onFocus, onPressEnter, addingLink, setAddingLink, onBlur, visible } = props;
   const containerRef = useRef(null);
   const [url, setUrl] = useState(attributes.url);
 
@@ -23,7 +23,9 @@ export default props => {
   };
 
   useEffect(() => {
-    focusInputFocus(containerRef.current);
+    if (visible) {
+      focusInputFocus(containerRef.current);
+    }
   });
 
   return (

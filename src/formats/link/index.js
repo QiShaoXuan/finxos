@@ -37,6 +37,7 @@ export default {
       <Tooltip
         title={() => (
           <TooltipContent
+            visible={isActive || visible}
             attributes={attributes}
             onFocus={() => setVisible(true)}
             onBlur={() => setVisible(false)}
