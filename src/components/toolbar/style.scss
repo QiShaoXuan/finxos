@@ -26,17 +26,13 @@
     &.active {
       background: $active-gray-bg;
       svg {
-        color: $active-gray;
-        fill: $active-gray;
-        stroke: $active-gray;
+        @include svg-color($active-gray);
       }
     }
     svg {
       width: 16px;
       height: 16px;
-      color: $disable-color;
-      fill: $disable-color;
-      stroke: $disable-color;
+      @include svg-color($disable-color);
     }
   }
 }

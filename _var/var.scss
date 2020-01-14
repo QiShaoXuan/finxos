@@ -3,3 +3,9 @@ $blue: #3c55ff;
 $disable-color: #bfc1c4;
 $active-gray-bg: #f6f6f6;
 $active-gray: #979797;
+
+@mixin svg-color($color) {
+  color: $color;
+  fill: $color;
+  //stroke: $color;
+}

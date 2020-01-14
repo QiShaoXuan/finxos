@@ -3,6 +3,7 @@ import ReactDom from 'react-dom';
 import { FinxosSlate, FinxosEditable } from '@Finxos/editor';
 import Header from '@Finxos/components/header';
 import BlockMenu from '@Finxos/components/block-menu';
+import HistoryGroup from '@Finxos/components/history-group';
 import ToolBar from '@Finxos/components/toolbar';
 
 import 'antd/dist/antd.css';
@@ -46,9 +47,15 @@ class App extends React.Component {
     return (
       <div className="editor-container">
         <FinxosSlate content={content} blocks={BlockSettings} formats={FormatSettings}>
-          <Header portal={document.body}>
-            <BlockMenu BlockSettings={BlockSettings} />
-          </Header>
+          <Header
+            portal={document.body}
+            left={
+              <>
+                {/*<BlockMenu BlockSettings={BlockSettings} />*/}
+                <HistoryGroup />
+              </>
+            }
+          />
           <ToolBar />
           <FinxosEditable />
         </FinxosSlate>

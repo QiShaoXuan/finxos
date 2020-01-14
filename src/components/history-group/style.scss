@@ -1,0 +1,9 @@
+.finxos-history-group {
+  .history-button {
+    padding: 5px;
+    @include svg-color($disable-color);
+    &.can-click {
+      @include svg-color($active-gray);
+    }
+  }
+}
