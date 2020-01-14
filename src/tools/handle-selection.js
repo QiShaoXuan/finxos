@@ -1,14 +1,14 @@
-export const setSelection = (editor, containerRef, selection) => {
+export const setSelection = (editor, editorDom, selection) => {
   return new Promise(resolve => {
     if (!selection) {
-      return console.error('no selection');
+      throw Error('no selection');
     }
     setTimeout(() => {
-      if (!containerRef.current) {
-        return console.error('no container ref');
+      if (!editorDom && !editor.selection) {
+        throw Error('no editor dom to focus');
       }
       if (!editor.selection) {
-        containerRef.current.querySelector('[contenteditable=true]').focus();
+        editorDom.focus();
       }
       editor.apply({
         type: 'set_selection',

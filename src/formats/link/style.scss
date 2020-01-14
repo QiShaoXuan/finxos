@@ -12,12 +12,23 @@
     width: 10px;
     height: 10px;
   }
-  .finxos-link-tooltip__content {
+  .finxos-link-popup__content {
     width: 350px;
     display: flex;
     align-items: center;
   }
-  a {
+  .link-tooltip__content {
     flex-grow: 1;
+  }
+  .finxos-link-popup__wrapper {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+  }
+  .link-popup--show {
+    display: flex;
+  }
+  .link-popup--hide {
+    display: none;
   }
 }

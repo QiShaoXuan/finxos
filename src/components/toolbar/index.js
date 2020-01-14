@@ -3,13 +3,14 @@ import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused } from 'slate-react';
 import { useControlsContext } from '@Finxos/hooks/use-controls';
+import { useSettingsContext } from '@Finxos/hooks/use-settings';
 
 import ToolbarButton from './toolbar-button';
 
 import './style.scss';
 
 export default props => {
-  const { settings:{formats} } = useControlsContext();
+  const { formats } = useSettingsContext();
 
   const editor = useSlate();
   const focused = useFocused();
