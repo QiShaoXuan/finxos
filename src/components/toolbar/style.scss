@@ -24,17 +24,19 @@
       margin-right: 0;
     }
     &.active {
-      background: #eee;
+      background: $active-gray-bg;
       svg {
-        color: #5c6369;
-        fill: #5c6369;
+        color: $active-gray;
+        fill: $active-gray;
+        stroke: $active-gray;
       }
     }
     svg {
       width: 16px;
       height: 16px;
-      color: #bfc2c5;
-      fill: #bfc2c5;
+      color: $disable-color;
+      fill: $disable-color;
+      stroke: $disable-color;
     }
   }
 }

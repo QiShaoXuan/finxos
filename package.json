@@ -49,6 +49,7 @@
     "react-dom": "^16.12.0",
     "react-svg-loader": "^3.0.3",
     "sass-loader": "^8.0.0",
+    "sass-resources-loader": "^2.0.1",
     "slate": "^0.57.1",
     "slate-history": "^0.57.1",
     "slate-react": "^0.57.1",
