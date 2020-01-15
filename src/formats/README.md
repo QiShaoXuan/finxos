@@ -1,18 +1,21 @@
 ```jsx harmony
+import __ from '@finxos/i18n';
+
 const formatsSettings = {
   name: 'formatName',
   title: __('format title'),
-  icon: LinkIcon,
+  icon: ReactNode,
   attributes: {
     url: '',
     blank: true,
   },
-  acrossBlock: false,
+  acrossBlock: true,
+  toolbar: true,
   render: props => {
-    return <strong {...props.attributes}>{props.children}</strong>;
+    return <Tag {...props.attributes}>{props.children}</Tag>;
   },
   shortcut: event => {
-    return event.ctrlKey && event.key === 'l';
+    return event.ctrlKey && event.key === 'XXX';
   },
 };
 ```

@@ -4,7 +4,7 @@ import { Tooltip } from '@finxos/ui-components';
 
 import { updateFormat } from '@finxos/tools/handle-format';
 import { setSelection } from '@finxos/tools/handle-selection';
-import { useControlsContext } from '@finxos/hooks/use-controls';
+import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
 import TooltipContent from './popup';
 
@@ -23,13 +23,14 @@ export default {
     blank: true,
   },
   acrossBlock: false,
+  toolbar: true,
   render: props => {
     const {
       controls: { isActive },
       attributes,
     } = props;
     const editor = useSlate();
-    const { editorDom, lastSelection } = useControlsContext();
+    const { editorDom, lastSelection } = useControls();
 
     const [visible, setVisible] = useState(false);
     const [addingLink, setAddingLink] = useState(!attributes.url);

@@ -3,13 +3,13 @@ import { Editable, useSlate } from 'slate-react';
 import React, { useCallback } from 'react';
 import { renderElement, renderLeaf } from './untils';
 import { toggleFormat } from '@finxos/tools/handle-format';
-import { useSettingsContext } from '@finxos/hooks/use-settings';
+import { useSettings } from '@finxos/hooks';
 import './style.scss';
 
 export default props => {
   const editor = useSlate();
 
-  const { blocks, formats } = useSettingsContext();
+  const { blocks, formats } = useSettings();
 
   return (
     <Editable

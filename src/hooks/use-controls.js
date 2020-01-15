@@ -4,7 +4,7 @@ import getCurrentBlocks from '@finxos/tools/get-current-blocks';
 import getCurrentFormats from '@finxos/tools/get-current-formats';
 export const ControlsContext = createContext();
 
-export const useControlsContext = () => {
+export const useControls = () => {
   return useContext(ControlsContext);
 };
 

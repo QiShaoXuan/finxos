@@ -2,7 +2,7 @@ import React from 'react';
 import { Editor } from 'slate';
 
 import BlockRender from '@finxos/tools/block-render.js';
-import { useControlsContext } from '@finxos/hooks/use-controls';
+import { useControls } from '@finxos/hooks';
 
 export const renderElement = (props, BlockSettings) => {
   const {
@@ -17,7 +17,7 @@ export const renderElement = (props, BlockSettings) => {
 };
 
 export const renderLeaf = (props, FormatSettings) => {
-  const { currentFormats } = useControlsContext();
+  const { currentFormats } = useControls();
 
   let ActiveFormats = [];
 
