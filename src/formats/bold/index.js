@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from './bold.svg';
-import __ from '@Finxos/i18n';
+import __ from '@finxos/i18n';
 
 export default {
   name: 'bold',

@@ -13,7 +13,7 @@ import FormatSettings from '../formats';
 import ToolBar from '../components/toolbar';
 import './style.scss';
 import BlockMenu from '../components/block-menu';
-import Header from '../components/header';
+import Header from '../ui-components/header';
 
 const defaultInitParams = {
   content: [],

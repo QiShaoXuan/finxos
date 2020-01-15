@@ -1,6 +1,6 @@
 import React from 'react';
 import { Range, Editor } from 'slate';
-import { Button } from 'antd';
+import { Button } from '@finxos/ui-components';
 import { useSlate } from 'slate-react';
 
 export default () => {

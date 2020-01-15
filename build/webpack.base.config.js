@@ -93,7 +93,7 @@ module.exports = {
   resolve: {
     modules: ['src', 'node_modules'],
     alias: {
-      '@Finxos': path.resolve('src/'),
+      '@finxos': path.resolve('src/'),
     },
   },
 };

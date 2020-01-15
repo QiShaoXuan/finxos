@@ -1,9 +1,8 @@
 import React from 'react';
 import { Editor } from 'slate';
 
-import BlockRender from '@Finxos/tools/block-render.js';
-import getCurrentFormats from '@Finxos/tools/get-current-formats';
-import { useFocused, useSlate } from 'slate-react';
+import BlockRender from '@finxos/tools/block-render.js';
+import { useControlsContext } from '@finxos/hooks/use-controls';
 
 export const renderElement = (props, BlockSettings) => {
   const {
@@ -18,8 +17,7 @@ export const renderElement = (props, BlockSettings) => {
 };
 
 export const renderLeaf = (props, FormatSettings) => {
-  const editor = useSlate();
-  const currentFormats = getCurrentFormats(editor);
+  const { currentFormats } = useControlsContext();
 
   let ActiveFormats = [];
 

@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
-import { Tooltip } from 'antd';
+import { Tooltip } from '@finxos/ui-components';
 
-import { updateFormat } from '@Finxos/tools/handle-format';
-import { setSelection } from '@Finxos/tools/handle-selection';
-import { useControlsContext } from '@Finxos/hooks/use-controls';
-import __ from '@Finxos/i18n';
+import { updateFormat } from '@finxos/tools/handle-format';
+import { setSelection } from '@finxos/tools/handle-selection';
+import { useControlsContext } from '@finxos/hooks/use-controls';
+import __ from '@finxos/i18n';
 import TooltipContent from './popup';
 
 import LinkIcon from './link.svg';
@@ -22,6 +22,7 @@ export default {
     url: '',
     blank: true,
   },
+  acrossBlock: false,
   render: props => {
     const {
       controls: { isActive },

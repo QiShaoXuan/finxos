@@ -2,8 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused } from 'slate-react';
-import { useControlsContext } from '@Finxos/hooks/use-controls';
-import { useSettingsContext } from '@Finxos/hooks/use-settings';
+import { useSettingsContext } from '@finxos/hooks/use-settings';
 
 import ToolbarButton from './toolbar-button';
 

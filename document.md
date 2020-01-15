@@ -196,7 +196,7 @@ Editor.insertFragment(editor, [
 
 45. Editor.range(editor, more...)
 
-- 获取当前 selection，貌似好 editor.selection 同
+-
 
 46. Editor.rangeRef(editor, more...)
 

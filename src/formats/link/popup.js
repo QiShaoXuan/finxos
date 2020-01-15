@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSlate } from 'slate-react';
-import { Button, Icon, Input, Switch, Tooltip } from 'antd';
-import { updateFormat } from '@Finxos/tools/handle-format';
-import __ from '@Finxos/i18n';
+import { Button, Icon, Input, Switch, Tooltip } from '@finxos/ui-components';
+import { updateFormat } from '@finxos/tools/handle-format';
+import __ from '@finxos/i18n';
 import { name } from './index';
 
 const focusInputFocus = container => {
@@ -23,8 +23,10 @@ export default props => {
   };
 
   useEffect(() => {
-    if (visible) {
-      focusInputFocus(containerRef.current);
+    if (visible && editor.selection && editor.selection.anchor.offset === editor.selection.focus.offset) {
+      if (editor.selection.anchor.offset === editor.selection.focus.offset) {
+        focusInputFocus(containerRef.current);
+      }
     }
   });
 
@@ -32,6 +34,7 @@ export default props => {
     <div className="finxos-link-popup__content" onMouseDown={e => e.stopPropagation()} ref={containerRef}>
       <div className={`finxos-link-popup__wrapper ${addingLink || editable ? 'link-popup--show' : 'link-popup--hide'}`}>
         <Input
+          autoFocus={true}
           size="small"
           placeholder={__('input href')}
           value={url}

@@ -2,8 +2,8 @@ import { Editable, useSlate } from 'slate-react';
 
 import React, { useCallback } from 'react';
 import { renderElement, renderLeaf } from './untils';
-import { toggleFormat } from '@Finxos/tools/handle-format';
-import { useSettingsContext } from '@Finxos/hooks/use-settings';
+import { toggleFormat } from '@finxos/tools/handle-format';
+import { useSettingsContext } from '@finxos/hooks/use-settings';
 import './style.scss';
 
 export default props => {

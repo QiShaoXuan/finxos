@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
-import { removeFormat, applyFormat } from '@Finxos/tools/handle-format';
-import isActiveFormat from '@Finxos/tools/is-format-active';
+import { removeFormat, applyFormat } from '@finxos/tools/handle-format';
+import isActiveFormat from '@finxos/tools/is-format-active';
 import { useSlate } from 'slate-react';
 
 export default props => {

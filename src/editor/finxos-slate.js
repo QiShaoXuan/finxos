@@ -2,10 +2,10 @@ import React, { useMemo, useState, useRef } from 'react';
 import { createEditor } from 'slate';
 import { Slate, useSlate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
-import ControlsProvider from '@Finxos/hooks/use-controls';
-import SettingsProvider from '@Finxos/hooks/use-settings';
+import ControlsProvider from '@finxos/hooks/use-controls';
+import SettingsProvider from '@finxos/hooks/use-settings';
 import { compose } from './untils';
-import TestButton from '@Finxos/components/test-button';
+import TestButton from '@finxos/components/test-button';
 
 export default props => {
   const { content, className = '', blocks, formats } = props;

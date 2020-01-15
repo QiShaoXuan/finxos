@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { FinxosSlate, FinxosEditable } from '@Finxos/editor';
-import Header from '@Finxos/components/header';
-import BlockMenu from '@Finxos/components/block-menu';
-import HistoryGroup from '@Finxos/components/history-group';
-import ToolBar from '@Finxos/components/toolbar';
+import { FinxosSlate, FinxosEditable } from '@finxos/editor';
+import { Header } from '@finxos/ui-components';
+import BlockMenu from '@finxos/components/block-menu';
+import HistoryGroup from '@finxos/components/history-group';
+import ToolBar from '@finxos/components/toolbar';
 
 import 'antd/dist/antd.css';
 import './style.scss';
-import BlockSettings from '@Finxos/blocks';
-import FormatSettings from '@Finxos/formats';
+import BlockSettings from '@finxos/blocks';
+import FormatSettings from '@finxos/formats';
 import './assets/styles/reset.scss';
 import './style.scss';
 const content = [

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 
-import { Menu, Dropdown, Button } from 'antd';
+import { Menu, Dropdown, Button } from '@finxos/ui-components';
 import createBlock from '../../tools/create-block.js';
 
 export default props => {

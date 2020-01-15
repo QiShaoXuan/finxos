@@ -1,6 +1,6 @@
 import React from 'react';
 import Icon from './code.svg';
-import __ from '@Finxos/i18n';
+import __ from '@finxos/i18n';
 
 import './style.scss';
 export default {
