@@ -1,15 +1,13 @@
 import React from 'react';
 import { useSelected } from 'slate-react';
+import __ from '@finxos/i18n';
 
 export default {
   name: 'paragraph',
-  title: '段落',
-  placeholder: 'This is paragraph',
+  title: __('Paragraph'),
   render: props => {
-    const selected = useSelected();
     return <p {...props.attributes}>{props.children}</p>;
   },
-  formats:[''],
   transform: props => {
     return 'default';
   },

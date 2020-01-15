@@ -14,8 +14,8 @@ export default props => {
   return (
     <Editable
       editor={editor}
-      renderElement={useCallback(props => renderElement(props, blocks), [])}
-      renderLeaf={useCallback(props => renderLeaf(props, formats), [])}
+      renderElement={useCallback(renderElement, [])}
+      renderLeaf={useCallback(renderLeaf, [])}
       onKeyDown={event => {
         const renderFormat = formats.find(v => v.shortcut && v.shortcut(event));
         if (!renderFormat) {

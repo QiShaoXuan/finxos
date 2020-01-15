@@ -11,7 +11,7 @@ import './style.scss';
 
 export default props => {
   const { protal = document.body } = props;
-  const { formats } = useSettings();
+  const { blocks, formats } = useSettings();
   const { currentBlocks } = useControls();
 
   const editor = useSlate();
@@ -32,7 +32,6 @@ export default props => {
       return { left: 0, top: 0 };
     }
   };
-
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position() }}>
       <div className="toolbar-wrapper">
@@ -42,6 +41,14 @@ export default props => {
           }
           if (currentBlocks.length > 1 && format.acrossBlock === false) {
             return null;
+          }
+
+          for (let i = 0; i < currentBlocks.length; i++) {
+            const block = blocks.find(v => v.name === currentBlocks[i].type);
+
+            if (block.preventFormats && block.preventFormats.includes(format.name)) {
+              return null;
+            }
           }
 
           return <ToolbarButton format={format} key={format.name} />;

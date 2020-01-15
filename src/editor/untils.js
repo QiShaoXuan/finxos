@@ -1,29 +1,32 @@
 import React from 'react';
-import { Editor } from 'slate';
-
-import BlockRender from '@finxos/tools/block-render.js';
+import BlockRender from '@finxos/components/block-render';
 import { useControls } from '@finxos/hooks';
+import { useSettings } from '../hooks';
 
-export const renderElement = (props, BlockSettings) => {
+export const renderElement = props => {
+  const { blocks } = useSettings();
+
   const {
     element: { type },
   } = props;
 
   const RenderSetting =
-    BlockSettings.find(v => {
+    blocks.find(v => {
       return v.name === type;
-    }) || BlockSettings.find(v => v.name === 'paragraph');
+    }) || blocks.find(v => v.name === 'paragraph');
+
   return <BlockRender {...props} RenderSetting={RenderSetting} />;
 };
 
-export const renderLeaf = (props, FormatSettings) => {
+export const renderLeaf = props => {
+  const { formats } = useSettings();
   const { currentFormats } = useControls();
 
   let ActiveFormats = [];
 
   for (let key in props.leaf) {
     if (key !== 'text') {
-      let format = FormatSettings.find(v => v.name === key);
+      let format = formats.find(v => v.name === key);
       if (format) {
         ActiveFormats.push(format);
       }
@@ -46,13 +49,6 @@ export const renderLeaf = (props, FormatSettings) => {
       }, props.children)}
     </span>
   );
-};
-
-export const isActiveBlock = (editor, blockName) => {
-  const [match] = Editor.nodes(editor, {
-    match: n => n.type === blockName,
-  });
-  return !!match;
 };
 
 export const compose = (composeFns = [], target) => {

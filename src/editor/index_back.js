@@ -89,15 +89,15 @@ export default initParams => {
           //   )
           // }
 
-          if (renderFormat) {
-            event.preventDefault();
-            const isActive = isActiveFormat(editor, renderFormat.name);
-            Transforms.setNodes(
-              editor,
-              { [renderFormat.name]: isActive ? null : true },
-              { match: n => Text.isText(n), split: true }
-            );
-          }
+          // if (renderFormat) {
+          //   event.preventDefault();
+          //   const isActive = isActiveFormat(editor, renderFormat.name);
+          //   Transforms.setNodes(
+          //     editor,
+          //     { [renderFormat.name]: isActive ? null : true },
+          //     { match: n => Text.isText(n), split: true }
+          //   );
+          // }
         }}
       />
     </Slate>
