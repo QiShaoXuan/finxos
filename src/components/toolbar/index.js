@@ -2,8 +2,7 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused } from 'slate-react';
-import { useSettings } from '@finxos/hooks';
-import { useControls } from '@finxos/hooks';
+import { useSettings, useControls } from '@finxos/hooks';
 
 import ToolbarButton from './toolbar-button';
 
@@ -12,7 +11,7 @@ import './style.scss';
 export default props => {
   const { protal = document.body } = props;
   const { blocks, formats } = useSettings();
-  const { currentBlocks } = useControls();
+  const { selectedBlocks } = useControls();
 
   const editor = useSlate();
   const focused = useFocused();
@@ -39,12 +38,12 @@ export default props => {
           if (format.toolbar === false) {
             return null;
           }
-          if (currentBlocks.length > 1 && format.acrossBlock === false) {
+          if (selectedBlocks.length > 1 && format.acrossBlock === false) {
             return null;
           }
 
-          for (let i = 0; i < currentBlocks.length; i++) {
-            const block = blocks.find(v => v.name === currentBlocks[i].type);
+          for (let i = 0; i < selectedBlocks.length; i++) {
+            const block = blocks.find(v => v.name === selectedBlocks[i].type);
 
             if (block.preventFormats && block.preventFormats.includes(format.name)) {
               return null;

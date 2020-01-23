@@ -1,7 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, memo, useState } from 'react';
 import { useSlate } from 'slate-react';
-import getCurrentBlocks from '@finxos/tools/get-current-blocks';
-import getCurrentFormats from '@finxos/tools/get-current-formats';
+import { getCurrentBlocks, getCurrentFormats } from '@finxos/tools';
 export const ControlsContext = createContext();
 
 export const useControls = () => {
@@ -18,7 +17,7 @@ export default props => {
         containerDom: container.current,
         editorDom: container.current ? container.current.querySelector('[contenteditable=true]') : container.current,
         lastSelection,
-        currentBlocks: getCurrentBlocks(editor),
+        selectedBlocks: getCurrentBlocks(editor),
         currentFormats: getCurrentFormats(editor),
       }}
     >

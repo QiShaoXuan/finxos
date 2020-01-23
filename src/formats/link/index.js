@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 import { Tooltip } from '@finxos/ui-components';
 
-import { updateFormat } from '@finxos/tools/handle-format';
-import { setSelection } from '@finxos/tools/handle-selection';
+import { updateFormat, setSelection } from '@finxos/tools';
 import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
 import TooltipContent from './popup';

@@ -1,4 +1,4 @@
-export const setSelection = (editor, editorDom, selection) => {
+export default (editor, editorDom, selection) => {
   return new Promise(resolve => {
     if (!selection) {
       throw Error('no selection');

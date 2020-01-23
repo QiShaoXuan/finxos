@@ -2,7 +2,7 @@ import React from 'react';
 import { useSlate } from 'slate-react';
 
 import { Menu, Dropdown, Button } from '@finxos/ui-components';
-import createBlock from '../../tools/create-block.js';
+import { createBlock } from '@finxos/tools';
 
 export default props => {
   const editor = useSlate();

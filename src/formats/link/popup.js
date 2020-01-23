@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSlate } from 'slate-react';
 import { Button, Icon, Input, Switch, Tooltip } from '@finxos/ui-components';
-import { updateFormat } from '@finxos/tools/handle-format';
+import { updateFormat } from '@finxos/tools';
 import __ from '@finxos/i18n';
 import { name } from './index';
 

@@ -1,5 +1,5 @@
 import { Editor } from 'slate';
-import isActiveFormat from './is-format-active';
+import isActiveFormat from '../is-format-active';
 
 export const applyFormat = (editor, name, attributes) => {
   Editor.addMark(editor, name, typeof attributes === 'object' ? JSON.parse(JSON.stringify(attributes)) : true);

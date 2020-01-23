@@ -1,13 +1,12 @@
 import React, { memo } from 'react';
-import { removeFormat, applyFormat } from '@finxos/tools/handle-format';
-import isActiveFormat from '@finxos/tools/is-format-active';
+import { removeFormat, applyFormat, isFormatActive } from '@finxos/tools';
 import { useSlate } from 'slate-react';
 
 export default props => {
   const editor = useSlate();
 
   let { format } = props;
-  const isActive = isActiveFormat(editor, format.name);
+  const isActive = isFormatActive(editor, format.name);
 
   return (
     <div

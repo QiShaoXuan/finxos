@@ -5,7 +5,7 @@ import { withHistory } from 'slate-history';
 import { useSelectedBlocks } from '../hooks/use-active-blocks';
 
 import { renderElement, renderLeaf, isActiveBlock, isActiveFormat } from './untils';
-import getCurrentCaretPositionStyle from '../tools/caret-position';
+import caretPosition from '@finxos/tools';
 
 import BlockSettings from '../blocks';
 import FormatSettings from '../formats';
@@ -46,7 +46,7 @@ export default initParams => {
         if (selection) {
           setToolBarVisible(!Range.isCollapsed(selection));
           if (!Range.isCollapsed(selection)) {
-            settoolBarPosition(getCurrentCaretPositionStyle());
+            settoolBarPosition(caretPosition());
           }
         } else {
           setToolBarVisible(false);
