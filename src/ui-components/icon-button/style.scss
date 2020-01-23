@@ -1,0 +1,22 @@
+.finxos-icon-button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-right: 2px;
+  &:last-of-type {
+    margin-right: 0;
+  }
+  &.active,
+  &:hover {
+    background: $active-gray-bg;
+    svg {
+      @include svg-color($blue);
+    }
+  }
+  svg {
+    @include svg-color($disable-color);
+  }
+}

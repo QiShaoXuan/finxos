@@ -8,3 +8,4 @@ export isFormatActive from './is-format-active';
 export mergeDefaultData from './merge-default-data';
 export setSelection from './set-selection';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
+export { setBlockData } from './handle-block';

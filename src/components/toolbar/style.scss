@@ -23,7 +23,8 @@
     &:last-of-type {
       margin-right: 0;
     }
-    &.active {
+    &.active,
+    &:hover {
       background: $active-gray-bg;
       svg {
         @include svg-color($active-gray);

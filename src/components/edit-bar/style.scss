@@ -1,0 +1,39 @@
+$popup-width: 240px;
+
+.finxox-edit-bar {
+  position: fixed;
+  z-index: 10;
+  padding-right: 16px;
+  &.edit-bar--hide {
+    display: none;
+  }
+  &.edit-bar--show {
+    display: block;
+  }
+
+  .edit-bar__popup-container {
+    position: absolute;
+    display: none;
+    width: $popup-width;
+    height: 5px;
+  }
+  &:hover {
+    .edit-bar__popup-container {
+      display: block;
+    }
+  }
+
+  .edit-bar__popup {
+    border-radius: 4px;
+    background: #fff;
+    border: 1px solid #dee0e3;
+    width: $popup-width;
+    max-height: 450px;
+    padding: 10px;
+    overflow: auto;
+    box-shadow: 0 6px 24px 0 rgba(31, 35, 41, 0.1);
+    position: absolute;
+    left: 0;
+    top: 100%;
+  }
+}

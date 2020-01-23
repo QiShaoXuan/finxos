@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useMemo, memo, useState } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useSlate } from 'slate-react';
 import { getCurrentBlocks, getCurrentFormats } from '@finxos/tools';
 export const ControlsContext = createContext();

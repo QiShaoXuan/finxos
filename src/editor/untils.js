@@ -7,7 +7,7 @@ export const renderElement = props => {
   const { blocks } = useSettings();
 
   const {
-    element: { type },
+    element: { type, data },
   } = props;
 
   const RenderSetting =
@@ -15,7 +15,7 @@ export const renderElement = props => {
       return v.name === type;
     }) || blocks.find(v => v.name === 'paragraph');
 
-  return <BlockRender {...props} RenderSetting={RenderSetting} />;
+  return <BlockRender {...props} data={data} RenderSetting={RenderSetting} />;
 };
 
 export const renderLeaf = props => {

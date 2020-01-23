@@ -10,7 +10,14 @@ export default () => {
   return (
     <Button
       onMouseDown={() => {
-        
+        // editor.insertNode([
+        //   {
+        //     type: 'code',
+        //     children: [{ text: 'outer code' }],
+        //   },
+        // ]);
+        console.log('------------');
+        console.log(' [...Editor.node(editor, editor.selection)]', [...Editor.nodes(editor, editor.selection)]);
       }}
     >
       click to tset

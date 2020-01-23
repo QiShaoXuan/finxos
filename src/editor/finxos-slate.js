@@ -4,13 +4,14 @@ import { Slate, useSlate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import ControlsProvider from '@finxos/hooks/use-controls';
 import SettingsProvider from '@finxos/hooks/use-settings';
+import { mergeDefaultData } from '@finxos/tools';
 import { compose } from './untils';
 import TestButton from '@finxos/components/test-button';
 
 export default props => {
   const { content, className = '', blocks, formats } = props;
   const editor = useMemo(() => compose([withHistory, withReact], createEditor()), []);
-  const [value, setValue] = useState(content);
+  const [value, setValue] = useState(mergeDefaultData(content, blocks));
   const [lastSelection, setLastSelection] = useState(editor.selection);
   const container = useRef(null);
 

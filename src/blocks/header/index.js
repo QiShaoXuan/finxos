@@ -1,15 +1,49 @@
 import React from 'react';
 import __ from '@finxos/i18n';
+import { Button, IconButton } from '@finxos/ui-components';
+import { useSlate } from 'slate-react';
 
+import H2 from './icons/h2.svg';
+import H3 from './icons/h3.svg';
+import H4 from './icons/h4.svg';
+
+import './style.scss'
 export default {
   name: 'header',
   title: __('Header'),
-  attributes: {
+  data: {
     level: 2,
   },
   preventFormats: ['bold'],
+  operation: props => {
+    const { data } = props;
+
+    return [
+      { Icon: H2, level: 2 },
+      { Icon: H3, level: 3 },
+      { Icon: H4, level: 4 },
+    ].map(Data => {
+      return (
+        <IconButton
+          size="small"
+          key={Data.level}
+          className={Data.level === data.level ? 'active' : ''}
+          onMouseDown={(e) => {
+            e.preventDefault()
+            props.setBlockData({
+              level: Data.level,
+            });
+          }}
+        >
+          <Data.Icon />
+        </IconButton>
+      );
+    });
+  },
   render: props => {
-    return <h2 {...props.attributes}>{props.children}</h2>;
+    const { data } = props;
+    const Tag = `h${data.level}`;
+    return <Tag className="finxos-h" {...props.attributes}>{props.children}</Tag>;
   },
   transform: props => {
     return 'default';
