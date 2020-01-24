@@ -6,15 +6,24 @@ import { useSlate } from 'slate-react';
 import H2 from './icons/h2.svg';
 import H3 from './icons/h3.svg';
 import H4 from './icons/h4.svg';
-
-import './style.scss'
+import Icon from './icons/heading.svg';
+import './style.scss';
 export default {
-  name: 'header',
-  title: __('Header'),
+  name: 'heading',
+  title: __('Heading'),
+  Icon: Icon,
   data: {
     level: 2,
   },
   preventFormats: ['bold'],
+  transform: [
+    {
+      name: 'paragraph',
+      children: children => {
+        return children;
+      },
+    },
+  ],
   operation: props => {
     const { data } = props;
 
@@ -28,8 +37,8 @@ export default {
           size="small"
           key={Data.level}
           className={Data.level === data.level ? 'active' : ''}
-          onMouseDown={(e) => {
-            e.preventDefault()
+          onMouseDown={e => {
+            e.preventDefault();
             props.setBlockData({
               level: Data.level,
             });
@@ -43,9 +52,10 @@ export default {
   render: props => {
     const { data } = props;
     const Tag = `h${data.level}`;
-    return <Tag className="finxos-h" {...props.attributes}>{props.children}</Tag>;
-  },
-  transform: props => {
-    return 'default';
+    return (
+      <Tag className="finxos-h" {...props.attributes}>
+        {props.children}
+      </Tag>
+    );
   },
 };
