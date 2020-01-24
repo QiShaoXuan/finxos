@@ -1,5 +1,5 @@
 import React from 'react';
-import BlockRender from '@finxos/components/block-render';
+import {BlockRender} from '@finxos/components';
 import { useControls } from '@finxos/hooks';
 import { useSettings } from '../hooks';
 

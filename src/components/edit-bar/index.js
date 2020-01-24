@@ -1,9 +1,10 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
-import OperationArea from '@finxos/components/operation-area';
+import { OperationArea } from '@finxos/components';
 import { useFocused, useSelected, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 import { Button } from '@finxos/ui-components';
+import { BlockMenu } from '@finxos/components';
 import { Range } from 'slate';
 
 import './style.scss';
@@ -40,6 +41,7 @@ export default props => {
       <div className="edit-bar__popup-container">
         <div className="edit-bar__popup">
           <OperationArea divider={true} />
+          <BlockMenu />
         </div>
       </div>
     </div>,

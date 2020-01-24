@@ -2,10 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { FinxosSlate, FinxosEditable } from '@finxos/editor';
 import { Header } from '@finxos/ui-components';
-import BlockMenu from '@finxos/components/block-menu';
-import HistoryGroup from '@finxos/components/history-group';
-import ToolBar from '@finxos/components/toolbar';
-import EditorBar from '@finxos/components/edit-bar';
+import { HistoryGroup, Toolbar, EditBar } from '@finxos/components';
 
 import 'antd/dist/antd.css';
 import './style.scss';
@@ -54,8 +51,8 @@ class App extends React.Component {
               </>
             }
           />
-          <ToolBar />
-          <EditorBar />
+          <Toolbar />
+          <EditBar />
           <FinxosEditable />
         </FinxosSlate>
       </div>

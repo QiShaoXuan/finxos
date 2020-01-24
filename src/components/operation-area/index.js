@@ -13,7 +13,7 @@ export default props => {
   const { editorDom, lastSelection } = useControls();
 
   let BlockOperation = null;
-  if (selectedBlocks.length === 1) {
+  if (selectedBlocks.length) {
     BlockOperation = blocks.find(v => v.name === selectedBlocks[0].type)['operation'];
   }
 
