@@ -1,5 +1,5 @@
 import React from 'react';
-import {BlockRender} from '@finxos/components';
+import { BlockRender } from '@finxos/components';
 import { useControls } from '@finxos/hooks';
 import { useSettings } from '../hooks';
 
@@ -51,9 +51,9 @@ export const renderLeaf = props => {
   );
 };
 
-export const compose = (composeFns = [], target) => {
+export const compose = (target, composeFns = []) => {
   if (!target) {
     return null;
   }
-  return composeFns.reverse().reduce((handler, fn) => fn(handler), target);
+  return composeFns.reduce((handler, fn) => fn(handler), target);
 };

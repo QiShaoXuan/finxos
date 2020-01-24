@@ -1,5 +1,5 @@
 import React from 'react';
-import { Range, Editor } from 'slate';
+import { Range, Editor, Node } from 'slate';
 import { Button } from '@finxos/ui-components';
 import { useSlate } from 'slate-react';
 
@@ -10,14 +10,23 @@ export default () => {
   return (
     <Button
       onMouseDown={() => {
-        // editor.insertNode([
-        //   {
+        // editor.apply({
+        //   type: 'insert_node',
+        //   path: [0],
+        //   node: {
         //     type: 'code',
         //     children: [{ text: 'outer code' }],
         //   },
-        // ]);
-        console.log('------------');
-        console.log(' [...Editor.node(editor, editor.selection)]', [...Editor.nodes(editor, editor.selection)]);
+        // });
+
+        console.log('aa', Node.get(editor, [0]));
+        editor.apply({
+          type: 'remove_node',
+          path: [0],
+          node: {
+            children: [],
+          },
+        });
       }}
     >
       click to tset

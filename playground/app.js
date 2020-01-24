@@ -12,7 +12,7 @@ import './assets/styles/reset.scss';
 import './style.scss';
 const content = [
   {
-    type: 'header',
+    type: 'heading',
     children: [{ text: 'outer code' }],
   },
   {

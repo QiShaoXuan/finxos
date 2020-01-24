@@ -10,8 +10,8 @@ import TestButton from '@finxos/components/test-button';
 
 export default props => {
   const { content, className = '', blocks, formats } = props;
-  const editor = useMemo(() => compose([withHistory, withReact], createEditor()), []);
-  const [value, setValue] = useState(mergeDefaultData(content, blocks));
+  const editor = useMemo(() => compose(createEditor(), [withHistory, withReact]), []);
+  const [value, setValue] = useState(compose(content, [content => mergeDefaultData(content, blocks)]));
   const [lastSelection, setLastSelection] = useState(editor.selection);
   const container = useRef(null);
 

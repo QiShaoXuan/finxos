@@ -7,11 +7,13 @@ import H2 from './icons/h2.svg';
 import H3 from './icons/h3.svg';
 import H4 from './icons/h4.svg';
 import Icon from './icons/heading.svg';
+
 import './style.scss';
+
 export default {
   name: 'heading',
   title: __('Heading'),
-  Icon: Icon,
+  icon: Icon,
   data: {
     level: 2,
   },
@@ -20,7 +22,13 @@ export default {
     {
       name: 'paragraph',
       children: children => {
-        return children;
+        return children.map(v => {
+          v.bold = true;
+          return v;
+        });
+      },
+      data: data => {
+        return {};
       },
     },
   ],
@@ -53,7 +61,7 @@ export default {
     const { data } = props;
     const Tag = `h${data.level}`;
     return (
-      <Tag className="finxos-h" {...props.attributes}>
+      <Tag className="finxos-heading" {...props.attributes}>
         {props.children}
       </Tag>
     );

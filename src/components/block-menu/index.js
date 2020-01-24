@@ -1,7 +1,8 @@
 import React from 'react';
+import { Node } from 'slate';
 import { useFocused, useSelected, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
-import { createBlock } from '@finxos/tools';
+import { getBlock, transformBlock } from '@finxos/tools';
 
 export default props => {
   const { blocks } = useSettings();
@@ -10,11 +11,36 @@ export default props => {
   const { selection } = editor;
   const { editorDom, lastSelection } = useControls();
 
+  let path = [];
   let BlockTransform = null;
+  let currentBlock = null;
   if (selectedBlocks.length) {
-    BlockTransform = blocks.find(v => v.name === selectedBlocks[0].type)['transform'];
+    path = selection.anchor.path.slice(0, selection.anchor.path.length - 1);
+    currentBlock = getBlock(editor, path);
+    BlockTransform = blocks.find(v => v.name === currentBlock.type)['transform'];
   }
-  console.log('BlockTransform', BlockTransform);
 
-  return BlockTransform ? <div></div> : null;
+  return BlockTransform && Array.isArray(BlockTransform) && BlockTransform.length ? (
+    <ul>
+      {BlockTransform.map(to => {
+        const Block = blocks.find(v => v.name === to.name);
+        return (
+          <li
+            key={to.name}
+            onClick={() => {
+              transformBlock(editor, path, currentBlock, {
+                type: to.name,
+                children: to.children
+                  ? to.children(JSON.parse(JSON.stringify(currentBlock.children)))
+                  : currentBlock.children,
+                data: to.data ? to.data(JSON.parse(JSON.stringify(currentBlock.data))) : {},
+              });
+            }}
+          >
+            <Block.icon />
+          </li>
+        );
+      })}
+    </ul>
+  ) : null;
 };

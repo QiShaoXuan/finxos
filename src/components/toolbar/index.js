@@ -31,6 +31,7 @@ export default props => {
       return { left: 0, top: 0 };
     }
   };
+
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position() }}>
       <div className="toolbar-wrapper">

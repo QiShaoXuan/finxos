@@ -5,7 +5,7 @@ import Icon from './paragraph.svg';
 export default {
   name: 'paragraph',
   title: __('Paragraph'),
-  Icon: Icon,
+  icon: Icon,
   render: props => {
     return <p {...props.attributes}>{props.children}</p>;
   },
