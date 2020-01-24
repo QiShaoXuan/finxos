@@ -6,6 +6,14 @@ export default {
   name: 'paragraph',
   title: __('Paragraph'),
   icon: Icon,
+  transform: [
+    {
+      name: 'heading',
+      data: {
+        level: 2,
+      },
+    },
+  ],
   render: props => {
     return <p {...props.attributes}>{props.children}</p>;
   },

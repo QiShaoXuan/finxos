@@ -3,6 +3,9 @@ import { Node } from 'slate';
 import { useFocused, useSelected, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 import { getBlock, transformBlock } from '@finxos/tools';
+import { IconButton } from '@finxos/ui-components';
+
+import './style.scss';
 
 export default props => {
   const { blocks } = useSettings();
@@ -31,13 +34,21 @@ export default props => {
               transformBlock(editor, path, currentBlock, {
                 type: to.name,
                 children: to.children
-                  ? to.children(JSON.parse(JSON.stringify(currentBlock.children)))
+                  ? typeof to.children === 'function'
+                    ? to.children(JSON.parse(JSON.stringify(currentBlock.children)))
+                    : to.children
                   : currentBlock.children,
-                data: to.data ? to.data(JSON.parse(JSON.stringify(currentBlock.data))) : {},
+                data: to.data
+                  ? typeof to.data === 'function'
+                    ? to.data(JSON.parse(JSON.stringify(currentBlock.data)))
+                    : to.data
+                  : {},
               });
             }}
           >
-            <Block.icon />
+            <IconButton>
+              <Block.icon />
+            </IconButton>
           </li>
         );
       })}
