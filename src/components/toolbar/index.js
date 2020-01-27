@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
-import { useSlate, useFocused } from 'slate-react';
+import { useSlate, useFocused, ReactEditor } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 
 import ToolbarButton from './toolbar-button';
@@ -20,15 +20,13 @@ export default props => {
 
   useEffect(() => {
     if (focused && selection && !Range.isCollapsed(selection)) {
-      const domSelection = window.getSelection();
-      const domRange = domSelection && domSelection.getRangeAt(0);
-      const rect = domRange && domRange.getBoundingClientRect();
+      const rect = ReactEditor.toDOMRange(editor, selection).getBoundingClientRect();
       setPosition({
         top: `${rect.top + window.pageYOffset}px`,
         left: `${rect.left + window.pageXOffset + rect.width / 2}px`,
       });
     } else {
-      setPosition({ left: 0, top: 0 });
+      setPosition({ left: -100, top: -100 });
     }
   }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 
