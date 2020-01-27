@@ -1,14 +1,13 @@
-import { Node } from 'slate';
+import { Node, Transforms } from 'slate';
 
-export const setBlockData = (editor, path, data) => {
-  editor.apply({
-    type: 'set_node',
-    path: path,
-    properties: {},
-    newProperties: {
+export const setBlockData = (editor, type, data, options = {}) => {
+  Transforms.setNodes(
+    editor,
+    {
       data,
     },
-  });
+    { match: n => n.type === type, ...options }
+  );
 };
 
 export const createBlock = (editor, path, node) => {

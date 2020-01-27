@@ -11,7 +11,7 @@ const setData = (children, blocks) => {
     }
 
     if (child.children) {
-      setData(child.children);
+      setData(child.children, blocks);
     }
   });
 };

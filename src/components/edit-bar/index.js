@@ -22,9 +22,7 @@ export default props => {
 
   useEffect(() => {
     if (focused && selection && Range.isCollapsed(selection)) {
-      const domBlock = selection.anchor.path
-        .slice(0, selection.anchor.path.length - 1)
-        .reduce((parent, path) => parent.childNodes[path], editorDom).childNodes[0];
+      const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
 

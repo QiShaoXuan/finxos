@@ -1,7 +1,10 @@
 import React from 'react';
-import { Range, Editor, Node } from 'slate';
+import { Range, Editor, Node, Transforms, Path } from 'slate';
+import { Slate, useSlate, withReact,ReactEditor } from 'slate-react';
+
 import { Button } from '@finxos/ui-components';
-import { useSlate } from 'slate-react';
+import listItem from '../../blocks/list/list-item';
+import list from '../../blocks/list';
 
 export default () => {
   const editor = useSlate();
@@ -19,14 +22,35 @@ export default () => {
         //   },
         // });
 
-        console.log('aa', Node.get(editor, [0]));
-        editor.apply({
-          type: 'remove_node',
-          path: [0],
-          node: {
-            children: [],
-          },
-        });
+        // Transforms.setNodes(
+        //   editor,
+        //   {
+        //     type: 'paragraph',
+        //     children: [
+        //       {
+        //         text: '天姥连天向天横，势拔五岳掩赤城。',
+        //       },
+        //     ],
+        //   },
+        // );
+
+        const t = ReactEditor.toDOMRange(editor,editor.selection)
+        console.log("t", t);
+
+
+
+        // Transforms.unwrapNodes(editor, {
+        //   match: n => n.type === 'list-item',
+        //   split: true,
+        // })
+
+        // editor.apply({
+        //   type: 'remove_node',
+        //   path: [0],
+        //   node: {
+        //     children: [],
+        //   },
+        // });
       }}
     >
       click to tset

@@ -1,14 +1,13 @@
-export default (editor, editorDom, selection) => {
+import { ReactEditor } from 'slate-react';
+
+export default (editor, selection) => {
   return new Promise(resolve => {
     if (!selection) {
       throw Error('no selection');
     }
     setTimeout(() => {
-      if (!editorDom && !editor.selection) {
-        throw Error('no editor dom to focus');
-      }
       if (!editor.selection) {
-        editorDom.focus();
+        ReactEditor.focus(editor);
       }
       editor.apply({
         type: 'set_selection',

@@ -27,3 +27,14 @@
 
 1. 各种弹窗出现的动画
 2. 首次加载 content 需要检查 type
+3. block 转换可以优化  
+```js
+Transforms.setNodes(editor, {
+  type: 'paragraph',
+  children: [
+    {
+      text: '天姥连天向天横，势拔五岳掩赤城。',
+    },
+  ],
+});
+```

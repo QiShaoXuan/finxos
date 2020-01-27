@@ -9,26 +9,23 @@ export default props => {
   const { blocks } = useSettings();
   const { selectedBlocks } = useControls();
   const editor = useSlate();
-  const { selection } = editor;
-  const { editorDom, lastSelection } = useControls();
+  const { lastSelection } = useControls();
 
-  let BlockOperation = null;
+  let currentBlock = null;
+
   if (selectedBlocks.length) {
-    BlockOperation = blocks.find(v => v.name === selectedBlocks[0].type)['operation'];
+    currentBlock = blocks.find(v => v.name === selectedBlocks[0].type);
   }
 
-  return BlockOperation ? (
+  return currentBlock && currentBlock.operation ? (
     <>
       <div className="finxos-operation-area">
-        {BlockOperation({
+        {currentBlock.operation({
           data: selectedBlocks[0].data,
+          editor,
           setBlockData: data => {
-            setBlockData(
-              editor,
-              selection.anchor.path.slice(0, selection.anchor.path.length - 1),
-              Object.assign({}, selectedBlocks[0].data, data)
-            );
-            setSelection(editor, editorDom, lastSelection);
+            setBlockData(editor, currentBlock.name, data);
+            setSelection(editor, lastSelection);
           },
         })}
       </div>

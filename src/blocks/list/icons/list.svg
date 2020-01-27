@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 23 23" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="block属性icon" transform="translate(-206.000000, -27.000000)">
+      <g id="编组-12复制" transform="translate(206.000000, 27.000000)">
+        <path d="M0,0 L23,0 L23,23 L0,23 L0,0 Z M1,1 L1,22 L22,22 L22,1 L1,1 Z" id="矩形复制-43" fill="#DEDFE1" fill-rule="nonzero"></path>
+        <g id="编组-6复制-8" transform="translate(5.000000, 5.000000)" fill="#5A6067">
+          <polygon id="矩形复制-4" points="4 1 13 1 13 2 4 2"></polygon>
+          <polygon id="矩形复制-8" points="4 6 13 6 13 7 4 7"></polygon>
+          <polygon id="矩形复制-9" points="4 11 13 11 13 12 4 12"></polygon>
+          <path d="M1,2.5 C1.55228475,2.5 2,2.05228475 2,1.5 C2,0.94771525 1.55228475,0.5 1,0.5 C0.44771525,0.5 0,0.94771525 0,1.5 C0,2.05228475 0.44771525,2.5 1,2.5 Z" id="椭圆形"></path>
+          <path d="M1,7.5 C1.55228475,7.5 2,7.05228475 2,6.5 C2,5.94771525 1.55228475,5.5 1,5.5 C0.44771525,5.5 0,5.94771525 0,6.5 C0,7.05228475 0.44771525,7.5 1,7.5 Z" id="椭圆形复制-2"></path>
+          <path d="M1,12.5 C1.55228475,12.5 2,12.0522847 2,11.5 C2,10.9477153 1.55228475,10.5 1,10.5 C0.44771525,10.5 0,10.9477153 0,11.5 C0,12.0522847 0.44771525,12.5 1,12.5 Z" id="椭圆形复制-3"></path>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

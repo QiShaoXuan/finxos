@@ -1,5 +1,4 @@
 import React from 'react';
-import { Node } from 'slate';
 import { useFocused, useSelected, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 import { getBlock, transformBlock } from '@finxos/tools';
@@ -12,7 +11,6 @@ export default props => {
   const { selectedBlocks } = useControls();
   const editor = useSlate();
   const { selection } = editor;
-  const { editorDom, lastSelection } = useControls();
 
   let path = [];
   let BlockTransform = null;
