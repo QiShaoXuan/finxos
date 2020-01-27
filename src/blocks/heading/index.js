@@ -40,20 +40,20 @@ export default {
       { Icon: H3, level: 3 },
       { Icon: H4, level: 4 },
     ].map(Data => {
+      const { level, Icon } = Data;
       return (
         <IconButton
           size="small"
-          key={Data.level}
-          className={Data.level === data.level ? 'active' : ''}
+          key={level}
+          className={level === data.level ? 'active' : ''}
           onMouseDown={e => {
             e.preventDefault();
             props.setBlockData({
-              level: Data.level,
+              level,
             });
           }}
-        >
-          <Data.Icon />
-        </IconButton>
+          icon={Icon}
+        />
       );
     });
   },

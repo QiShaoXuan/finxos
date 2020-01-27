@@ -40,9 +40,8 @@ const list = {
                   type,
                 });
               }}
-            >
-              <Icon />
-            </IconButton>
+              icon={Icon}
+            />
           );
         })}
       </div>

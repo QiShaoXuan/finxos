@@ -24,7 +24,7 @@ export default props => {
   return BlockTransform && Array.isArray(BlockTransform) && BlockTransform.length ? (
     <ul>
       {BlockTransform.map(to => {
-        const Block = blocks.find(v => v.name === to.name);
+        const block = blocks.find(v => v.name === to.name);
         return (
           <li
             key={to.name}
@@ -44,9 +44,7 @@ export default props => {
               });
             }}
           >
-            <IconButton>
-              <Block.icon />
-            </IconButton>
+            <IconButton icon={block.icon} />
           </li>
         );
       })}

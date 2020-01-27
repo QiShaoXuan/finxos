@@ -9,8 +9,13 @@
   &:last-of-type {
     margin-right: 0;
   }
-  &.active,
   &:hover {
+    background: $active-gray-bg;
+    svg {
+      @include svg-color($active-gray);
+    }
+  }
+  &.active {
     background: $active-gray-bg;
     svg {
       @include svg-color($blue);
