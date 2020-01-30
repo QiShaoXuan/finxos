@@ -1,0 +1,102 @@
+<svg
+  width="70px"
+  height="85px"
+  viewBox="0 0 70 85"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg">
+  <g id="59" stroke="none" strokeWidth="1"  fillRule="evenodd">
+    <g
+      id="B文本列表编辑-03选择有序列表样式"
+      transform="translate(-747.000000, -348.000000)">
+      <g id="pic-list-2" transform="translate(747.000000, 348.000000)">
+        <rect
+          id="Rectangle"
+          fill="#FFFFFF"
+          x="0"
+          y="0"
+          width="70"
+          height="85"></rect>
+        <text
+          id="一、"
+          fontFamily="PingFangSC-Regular, PingFang SC"
+          fontSize="9"
+          fontWeight="normal"
+          >
+          <tspan x="5" y="16">
+            一、
+          </tspan>
+        </text>
+        <text
+          id="二、"
+          fontFamily="PingFangSC-Regular, PingFang SC"
+          fontSize="9"
+          fontWeight="normal"
+          >
+          <tspan x="5" y="77">
+            二、
+          </tspan>
+        </text>
+        <text
+          id="1.1."
+          fontFamily="PingFangSC-Regular, PingFang SC"
+          fontSize="10"
+          fontWeight="normal"
+          >
+          <tspan x="11.7" y="30">
+            1.1.
+          </tspan>
+        </text>
+        <text
+          id="1.1.1."
+          fontFamily="PingFangSC-Regular, PingFang SC"
+          fontSize="10"
+          fontWeight="normal"
+          >
+          <tspan x="14.05" y="45">
+            1.1.1.
+          </tspan>
+        </text>
+        <text
+          id="1.1.1.1."
+          fontFamily="PingFangSC-Regular, PingFang SC"
+          fontSize="10"
+          fontWeight="normal"
+          >
+          <tspan x="16.4" y="59">
+            1.1.1.1.
+          </tspan>
+        </text>
+        <path
+          d="M21.5,14 L60.5,14"
+          id="Line-3"
+          stroke="#CCCCCC"
+          strokeWidth="3"
+          strokeLinejoin="round"></path>
+        <path
+          d="M31,29.5 L61,29.5"
+          id="Line-3"
+          stroke="#CCCCCC"
+          strokeWidth="3"
+          strokeLinejoin="round"></path>
+        <path
+          d="M39,44.5 L61,44.5"
+          id="Line-3"
+          stroke="#CCCCCC"
+          strokeWidth="3"
+          strokeLinejoin="round"></path>
+        <path
+          d="M46,58.5 L61,58.5"
+          id="Line-3"
+          stroke="#CCCCCC"
+          strokeWidth="3"
+          strokeLinejoin="round"></path>
+        <path
+          d="M21.5,76 L60.5,76"
+          id="Line-3"
+          stroke="#CCCCCC"
+          strokeWidth="3"
+          strokeLinejoin="round"></path>
+      </g>
+    </g>
+  </g>
+</svg>

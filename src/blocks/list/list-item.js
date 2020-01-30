@@ -1,21 +1,28 @@
-import React from 'react';
-import { Path, Node } from 'slate';
+import React, { useMemo } from 'react';
 import { useSelected, ReactEditor, useSlate } from 'slate-react';
-
+import { getItemPrefix, getListDeep } from './untils';
 import __ from '@finxos/i18n';
+import data from './data';
 
 export default {
   name: 'list-item',
-  title: __('List-tem'),
+  title: __('ListItem'),
+  data,
   render: props => {
     const editor = useSlate();
-    const parent = Node.get(editor, Path.parent(ReactEditor.findPath(editor, props.element)));
+    const path = useMemo(() => ReactEditor.findPath(editor, props.element), [props.element, useSelected()]);
+    const deep = useMemo(() => getListDeep(editor, path), [path]);
     const {
       data: { type },
-    } = parent;
+    } = props;
+
     return (
-      <li>
-        {type}:{props.children}
+      <li
+        className={`finxos-list-item finxos-list-item--${type}`}
+        data-deep={deep + 1}
+        data-prefix={useMemo(() => getItemPrefix(editor, path, type, deep), [path, type])}
+      >
+        {props.children}
       </li>
     );
   },

@@ -1,12 +1,28 @@
-import { Node, Transforms } from 'slate';
+import { Node, Transforms, Range } from 'slate';
 
 export const setBlockData = (editor, type, data, options = {}) => {
+  const root = Node.get(editor, Range.start(editor.selection));
+  const [, first] = Node.first(root, editor.selection.anchor.path);
+  const [, last] = Node.last(root, editor.selection.anchor.path);
+
   Transforms.setNodes(
     editor,
     {
       data,
     },
-    { match: n => n.type === type, ...options }
+    {
+      mode: 'all',
+      at: {
+        anchor: {
+          path: first,
+        },
+        focus: {
+          path: last,
+        },
+      },
+      match: n => n.type === type,
+      ...options,
+    }
   );
 };
 

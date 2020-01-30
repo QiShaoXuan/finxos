@@ -21,7 +21,7 @@ export default props => {
   const [position, setPosition] = useState({ left: -100, top: -100 });
 
   useEffect(() => {
-    if (focused && selection && Range.isCollapsed(selection)) {
+    if (focused && selection ) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
@@ -33,7 +33,7 @@ export default props => {
     } else {
       setPosition({ left: -100, top: -100 });
     }
-  }, [focused, selection, selection && Range.isCollapsed(selection)]);
+  }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 
   return createPortal(
     <div style={{ ...position }} className={`finxox-edit-bar`}>

@@ -6,22 +6,31 @@
   align-items: center;
   cursor: pointer;
   margin-right: 2px;
+  color: $default-color;
   &:last-of-type {
     margin-right: 0;
   }
-  &:hover {
+
+  &.finxos-icon-button--disabled {
+    cursor: default;
+    color: $disable-color;
+    @include svg-color($disable-color);
+  }
+  &:hover:not(.finxos-icon-button--disabled) {
     background: $active-gray-bg;
+    color: $active-gray;
     svg {
       @include svg-color($active-gray);
     }
   }
-  &.active {
+  &.active:not(.finxos-icon-button--disabled) {
     background: $active-gray-bg;
+    color: $blue;
     svg {
       @include svg-color($blue);
     }
   }
   svg {
-    @include svg-color($disable-color);
+    @include svg-color($default-color);
   }
 }

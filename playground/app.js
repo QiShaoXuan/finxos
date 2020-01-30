@@ -39,34 +39,41 @@ const content = [
         ],
       },
       {
-        type: 'list-item',
+        type: 'list',
         children: [
           {
-            text: '天台四万八千丈，对此欲倒东南倾。',
+            type: 'list-item',
+            children: [
+              {
+                text: '天台四万八千丈，对此欲倒东南倾。',
+              },
+            ],
           },
-        ],
-      },
-      {
-        type: 'list-item',
-        children: [
           {
-            text: '我欲因之梦吴越，一夜飞渡镜湖月。',
-          },
-        ],
-      },
-      {
-        type: 'list-item',
-        children: [
-          {
-            text: '湖月照我影，送我至剡溪。',
-          },
-        ],
-      },
-      {
-        type: 'list-item',
-        children: [
-          {
-            text: '谢公宿处今尚在，渌水荡漾清猿啼。',
+            type: 'list',
+            children: [
+              {
+                type: 'list-item',
+                children: [
+                  {
+                    text: '我欲因之梦吴越，一夜飞渡镜湖月。',
+                  },
+                ],
+              },
+              {
+                type: 'list',
+                children: [
+                  {
+                    type: 'list-item',
+                    children: [
+                      {
+                        text: '湖月照我影，送我至剡溪。',
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
           },
         ],
       },
@@ -88,7 +95,7 @@ const content = [
 ];
 
 // -------------------- test ----------------------
-import Test from '../src/test'
+import Test from '../src/test';
 // -------------------- END - test ----------------------
 
 class App extends React.Component {

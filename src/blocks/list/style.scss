@@ -1,0 +1,40 @@
+.finxos-list {
+  ul,
+  ol {
+    margin-left: 20px;
+  }
+}
+
+.finxos-list--operation {
+  display: flex;
+}
+
+.finxos-list-item {
+  padding-left: 25px;
+  position: relative;
+
+  &::before {
+    content: attr(data-prefix);
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+@for $i from 1 through 10 {
+  .finxos-list-item--ol1[data-deep='#{$i}'] {
+    padding-left: $i * 15px + 10px;
+  }
+}
+
+@for $i from 1 through 10 {
+  @if $i <= 2 {
+    .finxos-list-item--ol2[data-deep='#{$i}'] {
+      padding-left: 15px + 10px;
+    }
+  } @else  {
+    .finxos-list-item--ol2[data-deep='#{$i}'] {
+      padding-left: $i * 10px + 15px;
+    }
+  }
+}
