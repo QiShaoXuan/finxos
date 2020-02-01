@@ -3,11 +3,10 @@ import { ReactEditor } from 'slate-react';
 import { getBlockRange } from '@finxos/tools';
 
 export default (event, editor, selectedBlocks) => {
-  const listItem = selectedBlocks.find(v => v.type === 'list-item');
-  const path = ReactEditor.findPath(editor, listItem);
-
   if (event.keyCode === 9) {
     event.preventDefault();
+    const listItem = selectedBlocks.find(v => v.type === 'list-item');
+    const path = ReactEditor.findPath(editor, listItem);
 
     if (path[path.length - 1] !== 0) {
       Transforms.wrapNodes(editor, { type: 'list', children: [], data: listItem.data });
@@ -16,33 +15,32 @@ export default (event, editor, selectedBlocks) => {
     return;
   }
 
-  if (
-    event.keyCode === 8 &&
-    Range.isCollapsed(editor.selection) &&
-    editor.selection.anchor.offset === 0 &&
-    path[path.length - 1] === 0
-  ) {
-    event.preventDefault();
+  if (event.keyCode === 8) {
+    const listItem = selectedBlocks.find(v => v.type === 'list-item');
+    const path = ReactEditor.findPath(editor, listItem);
 
-    const list = selectedBlocks.reverse().find(v => v.type === 'list');
-    const listPath = ReactEditor.findPath(editor, list);
-    const unwrapRange = getBlockRange(editor, listPath);
+    if (Range.isCollapsed(editor.selection) && editor.selection.anchor.offset === 0 && path[path.length - 1] === 0) {
+      event.preventDefault();
 
-    Transforms.unwrapNodes(editor, {
-      mode: 'all',
-      match: n => {
-        // console.log('n', n, ReactEditor.findPath(editor, n));
-        const p = ReactEditor.findPath(editor, n);
+      const list = selectedBlocks.reverse().find(v => v.type === 'list');
+      const listPath = ReactEditor.findPath(editor, list);
+      const unwrapRange = getBlockRange(editor, listPath);
 
-        return (
-          listPath.length >= p.length && listPath[listPath.length - 1] <= p[listPath.length - 1] && n.type === 'list'
-        );
-      },
-      at: unwrapRange,
-      split: true,
-    });
+      Transforms.unwrapNodes(editor, {
+        mode: 'all',
+        match: n => {
+          const p = ReactEditor.findPath(editor, n);
 
-    return;
+          return (
+            listPath.length >= p.length && listPath[listPath.length - 1] <= p[listPath.length - 1] && n.type === 'list'
+          );
+        },
+        at: unwrapRange,
+        split: true,
+      });
+
+      return;
+    }
   }
 };
 
