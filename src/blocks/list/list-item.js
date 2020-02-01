@@ -3,10 +3,12 @@ import { useSelected, ReactEditor, useSlate } from 'slate-react';
 import { getItemPrefix, getListDeep } from './untils';
 import __ from '@finxos/i18n';
 import data from './data';
+import Icon from './icons/list.svg';
 
 export default {
   name: 'list-item',
   title: __('ListItem'),
+  icon: Icon,
   data,
   render: props => {
     const editor = useSlate();

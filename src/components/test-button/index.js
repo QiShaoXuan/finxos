@@ -1,6 +1,6 @@
 import React from 'react';
 import { Range, Editor, Node, Transforms, Path } from 'slate';
-import { Slate, useSlate, withReact,ReactEditor } from 'slate-react';
+import { Slate, useSlate, withReact, ReactEditor } from 'slate-react';
 
 import { Button } from '@finxos/ui-components';
 import listItem from '../../blocks/list/list-item';
@@ -34,11 +34,49 @@ export default () => {
         //   },
         // );
 
-        const t = ReactEditor.toDOMRange(editor,editor.selection)
-        console.log("t", t);
+        // const t = ReactEditor.toDOMRange(editor, editor.selection);
+        console.log('editor', editor);
 
-
-
+        // editor.apply({
+        //   type: 'insert_node',
+        //   path: editor.selection,
+        //   node: {
+        //     type: 'heading',
+        //     data: { level: 4 },
+        //     children: [{ text: 'outer code' }],
+        //   },
+        // });
+        // [
+        //   {
+        //     type: 'heading',
+        //     data: { level: 4 },
+        //     children: [{ text: 'outer code' }],
+        //   },
+        //   {
+        //     type: 'heading',
+        //     data: { level: 4 },
+        //     children: [{ text: 'outer code' }],
+        //   },
+        // ]
+        // Transforms.setNodes(
+        //   editor,
+        //   {
+        //     data,
+        //   },
+        //   {
+        //     mode: 'all',
+        //     at: {
+        //       anchor: {
+        //         path: first,
+        //       },
+        //       focus: {
+        //         path: last,
+        //       },
+        //     },
+        //     match: n => n.type === type,
+        //     ...options,
+        //   }
+        // );
         // Transforms.unwrapNodes(editor, {
         //   match: n => n.type === 'list-item',
         //   split: true,

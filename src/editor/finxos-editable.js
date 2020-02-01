@@ -18,10 +18,10 @@ export default props => {
       renderElement={useCallback(renderElement, [])}
       renderLeaf={useCallback(renderLeaf, [])}
       onKeyDown={event => {
-        // if (selectedBlocks.length === 1) {
-        //   const block = blocks.find(v => v.name === selectedBlocks[0].type);
-        //   block.edit && block.edit(event);
-        // }
+        if (selectedBlocks.length) {
+          const block = blocks.find(v => v.name === selectedBlocks[0].type);
+          block.edit && block.edit(event, editor, selectedBlocks);
+        }
         const renderFormat = formats.find(v => v.shortcut && v.shortcut(event));
         if (!renderFormat) {
           return;

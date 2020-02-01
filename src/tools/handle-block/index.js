@@ -1,10 +1,37 @@
-import { Node, Transforms, Range } from 'slate';
+import { Node, Transforms, Range, Editor } from 'slate';
+
+export const getBlockRange = (editor, start) => {
+  const path = start || [editor.selection.anchor.path[0]];
+  const block = Node.get(editor, path);
+
+  return {
+    anchor: blockAnchor(block, path),
+    focus: blockFocus(block, path),
+  };
+};
+const blockAnchor = (parent, path) => {
+  if (parent.children) {
+    return blockAnchor(parent.children[0], [...path, 0]);
+  } else {
+    return {
+      path,
+      offset: 0,
+    };
+  }
+};
+
+const blockFocus = (parent, path) => {
+  if (parent.children) {
+    return blockFocus(parent.children[parent.children.length - 1], [...path, parent.children.length - 1]);
+  } else {
+    return {
+      path,
+      offset: parent.text.length,
+    };
+  }
+};
 
 export const setBlockData = (editor, type, data, options = {}) => {
-  const root = Node.get(editor, Range.start(editor.selection));
-  const [, first] = Node.first(root, editor.selection.anchor.path);
-  const [, last] = Node.last(root, editor.selection.anchor.path);
-
   Transforms.setNodes(
     editor,
     {
@@ -12,14 +39,7 @@ export const setBlockData = (editor, type, data, options = {}) => {
     },
     {
       mode: 'all',
-      at: {
-        anchor: {
-          path: first,
-        },
-        focus: {
-          path: last,
-        },
-      },
+      at: getBlockRange(editor),
       match: n => n.type === type,
       ...options,
     }
@@ -46,7 +66,18 @@ export const removeBlock = (editor, path, node) => {
   });
 };
 
-export const transformBlock = (editor, path, from, to) => {
-  removeBlock(editor, path, from);
-  createBlock(editor, path, to);
+export const transformBlock = (editor, { type, data = {} }, options = {}) => {
+  console.log('type,data', type, data);
+
+  return Transforms.setNodes(editor, {
+    type,
+    data,
+  });
+
+  const obj = {
+    mode: 'all',
+    at: Range.isCollapsed(editor.selection) ? getBlockRange(editor) : editor.selection,
+    match: n => n.type === type,
+    ...options,
+  };
 };

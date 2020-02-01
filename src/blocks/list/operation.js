@@ -29,9 +29,9 @@ export default props => {
               className={type === data.type ? 'active' : ''}
               onMouseDown={e => {
                 e.preventDefault();
-                props.setBlockData({
-                  type,
-                });
+                // props.setBlockData({
+                //   type,
+                // });
                 props.setBlockData(
                   {
                     type,

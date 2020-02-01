@@ -17,7 +17,7 @@ export default props => {
   let currentBlock = null;
   if (selectedBlocks.length) {
     path = selection.anchor.path.slice(0, selection.anchor.path.length - 1);
-    currentBlock = getBlock(editor, path);
+    currentBlock = selectedBlocks[0];
     BlockTransform = blocks.find(v => v.name === currentBlock.type)['transform'];
   }
 
@@ -28,20 +28,22 @@ export default props => {
         return (
           <li
             key={to.name}
-            onClick={() => {
-              transformBlock(editor, path, currentBlock, {
-                type: to.name,
-                children: to.children
-                  ? typeof to.children === 'function'
-                    ? to.children(JSON.parse(JSON.stringify(currentBlock.children)))
-                    : to.children
-                  : currentBlock.children,
-                data: to.data
-                  ? typeof to.data === 'function'
-                    ? to.data(JSON.parse(JSON.stringify(currentBlock.data)))
-                    : to.data
-                  : {},
-              });
+            onMouseDown={e => {
+              e.preventDefault();
+              to.before && to.before(editor);
+              transformBlock(
+                editor,
+                {
+                  type: to.name,
+                  data: to.data
+                    ? typeof to.data === 'function'
+                      ? to.data(JSON.parse(JSON.stringify(currentBlock.data)))
+                      : to.data
+                    : {},
+                },
+                to.options
+              );
+              to.after && to.after(editor);
             }}
           >
             <IconButton icon={block.icon} />

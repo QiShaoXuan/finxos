@@ -7,4 +7,11 @@ export isFormatActive from './is-format-active';
 export mergeDefaultData from './merge-default-data';
 export setSelection from './set-selection';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
-export { setBlockData, createBlock, removeBlock, getBlock, transformBlock } from './handle-block';
+export {
+  setBlockData,
+  createBlock,
+  removeBlock,
+  getBlock,
+  transformBlock,
+  getBlockRange,
+} from './handle-block';

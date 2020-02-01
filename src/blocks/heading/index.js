@@ -21,12 +21,6 @@ export default {
   transform: [
     {
       name: 'paragraph',
-      children: children => {
-        return children.map(v => {
-          v.bold = true;
-          return v;
-        });
-      },
       data: data => {
         return {};
       },

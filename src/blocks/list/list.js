@@ -1,7 +1,9 @@
 import React from 'react';
 import __ from '@finxos/i18n';
-import operation from './list-operation';
-import data from './data'
+import operation from './operation';
+import transform from './transform';
+import edit from './edit';
+import data from './data';
 import Icon from './icons/list.svg';
 
 import './style.scss';
@@ -13,15 +15,9 @@ export default {
   title: __('List'),
   icon: Icon,
   data,
+  edit,
   operation,
-  // transform: [
-  //   {
-  //     name: 'p',
-  //     data: {
-  //       level: 2,
-  //     },
-  //   },
-  // ],
+  transform,
   render: props => {
     const { data } = props;
     const Tag = data.type.indexOf('ul') === -1 ? 'ol' : 'ul';
