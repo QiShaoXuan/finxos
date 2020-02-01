@@ -67,17 +67,15 @@ export const removeBlock = (editor, path, node) => {
 };
 
 export const transformBlock = (editor, { type, data = {} }, options = {}) => {
-  console.log('type,data', type, data);
-
   return Transforms.setNodes(editor, {
     type,
     data,
   });
 
-  const obj = {
-    mode: 'all',
-    at: Range.isCollapsed(editor.selection) ? getBlockRange(editor) : editor.selection,
-    match: n => n.type === type,
-    ...options,
-  };
+  // const obj = {
+  //   mode: 'all',
+  //   at: Range.isCollapsed(editor.selection) ? getBlockRange(editor) : editor.selection,
+  //   match: n => n.type === type,
+  //   ...options,
+  // };
 };

@@ -57,15 +57,16 @@ const getUlIcon = (editor, path, type, deep) => {
 const getOlIcon = (editor, path, type, deep) => {
   switch (type) {
     case 'ol1':
-      return path
-        .reduce((indexGroup, p, i) => {
-          if (i > 0) {
-            indexGroup.push(getItemIndex(editor, path.slice(0, i + 1)));
-          }
-          return indexGroup;
-        }, [])
-        .join('.');
-      return '';
+      return (
+        path
+          .reduce((indexGroup, p, i) => {
+            if (i > 0) {
+              indexGroup.push(getItemIndex(editor, path.slice(0, i + 1)));
+            }
+            return indexGroup;
+          }, [])
+          .join('.') + '.'
+      );
     case 'ol2':
       return path.length > 2
         ? path
@@ -75,9 +76,8 @@ const getOlIcon = (editor, path, type, deep) => {
               }
               return indexGroup;
             }, [])
-            .join('.')
-        : convertRoman(getItemIndex(editor, path));
-      return '';
+            .join('.') + '.'
+        : convertRoman(getItemIndex(editor, path)) + '.';
     case 'ol3':
       const index = getItemIndex(editor, path);
       switch (deep % 3) {

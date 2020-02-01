@@ -7,6 +7,9 @@
 
 .finxos-list--operation {
   display: flex;
+  &:not(:last-of-type) {
+    margin-bottom: 2px;
+  }
 }
 
 .finxos-list-item {
@@ -32,7 +35,7 @@
     .finxos-list-item--ol2[data-deep='#{$i}'] {
       padding-left: 15px + 10px;
     }
-  } @else  {
+  } @else {
     .finxos-list-item--ol2[data-deep='#{$i}'] {
       padding-left: $i * 10px + 15px;
     }

@@ -2,11 +2,18 @@ import React from 'react';
 import { Transforms } from 'slate';
 import { useSelected } from 'slate-react';
 import __ from '@finxos/i18n';
-import Icon from './paragraph.svg';
+import operation from './operation';
+
+import Icon from './icons/paragraph.svg';
+
+import './style.scss'
 export default {
   name: 'paragraph',
   title: __('Paragraph'),
   icon: Icon,
+  data: {
+    align: 'left',
+  },
   transform: [
     {
       name: 'heading',
@@ -28,9 +35,12 @@ export default {
       },
     },
   ],
+  operation,
   render: props => {
+    const {data} = props;
+
     return (
-      <p {...props.attributes} className="finxos-paragraph">
+      <p {...props.attributes} className={`finxos-paragraph finxos-paragraph--${data.align}`}>
         {props.children}
       </p>
     );

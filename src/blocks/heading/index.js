@@ -1,6 +1,6 @@
 import React from 'react';
 import __ from '@finxos/i18n';
-import { Button, IconButton } from '@finxos/ui-components';
+import { IconButton } from '@finxos/ui-components';
 import { useSlate } from 'slate-react';
 
 import H2 from './icons/h2.svg';
@@ -37,7 +37,6 @@ export default {
       const { level, Icon } = Data;
       return (
         <IconButton
-          size="small"
           key={level}
           className={level === data.level ? 'active' : ''}
           onMouseDown={e => {

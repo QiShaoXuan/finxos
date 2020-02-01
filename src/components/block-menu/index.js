@@ -22,7 +22,7 @@ export default props => {
   }
 
   return BlockTransform && Array.isArray(BlockTransform) && BlockTransform.length ? (
-    <ul>
+    <ul className="finxos-transform-menu">
       {BlockTransform.map(to => {
         const block = blocks.find(v => v.name === to.name);
         return (

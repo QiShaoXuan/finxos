@@ -36,7 +36,7 @@ export default () => {
 
         // const t = ReactEditor.toDOMRange(editor, editor.selection);
         console.log('editor', editor);
-
+        editor.insertBreak()
         // editor.apply({
         //   type: 'insert_node',
         //   path: editor.selection,

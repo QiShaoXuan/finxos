@@ -1,0 +1,7 @@
+.finxos-transform-menu {
+  display: flex;
+  flex-wrap: wrap;
+  li:not(:nth-of-type(6)){
+    margin-right: 5px;
+  }
+}

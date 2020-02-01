@@ -5,6 +5,7 @@ import React, { useCallback } from 'react';
 import { renderElement, renderLeaf } from './untils';
 import { toggleFormat } from '@finxos/tools';
 import { useSettings, useControls } from '@finxos/hooks';
+import globalShortcut from './shortcuts';
 import './style.scss';
 
 export default props => {
@@ -18,6 +19,8 @@ export default props => {
       renderElement={useCallback(renderElement, [])}
       renderLeaf={useCallback(renderLeaf, [])}
       onKeyDown={event => {
+        globalShortcut(event, editor);
+
         if (selectedBlocks.length) {
           const block = blocks.find(v => v.name === selectedBlocks[0].type);
           block.edit && block.edit(event, editor, selectedBlocks);

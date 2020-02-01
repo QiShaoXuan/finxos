@@ -1,4 +1,4 @@
-$popup-width: 240px;
+$popup-width: 216px;
 
 .finxox-edit-bar {
   position: fixed;
@@ -21,6 +21,12 @@ $popup-width: 240px;
     .edit-bar__popup-container {
       display: block;
     }
+    .finxox-edit-bar__edit-button {
+      background: transparent;
+      svg {
+        @include svg-color($blue);
+      }
+    }
   }
 
   .edit-bar__popup {
@@ -35,5 +41,10 @@ $popup-width: 240px;
     position: absolute;
     left: 0;
     top: 100%;
+  }
+
+  .finxox-edit-bar__edit-button svg {
+    width: 20px;
+    height: 20px;
   }
 }

@@ -5,4 +5,4 @@ import list from './list';
 
 export const defaultBlock = paragraph;
 
-export default [paragraph, heading, codeSetting, ...list];
+export default [paragraph, heading, ...list];

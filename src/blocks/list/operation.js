@@ -37,7 +37,7 @@ export default props => {
                     type,
                   },
                   {
-                    match: n => n.type === 'list-item',
+                    match: n => n.type === 'list-item' || n.type === 'list',
                   }
                 );
               }}
@@ -61,15 +61,15 @@ export default props => {
               className={`list-special-btn ${type === data.type ? 'active' : ''}`}
               onMouseDown={e => {
                 e.preventDefault();
-                props.setBlockData({
-                  type,
-                });
+                // props.setBlockData({
+                //   type,
+                // });
                 props.setBlockData(
                   {
                     type,
                   },
                   {
-                    match: n => n.type === 'list-item',
+                    match: n => n.type === 'list-item' || n.type === 'list',
                   }
                 );
               }}
