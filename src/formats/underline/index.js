@@ -16,4 +16,10 @@ export default {
   shortcut: event => {
     return event.ctrlKey && event.key === 'u';
   },
+  paste: el => {
+    const { nodeName, style } = el;
+    console.log("innderel", el);
+
+    return nodeName === 'U' || style.textDecoration === 'underline';
+  },
 };

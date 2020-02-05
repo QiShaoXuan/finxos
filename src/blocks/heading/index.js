@@ -50,6 +50,18 @@ export default {
       );
     });
   },
+  paste: el => {
+    const { nodeName } = el;
+    return ['H1', 'H2', 'H3', 'H4'].find((v, i) => {
+      if (v === nodeName) {
+        return {
+          data: {
+            level: i,
+          },
+        };
+      }
+    });
+  },
   render: props => {
     const { data } = props;
     const Tag = `h${data.level}`;

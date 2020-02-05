@@ -6,7 +6,7 @@ import operation from './operation';
 
 import Icon from './icons/paragraph.svg';
 
-import './style.scss'
+import './style.scss';
 export default {
   name: 'paragraph',
   title: __('Paragraph'),
@@ -37,7 +37,7 @@ export default {
   ],
   operation,
   render: props => {
-    const {data} = props;
+    const { data } = props;
 
     return (
       <p {...props.attributes} className={`finxos-paragraph finxos-paragraph--${data.align}`}>
@@ -45,7 +45,8 @@ export default {
       </p>
     );
   },
-  save: props => {
-    return 'default';
+  paste: el => {
+    const { nodeName } = el;
+    return nodeName === 'P' ? { data: { align: 'left' } } : false;
   },
 };

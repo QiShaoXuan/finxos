@@ -28,7 +28,20 @@ export default {
       </Tag>
     );
   },
-  save: props => {
-    return 'default';
+  paste: el => {
+    const { nodeName } = el;
+    return nodeName === 'UL'
+      ? {
+          data: {
+            type: 'ul1',
+          },
+        }
+      : nodeName === 'OL'
+      ? {
+          data: {
+            type: 'ol1',
+          },
+        }
+      : false;
   },
 };

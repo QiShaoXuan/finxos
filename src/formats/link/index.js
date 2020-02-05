@@ -68,4 +68,11 @@ export default {
   shortcut: event => {
     return event.ctrlKey && event.key === 'l';
   },
+  paste: el => {
+    const { nodeName, href } = el;
+    if (nodeName === 'A') {
+      return href || '';
+    }
+    return false;
+  },
 };

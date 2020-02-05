@@ -12,4 +12,8 @@ export default {
   shortcut: event => {
     return event.ctrlKey && event.key === 'b';
   },
+  paste: el => {
+    const { nodeName, style } = el;
+    return nodeName === 'B' || nodeName === 'STRONG' || style.fontWeight === 'bold';
+  },
 };

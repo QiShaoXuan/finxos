@@ -13,6 +13,10 @@ export default {
       </del>
     );
   },
+  paste: el => {
+    const { nodeName, style } = el;
+    return nodeName === 'DEL' || nodeName === 'S' || style.fontStyle === 'italic';
+  },
   // shortcut: event => {
   //   return event.ctrlKey && event.key === '';
   // },

@@ -58,6 +58,7 @@ const content = [
             children: [
               {
                 text: '天台四万八千丈，对此欲倒东南倾。',
+                underline: true,
               },
             ],
           },

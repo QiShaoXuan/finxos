@@ -8,6 +8,10 @@ export default {
   render: props => {
     return <i {...props.attributes}>{props.children}</i>;
   },
+  paste: el => {
+    const { nodeName, style } = el;
+    return nodeName === 'I' || nodeName === 'EM' || style.textDecoration === 'line-through';
+  },
   // shortcut: event => {
   //   return event.ctrlKey && event.key === 'b';
   // },

@@ -17,4 +17,8 @@ export default {
   shortcut: event => {
     return event.ctrlKey && event.key === '`';
   },
+  paste: el => {
+    const { nodeName } = el;
+    return nodeName === 'CODE' && el.parentNode.nodeName !== 'PRE';
+  },
 };

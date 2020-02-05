@@ -64,6 +64,7 @@
   },
   "dependencies": {
     "antd": "^3.26.6",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "slate-hyperscript": "^0.57.1"
   }
 }

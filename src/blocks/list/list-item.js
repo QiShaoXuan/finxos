@@ -28,7 +28,14 @@ export default {
       </li>
     );
   },
-  save: props => {
-    return 'default';
+  paste: el => {
+    const { nodeName } = el;
+    return nodeName === 'LI'
+      ? {
+          data: {
+            type: el.parentNode.nodeName === 'ol' ? 'ol1' : 'ul1',
+          },
+        }
+      : false;
   },
 };
