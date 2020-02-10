@@ -10,6 +10,11 @@ export default {
   title: __('ListItem'),
   icon: Icon,
   data,
+  // split: () => {
+  //   console.log('hi');
+  //   const LIST_TYPES = ['numbered-list', 'bulleted-list']
+  //
+  // },
   render: props => {
     const editor = useSlate();
     const path = useMemo(() => ReactEditor.findPath(editor, props.element), [props.element, useSelected()]);
@@ -33,7 +38,7 @@ export default {
     return nodeName === 'LI'
       ? {
           data: {
-            type: el.parentNode.nodeName === 'ol' ? 'ol1' : 'ul1',
+            type: el.parentNode.nodeName === 'OL' ? 'ol1' : 'ul1',
           },
         }
       : false;

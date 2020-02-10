@@ -1,21 +1,5 @@
 import { jsx } from 'slate-hyperscript';
-import { Transforms } from 'slate';
-const ELEMENT_TAGS = {
-  A: el => ({ type: 'link', url: el.getAttribute('href') }),
-  BLOCKQUOTE: () => ({ type: 'quote' }),
-  H1: () => ({ type: 'heading-one' }),
-  H2: () => ({ type: 'heading-two' }),
-  H3: () => ({ type: 'heading-three' }),
-  H4: () => ({ type: 'heading-four' }),
-  H5: () => ({ type: 'heading-five' }),
-  H6: () => ({ type: 'heading-six' }),
-  IMG: el => ({ type: 'image', url: el.getAttribute('src') }),
-  LI: () => ({ type: 'list-item' }),
-  OL: () => ({ type: 'numbered-list' }),
-  P: () => ({ type: 'paragraph' }),
-  PRE: () => ({ type: 'code' }),
-  UL: () => ({ type: 'bulleted-list' }),
-};
+import { Editor, Transforms } from 'slate';
 
 const deserialize = (el, blocks, formats) => {
   if (el.nodeType === 3) {
@@ -26,7 +10,6 @@ const deserialize = (el, blocks, formats) => {
     return '\n';
   }
 
-  const { nodeName } = el;
   let parent = el;
 
   // if (nodeName === 'PRE' && el.childNodes[0] && el.childNodes[0].nodeName === 'CODE') {
@@ -41,20 +24,9 @@ const deserialize = (el, blocks, formats) => {
     return jsx('fragment', {}, children);
   }
 
-  // if (ELEMENT_TAGS[nodeName]) {
-  //   const attrs = ELEMENT_TAGS[nodeName](el);
-  //   return jsx('element', attrs, children);
-  // }
-
-  //
-  // return jsx('element', { type: 'paragraph', data: { align: 'center' } }, children);
-  // return jsx('element', { type: 'paragraph', data: { align: 'left' } }, children);
-
   for (let i = 0; i < blocks.length; i++) {
     const blockCheck = blocks[i].paste ? blocks[i].paste(el) : false;
     if (Boolean(blockCheck)) {
-      console.log("blockCheck", blockCheck);
-
       return jsx(
         'element',
         Object.assign(
@@ -79,6 +51,27 @@ const deserialize = (el, blocks, formats) => {
   return children;
 };
 
+const findEndsOfChildren = editor => {
+  const findPath = (parent, last) => {
+    if (parent.children) {
+      last.push(parent.children.length - 1);
+      return findPath(parent.children[parent.children.length - 1], last);
+    }
+    return last;
+  };
+
+  let path = findPath(editor, []);
+  const { text } = path.reduce(
+    (last, current, i) => (i === path.length - 1 ? last[current] : last[current].children),
+    editor.children
+  );
+
+  return {
+    path,
+    offset: text.length,
+  };
+};
+
 export default (editor, blocks, formats) => {
   const { insertData } = editor;
 
@@ -89,7 +82,62 @@ export default (editor, blocks, formats) => {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
       const fragment = deserialize(parsed.body, blocks, formats);
 
-      Transforms.insertFragment(editor, fragment);
+      if (fragment.length === 0) {
+        return;
+      }
+
+      // delete fragment if selection is not collapsed first
+      editor.deleteFragment();
+
+      // judge cursor is in the end of content, new node need insert after current block
+      // else move cursor to the after position
+      let after = Editor.after(editor, editor.selection.focus);
+      const isEnds = after === undefined;
+      let endIndex = 0;
+      if (after && after.offset === 0) {
+        editor.apply({
+          type: 'set_selection',
+          properties: editor.selection,
+          newProperties: {
+            anchor: after,
+            focus: after,
+          },
+        });
+      }
+
+      Transforms.splitNodes(editor, { at: editor.selection, mode: 'highest' });
+
+      // insert text or node separately
+      fragment.forEach((child, i) => {
+        // distinguish format or block by the text property
+        if (child.text) {
+          if (/\n/.test(child.text) && !fragment[i + 1].text) {
+            return;
+          }
+          editor.insertFragment([child]);
+        } else {
+          if (isEnds) {
+            endIndex += 1;
+          }
+          editor.apply({
+            type: 'insert_node',
+            path: [editor.selection.focus.path[0] + endIndex],
+            node: child,
+          });
+        }
+      });
+
+      // set cursor in the end of pasted content
+      let before = isEnds ? findEndsOfChildren(editor) : Editor.before(editor, editor.selection.focus);
+      editor.apply({
+        type: 'set_selection',
+        properties: editor.selection,
+        newProperties: {
+          anchor: before,
+          focus: before,
+        },
+      });
+
       return;
     }
 

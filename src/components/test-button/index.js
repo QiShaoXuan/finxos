@@ -1,7 +1,7 @@
 import React from 'react';
 import { Range, Editor, Node, Transforms, Path } from 'slate';
 import { Slate, useSlate, withReact, ReactEditor } from 'slate-react';
-
+import { useControls } from '@finxos/hooks';
 import { Button } from '@finxos/ui-components';
 import listItem from '../../blocks/list/list-item';
 import list from '../../blocks/list';
@@ -9,10 +9,13 @@ import list from '../../blocks/list';
 export default () => {
   const editor = useSlate();
   const { selection } = editor;
+  const { editorDom, lastSelection } = useControls();
 
   return (
     <Button
-      onMouseDown={() => {
+      onMouseDown={e => {
+        e.preventDefault();
+        e.stopPropagation();
         // editor.apply({
         //   type: 'insert_node',
         //   path: [0],
@@ -35,8 +38,22 @@ export default () => {
         // );
 
         // const t = ReactEditor.toDOMRange(editor, editor.selection);
+
+        // Transforms.splitNodes(editor, { at: editor.selection.focus  })
+        console.log('lastSelection', lastSelection);
+
+        console.log('Editor.after(editor, editor.selection.focus)', Editor.after(editor, editor.selection.focus));
+
+        editor.apply({
+          type: 'set_selection',
+          properties: editor.selection,
+          newProperties: {
+            anchor: Editor.after(editor, editor.selection.focus),
+            focus: Editor.after(editor, editor.selection.focus),
+          },
+        });
         console.log('editor', editor);
-        editor.insertBreak()
+        // editor.insertBreak()
         // editor.apply({
         //   type: 'insert_node',
         //   path: editor.selection,
