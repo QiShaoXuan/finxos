@@ -18,8 +18,6 @@ export default {
   },
   paste: el => {
     const { nodeName, style } = el;
-    console.log("innderel", el);
-
     return nodeName === 'U' || style.textDecoration === 'underline';
   },
 };

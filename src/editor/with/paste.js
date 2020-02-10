@@ -1,5 +1,5 @@
 import { jsx } from 'slate-hyperscript';
-
+import { Transforms } from 'slate';
 const ELEMENT_TAGS = {
   A: el => ({ type: 'link', url: el.getAttribute('href') }),
   BLOCKQUOTE: () => ({ type: 'quote' }),
@@ -17,7 +17,7 @@ const ELEMENT_TAGS = {
   UL: () => ({ type: 'bulleted-list' }),
 };
 
-const deserialize = (el, blockPastes, formatPastes) => {
+const deserialize = (el, blocks, formats) => {
   if (el.nodeType === 3) {
     return el.textContent;
   } else if (el.nodeType !== 1) {
@@ -34,29 +34,47 @@ const deserialize = (el, blockPastes, formatPastes) => {
   // }
 
   const children = Array.from(parent.childNodes)
-    .map(child => deserialize(child, blockPastes, formatPastes))
+    .map(child => deserialize(child, blocks, formats))
     .flat();
 
   if (el.nodeName === 'BODY') {
     return jsx('fragment', {}, children);
   }
 
-  if (ELEMENT_TAGS[nodeName]) {
-    const attrs = ELEMENT_TAGS[nodeName](el);
-    return jsx('element', attrs, children);
-  }
+  // if (ELEMENT_TAGS[nodeName]) {
+  //   const attrs = ELEMENT_TAGS[nodeName](el);
+  //   return jsx('element', attrs, children);
+  // }
 
-  for (let format in formatPastes) {
-    const formatCheck = formatPastes[format](el);
-    if (Boolean(formatCheck)) {
-      return children.map(child => jsx('text', { format: formatCheck }, child));
+  //
+  // return jsx('element', { type: 'paragraph', data: { align: 'center' } }, children);
+  // return jsx('element', { type: 'paragraph', data: { align: 'left' } }, children);
+
+  for (let i = 0; i < blocks.length; i++) {
+    const blockCheck = blocks[i].paste ? blocks[i].paste(el) : false;
+    if (Boolean(blockCheck)) {
+      console.log("blockCheck", blockCheck);
+
+      return jsx(
+        'element',
+        Object.assign(
+          {
+            type: blocks[i].name,
+            data: JSON.parse(JSON.stringify(blocks[i].data)),
+          },
+          typeof blockCheck === 'object' ? blockCheck : {}
+        ),
+        children
+      );
     }
   }
 
-  // if (TEXT_TAGS[nodeName]) {
-  //   const attrs = TEXT_TAGS[nodeName](el);
-  //   return children.map(child => jsx('text', attrs, child));
-  // }
+  for (let i = 0; i < formats.length; i++) {
+    const formatCheck = formats[i].paste ? formats[i].paste(el) : false;
+    if (Boolean(formatCheck)) {
+      return children.map(child => jsx('text', { [formats[i].name]: formatCheck }, child));
+    }
+  }
 
   return children;
 };
@@ -67,27 +85,11 @@ export default (editor, blocks, formats) => {
   editor.insertData = data => {
     const html = data.getData('text/html');
 
-    const blockPastes = blocks
-      .filter(v => v.paste)
-      .reduce((group, setting) => {
-        group[setting.name] = setting.paste;
-        return group;
-      }, {});
-    const formatPastes = formats
-      .filter(v => v.paste)
-      .reduce((group, setting) => {
-        group[setting.name] = setting.paste;
-        return group;
-      }, {});
-
     if (html) {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
-      const fragment = deserialize(parsed.body, blockPastes, formatPastes);
+      const fragment = deserialize(parsed.body, blocks, formats);
 
-      console.log('parsed', parsed);
-      console.log('fragment', fragment);
-
-      // Transforms.insertFragment(editor, fragment)
+      Transforms.insertFragment(editor, fragment);
       return;
     }
 

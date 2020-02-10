@@ -52,15 +52,16 @@ export default {
   },
   paste: el => {
     const { nodeName } = el;
-    return ['H1', 'H2', 'H3', 'H4'].find((v, i) => {
-      if (v === nodeName) {
-        return {
-          data: {
-            level: i,
-          },
-        };
-      }
-    });
+    if (/^H\d$/.test(nodeName)) {
+      const [level] = nodeName.match(/\d/);
+      return {
+        data: {
+          level: level > 4 ? 4 : level,
+        },
+      };
+    }
+
+    return false;
   },
   render: props => {
     const { data } = props;

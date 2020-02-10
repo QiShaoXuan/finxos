@@ -45,8 +45,5 @@ export default {
       </p>
     );
   },
-  paste: el => {
-    const { nodeName } = el;
-    return nodeName === 'P' ? { data: { align: 'left' } } : false;
-  },
+  paste: el => el.nodeName === 'P',
 };
