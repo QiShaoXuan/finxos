@@ -30,8 +30,6 @@ export default {
       controls: { isActive },
       attributes,
     } = props;
-    console.log('attributes', attributes);
-
     const editor = useSlate();
     const { editorDom, lastSelection } = useControls();
 
@@ -49,7 +47,7 @@ export default {
             addingLink={addingLink}
             setAddingLink={setAddingLink}
             onPressEnter={url => {
-              setSelection(editor, editorDom, lastSelection).then(() => {
+              setSelection(editor, lastSelection).then(() => {
                 updateFormat(editor, name, attributes, { url });
                 setAddingLink(false);
                 setVisible(false);
