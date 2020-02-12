@@ -1,5 +1,6 @@
 import { jsx } from 'slate-hyperscript';
 import { Editor, Transforms } from 'slate';
+import { defaultBlock } from '@finxos/blocks';
 
 const deserialize = (el, blocks, formats) => {
   if (el.nodeType === 3) {
@@ -72,6 +73,36 @@ const findEndsOfChildren = editor => {
   };
 };
 
+const handleFragment = fragment => {
+  // 处理解析过的 fragment
+  // 如果是开始存在的 text ，直接插入到当前 block 中
+  // 如果是 block 之间的 text ，则创建一个默认 block 并插入（未识别的 block 也会转换为 text，同样的被转换为默认block）
+  const splitIndex = fragment.findIndex(v => v.type);
+  if (splitIndex === -1) {
+    return [fragment];
+  }
+  let group = [];
+
+  group.push(fragment.slice(0, splitIndex));
+
+  for (let i = splitIndex; i < fragment.length; i++) {
+    if (fragment[i].text) {
+      if (i === splitIndex || fragment[i - 1].type) {
+        group.push({
+          type: defaultBlock.name,
+          data: JSON.parse(JSON.stringify(defaultBlock.data)),
+          children: [fragment[i]],
+        });
+      } else {
+        group[group.length - 1].children.push(fragment[i]);
+      }
+    } else {
+      group.push(fragment[i]);
+    }
+  }
+  return group;
+};
+
 export default (editor, blocks, formats) => {
   const { insertData } = editor;
 
@@ -80,17 +111,17 @@ export default (editor, blocks, formats) => {
 
     if (html) {
       const parsed = new DOMParser().parseFromString(html, 'text/html');
-      const fragment = deserialize(parsed.body, blocks, formats);
+      const fragment = handleFragment(deserialize(parsed.body, blocks, formats));
 
       if (fragment.length === 0) {
         return;
       }
+      console.log('fragment', fragment);
 
-      // delete fragment if selection is not collapsed first
+      // 删除掉当前已选中的部分
       editor.deleteFragment();
 
-      // judge cursor is in the end of content, new node need insert after current block
-      // else move cursor to the after position
+      // 如果光标在 block 的末尾处，则将光标移动至下一 block 的开始位置已使 splitNodes 生效
       let after = Editor.after(editor, editor.selection.focus);
       const isEnds = after === undefined;
       let endIndex = 0;
@@ -107,14 +138,10 @@ export default (editor, blocks, formats) => {
 
       Transforms.splitNodes(editor, { at: editor.selection, mode: 'highest' });
 
-      // insert text or node separately
       fragment.forEach((child, i) => {
-        // distinguish format or block by the text property
-        if (child.text) {
-          if (/\n/.test(child.text) && !fragment[i + 1].text) {
-            return;
-          }
-          editor.insertFragment([child]);
+        // 数组应该仅存在于第一项，即直接插入到当前 block 中
+        if (Array.isArray(child)) {
+          editor.insertFragment(child);
         } else {
           if (isEnds) {
             endIndex += 1;
@@ -127,7 +154,7 @@ export default (editor, blocks, formats) => {
         }
       });
 
-      // set cursor in the end of pasted content
+      // 将光标设置到粘贴结束的位置
       let before = isEnds ? findEndsOfChildren(editor) : Editor.before(editor, editor.selection.focus);
       editor.apply({
         type: 'set_selection',
