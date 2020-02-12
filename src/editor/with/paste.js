@@ -43,6 +43,7 @@ const deserialize = (el, blocks, formats) => {
   }
 
   for (let i = 0; i < formats.length; i++) {
+    // paste 方法返回的是 boolean 或者对象
     const formatCheck = formats[i].paste ? formats[i].paste(el) : false;
     if (Boolean(formatCheck)) {
       return children.map(child => jsx('text', { [formats[i].name]: formatCheck }, child));

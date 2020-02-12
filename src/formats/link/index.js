@@ -13,14 +13,16 @@ import './style.scss';
 
 export const name = 'link';
 
+const attributes = {
+  url: '',
+  blank: true,
+};
+
 export default {
   name,
   title: __('Link'),
   icon: LinkIcon,
-  attributes: {
-    url: '',
-    blank: true,
-  },
+  attributes,
   acrossBlock: false,
   toolbar: true,
   render: props => {
@@ -28,6 +30,8 @@ export default {
       controls: { isActive },
       attributes,
     } = props;
+    console.log('attributes', attributes);
+
     const editor = useSlate();
     const { editorDom, lastSelection } = useControls();
 
@@ -59,7 +63,7 @@ export default {
         placement="bottom"
         trigger="click"
       >
-        <a className="finxos-link" {...props}>
+        <a className="finxos-link" >
           {props.children}
         </a>
       </Tooltip>
@@ -71,7 +75,9 @@ export default {
   paste: el => {
     const { nodeName, href } = el;
     if (nodeName === 'A') {
-      return href || '';
+      const attr = JSON.parse(JSON.stringify(attributes));
+      attr.url = href || '';
+      return attr;
     }
     return false;
   },
