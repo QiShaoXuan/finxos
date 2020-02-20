@@ -1,5 +1,23 @@
 .finxos-heading {
   line-height: 1.5;
+  &.finxos-heading {
+    &--left {
+      text-align: left;
+    }
+    &--center {
+      text-align: center;
+    }
+    &--right {
+      text-align: right;
+    }
+  }
+}
+
+.finxos-heading__operation {
+  display: flex;
+  &:not(:last-of-type) {
+    margin-bottom: 2px;
+  }
 }
 
 h2.finxos-heading {

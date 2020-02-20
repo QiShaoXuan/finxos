@@ -1,7 +1,7 @@
 import React from 'react';
-import { useFocused, useSelected, useSlate } from 'slate-react';
-import { useSettings, useControls } from '@finxos/hooks';
-import { getBlock, transformBlock } from '@finxos/tools';
+import { useSlate } from 'slate-react';
+import { useSettings } from '@finxos/hooks';
+import { transformBlock, deepClone } from '@finxos/tools';
 import { IconButton } from '@finxos/ui-components';
 
 import './style.scss';
@@ -33,9 +33,9 @@ export default props => {
                   type: to.name,
                   data: to.data
                     ? typeof to.data === 'function'
-                      ? to.data(JSON.parse(JSON.stringify(currentBlock.data)))
-                      : to.data
-                    : JSON.parse(JSON.stringify(block.data)),
+                      ? to.data(deepClone(currentBlock.data))
+                      : Object.assign(deepClone(block.data), to.data)
+                    : JSON.parse(deepClone(block.data)),
                 },
                 to.options
               );

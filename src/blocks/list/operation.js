@@ -14,7 +14,7 @@ export default props => {
   const { data } = props;
   return (
     <div>
-      <div className="finxos-list--operation">
+      <div className="finxos-list__operation">
         <IconButton size="small" icon={Ul} disabled />
         {[
           { Icon: Ul1, type: 'ul1' },
@@ -46,7 +46,7 @@ export default props => {
           );
         })}
       </div>
-      <div className="finxos-list--operation">
+      <div className="finxos-list__operation">
         <IconButton size="small" icon={Ol} disabled />
         {[
           { Icon: '1', type: 'ol1' },

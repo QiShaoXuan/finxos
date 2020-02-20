@@ -51,7 +51,7 @@ export default props => {
       <IconButton icon={icon} className="finxox-edit-bar__edit-button" />
       <div className="edit-bar__popup-container">
         <div className="edit-bar__popup">
-          <OperationArea currentBlockSetting={currentBlockSetting} />
+          <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
           <Divider />
           <BlockList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
         </div>

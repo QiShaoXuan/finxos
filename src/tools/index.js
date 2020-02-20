@@ -6,12 +6,6 @@ export isBlockActive from './is-block-active';
 export isFormatActive from './is-format-active';
 export mergeDefaultData from './merge-default-data';
 export setSelection from './set-selection';
+export deepClone from './deep-clone';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
-export {
-  setBlockData,
-  createBlock,
-  removeBlock,
-  getBlock,
-  transformBlock,
-  getBlockRange,
-} from './handle-block';
+export { setBlockData, createBlock, removeBlock, getBlock, transformBlock, getBlockRange } from './handle-block';

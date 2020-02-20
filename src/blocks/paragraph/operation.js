@@ -1,9 +1,9 @@
 import React from 'react';
 import { IconButton } from '@finxos/ui-components';
 
-import left from './icons/left.svg';
-import center from './icons/center.svg';
-import right from './icons/right.svg';
+import left from '@finxos/icons/left.svg';
+import center from '@finxos/icons/center.svg';
+import right from '@finxos/icons/right.svg';
 
 export default props => {
   const { data, setBlockData } = props;
