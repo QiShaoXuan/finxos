@@ -1,6 +1,7 @@
 import { jsx } from 'slate-hyperscript';
 import { Editor, Transforms } from 'slate';
 import { defaultBlock } from '@finxos/blocks';
+import { deepClone } from '@finxos/tools';
 
 const deserialize = (el, blocks, formats) => {
   if (el.nodeType === 3) {
@@ -33,7 +34,7 @@ const deserialize = (el, blocks, formats) => {
         Object.assign(
           {
             type: blocks[i].name,
-            data: JSON.parse(JSON.stringify(blocks[i].data)),
+            data: deepClone(blocks[i].data),
           },
           typeof blockCheck === 'object' ? blockCheck : {}
         ),
@@ -91,7 +92,7 @@ const handleFragment = fragment => {
       if (i === splitIndex || fragment[i - 1].type) {
         group.push({
           type: defaultBlock.name,
-          data: JSON.parse(JSON.stringify(defaultBlock.data)),
+          data: deepClone(defaultBlock.data),
           children: [fragment[i]],
         });
       } else {

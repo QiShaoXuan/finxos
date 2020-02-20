@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 import { Tooltip } from '@finxos/ui-components';
 
-import { updateFormat, setSelection } from '@finxos/tools';
+import { updateFormat, setSelection, deepClone } from '@finxos/tools';
 import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
 import TooltipContent from './popup';
@@ -61,9 +61,7 @@ export default {
         placement="bottom"
         trigger="click"
       >
-        <a className="finxos-link" >
-          {props.children}
-        </a>
+        <a className="finxos-link">{props.children}</a>
       </Tooltip>
     );
   },
@@ -73,7 +71,7 @@ export default {
   paste: el => {
     const { nodeName, href } = el;
     if (nodeName === 'A') {
-      const attr = JSON.parse(JSON.stringify(attributes));
+      const attr = deepClone(attributes);
       attr.url = href || '';
       return attr;
     }

@@ -1,8 +1,9 @@
 import { Editor } from 'slate';
 import isActiveFormat from '../is-format-active';
+import { deepClone } from '@finxos/tools';
 
 export const applyFormat = (editor, name, attributes) => {
-  Editor.addMark(editor, name, typeof attributes === 'object' ? JSON.parse(JSON.stringify(attributes)) : true);
+  Editor.addMark(editor, name, typeof attributes === 'object' ? deepClone(attributes) : true);
 };
 
 export const removeFormat = (editor, formatName) => {
