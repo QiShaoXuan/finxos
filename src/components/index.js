@@ -1,4 +1,4 @@
-export BlockMenu from './block-menu';
+export BlockList from './block-list';
 export BlockRender from './block-render';
 export EditBar from './edit-bar';
 export HistoryGroup from './history-group';

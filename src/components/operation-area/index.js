@@ -1,33 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSlate } from 'slate-react';
-import { useSettings, useControls } from '@finxos/hooks';
-import { Divider } from '@finxos/ui-components';
+import { useControls } from '@finxos/hooks';
 import { setBlockData } from '@finxos/tools';
 
 import './style.scss';
+
 export default props => {
-  const { blocks } = useSettings();
   const { selectedBlocks } = useControls();
+  const { currentBlockSetting } = props;
   const editor = useSlate();
 
-  let blockSetting = null;
-
-  if (selectedBlocks.length) {
-    blockSetting = blocks.find(v => v.name === selectedBlocks[0].type);
-  }
-
-  return blockSetting && blockSetting.operation ? (
+  return currentBlockSetting && currentBlockSetting.operation ? (
     <>
       <div className="finxos-operation-area">
-        {blockSetting.operation({
-          data: selectedBlocks[0].data,
-          editor,
+        {currentBlockSetting.operation({
+          data: currentBlockSetting.data,
           setBlockData: (data, options) => {
-            setBlockData(editor, blockSetting.name, Object.assign({}, selectedBlocks[0].data, data), options);
+            setBlockData(editor, currentBlockSetting.name, Object.assign({}, selectedBlocks[0].data, data), options);
           },
         })}
       </div>
-      {props.divider ? <Divider /> : null}
     </>
   ) : null;
 };

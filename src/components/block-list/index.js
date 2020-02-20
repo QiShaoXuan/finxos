@@ -7,23 +7,19 @@ import { IconButton } from '@finxos/ui-components';
 import './style.scss';
 
 export default props => {
+  if (!props.currentBlockSetting) {
+    return null;
+  }
   const { blocks } = useSettings();
-  const { selectedBlocks } = useControls();
+  const { currentBlockSetting, currentBlock } = props;
   const editor = useSlate();
   const { selection } = editor;
 
-  let path = [];
-  let BlockTransform = null;
-  let currentBlock = null;
-  if (selectedBlocks.length) {
-    path = selection.anchor.path.slice(0, selection.anchor.path.length - 1);
-    currentBlock = selectedBlocks[0];
-    BlockTransform = blocks.find(v => v.name === currentBlock.type)['transform'];
-  }
+  const { transform } = currentBlockSetting;
 
-  return BlockTransform && Array.isArray(BlockTransform) && BlockTransform.length ? (
+  return transform && Array.isArray(transform) && transform.length ? (
     <ul className="finxos-transform-menu">
-      {BlockTransform.map(to => {
+      {transform.map(to => {
         const block = blocks.find(v => v.name === to.name);
         return (
           <li
@@ -39,7 +35,7 @@ export default props => {
                     ? typeof to.data === 'function'
                       ? to.data(JSON.parse(JSON.stringify(currentBlock.data)))
                       : to.data
-                    : {},
+                    : JSON.parse(JSON.stringify(block.data)),
                 },
                 to.options
               );

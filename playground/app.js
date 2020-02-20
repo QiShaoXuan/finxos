@@ -107,10 +107,6 @@ const content = [
   // },
 ];
 
-// -------------------- test ----------------------
-import Test from '../src/test';
-// -------------------- END - test ----------------------
-
 class App extends React.Component {
   render() {
     return (

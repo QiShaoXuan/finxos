@@ -6,7 +6,7 @@ import center from './icons/center.svg';
 import right from './icons/right.svg';
 
 export default props => {
-  const { data } = props;
+  const { data, setBlockData } = props;
 
   return [
     { Icon: left, align: 'left' },
@@ -20,7 +20,7 @@ export default props => {
         className={align === data.align ? 'active' : ''}
         onMouseDown={e => {
           e.preventDefault();
-          props.setBlockData({
+          setBlockData({
             align,
           });
         }}
