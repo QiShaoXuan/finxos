@@ -25,7 +25,7 @@ export default props => {
           <li
             key={to.name}
             onMouseDown={e => {
-              e.preventDefault();
+              // e.preventDefault();
               to.before && to.before(editor);
               transformBlock(
                 editor,
