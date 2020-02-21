@@ -13,9 +13,8 @@ export default {
       </span>
     );
   },
-  shortcut: event => {
-    return event.ctrlKey && event.key === 'u';
-  },
+  shortcut: ['ctrl', 'u'],
+
   paste: el => {
     const { nodeName, style } = el;
     return nodeName === 'U' || style.textDecoration === 'underline';

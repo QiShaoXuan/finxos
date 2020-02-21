@@ -14,27 +14,30 @@ export default {
   data: {
     align: 'left',
   },
-  transform: [
-    {
-      name: 'heading',
-      data: {
-        level: 2,
-      },
-      options: {
-        match: n => n.type === 'heading',
-      },
-    },
-    {
-      name: 'list-item',
-      data: {
-        type: 'ul1',
-      },
-      after: editor => {
-        const block = { type: 'list', children: [], data: { type: 'ul1' } };
-        Transforms.wrapNodes(editor, block);
-      },
-    },
-  ],
+  // transform: [
+  //   {
+  //     name: 'heading',
+  //     data: {
+  //       level: 2,
+  //     },
+  //     options: {
+  //       match: n => n.type === 'heading',
+  //     },
+  //   },
+  //   {
+  //     name: 'list-item',
+  //     data: {
+  //       type: 'ul1',
+  //     },
+  //     after: editor => {
+  //       const block = { type: 'list', children: [], data: { type: 'ul1' } };
+  //       Transforms.wrapNodes(editor, block);
+  //     },
+  //   },
+  // ],
+  transform: {
+    target: ['heading', 'list'],
+  },
   operation,
   render: props => {
     const { data } = props;

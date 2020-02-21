@@ -9,9 +9,7 @@ export default {
   render: props => {
     return <strong {...props.attributes}>{props.children}</strong>;
   },
-  shortcut: event => {
-    return event.ctrlKey && event.key === 'b';
-  },
+  shortcut: ['ctrl', 'b'],
   paste: el => {
     const { nodeName, style } = el;
     return nodeName === 'B' || nodeName === 'STRONG' || style.fontWeight === 'bold';

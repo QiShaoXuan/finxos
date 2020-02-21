@@ -7,5 +7,6 @@ export isFormatActive from './is-format-active';
 export mergeDefaultData from './merge-default-data';
 export setSelection from './set-selection';
 export deepClone from './deep-clone';
+export { keyToCode, compositionKeyToCode } from './key-code';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
-export { setBlockData, createBlock, removeBlock, getBlock, transformBlock, getBlockRange } from './handle-block';
+export { setBlockData, insertBlock, removeBlock, getBlock, transformBlock, getBlockRange } from './handle-block';

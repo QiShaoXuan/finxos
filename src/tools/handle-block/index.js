@@ -46,7 +46,7 @@ export const setBlockData = (editor, type, data, options = {}) => {
   );
 };
 
-export const createBlock = (editor, path, node) => {
+export const insertBlock = (editor, path, node) => {
   editor.apply({
     type: 'insert_node',
     path: path,
@@ -58,20 +58,24 @@ export const getBlock = (editor, path) => {
   return Node.get(editor, path);
 };
 
-export const removeBlock = (editor, path, node) => {
+export const removeBlock = (editor, path) => {
   editor.apply({
     type: 'remove_node',
     path,
-    node,
+    node: {
+      children: [],
+    },
   });
 };
 
-export const transformBlock = (editor, { type, data = {} }, options = {}) => {
-  return Transforms.setNodes(editor, {
-    type,
-    data,
-  });
+export const transformBlock = (editor, path, node) => {
+  removeBlock(editor, path, node);
+  insertBlock(editor, path, node);
 
+  // return Transforms.setNodes(editor, {
+  //   type,
+  //   data,
+  // });
   // const obj = {
   //   mode: 'all',
   //   at: Range.isCollapsed(editor.selection) ? getBlockRange(editor) : editor.selection,

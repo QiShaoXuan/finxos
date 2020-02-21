@@ -14,16 +14,19 @@ export default {
     align: 'left',
   },
   preventFormats: ['bold'],
-  transform: [
-    {
-      name: 'paragraph',
-      data: data => {
-        return {
-          align: data.align,
-        };
-      },
-    },
-  ],
+  // transform: [
+  //   {
+  //     name: 'paragraph',
+  //     data: data => {
+  //       return {
+  //         align: data.align,
+  //       };
+  //     },
+  //   },
+  // ],
+  transform: {
+    target: ['paragraph'],
+  },
   operation,
   paste: el => {
     const { nodeName } = el;
@@ -35,7 +38,6 @@ export default {
         },
       };
     }
-
     return false;
   },
   render: props => {

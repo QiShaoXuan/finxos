@@ -118,7 +118,6 @@ export default (editor, blocks, formats) => {
       if (fragment.length === 0) {
         return;
       }
-      console.log('fragment', fragment);
 
       // 删除掉当前已选中的部分
       editor.deleteFragment();

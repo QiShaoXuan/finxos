@@ -65,9 +65,7 @@ export default {
       </Tooltip>
     );
   },
-  shortcut: event => {
-    return event.ctrlKey && event.key === 'l';
-  },
+  shortcut: ['ctrl', 'l'],
   paste: el => {
     const { nodeName, href } = el;
     if (nodeName === 'A') {

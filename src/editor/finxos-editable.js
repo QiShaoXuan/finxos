@@ -1,7 +1,7 @@
 import { Editor } from 'slate';
 import { Editable, useSlate } from 'slate-react';
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { renderElement, renderLeaf } from './untils';
 import { toggleFormat } from '@finxos/tools';
 import { useSettings, useControls } from '@finxos/hooks';
@@ -11,7 +11,11 @@ import './style.scss';
 export default props => {
   const editor = useSlate();
   const { selectedBlocks } = useControls();
-  const { formats, blocks } = useSettings();
+  const { blocks, formats, formatShortcuts } = useSettings();
+
+  const blockSetting = useMemo(() => {
+    return selectedBlocks.length ? blocks.find(v => v.name === selectedBlocks[0].type) : null;
+  }, [selectedBlocks]);
 
   return (
     <Editable
@@ -19,18 +23,29 @@ export default props => {
       renderElement={useCallback(renderElement, [])}
       renderLeaf={useCallback(renderLeaf, [])}
       onKeyDown={event => {
-        globalShortcut(event, editor);
+        // Current block keydown is first level,
+        // handle custom global shortcut after,
+        // foramt shortcut is lastest
 
         if (selectedBlocks.length) {
-          const block = blocks.find(v => v.name === selectedBlocks[0].type);
-          block.edit && block.edit(event, editor, selectedBlocks);
+          blockSetting && blockSetting.onKeyDown && blockSetting.onKeyDown(event, editor, selectedBlocks);
         }
-        const renderFormat = formats.find(v => v.shortcut && v.shortcut(event));
-        if (!renderFormat) {
-          return;
+
+        globalShortcut(event, editor);
+
+        for (let key in formatShortcuts) {
+          if (
+            formatShortcuts[key].keyCode === event.keyCode &&
+            formatShortcuts[key].assist.map(v => event[v]).every(v => v)
+          ) {
+            event.preventDefault();
+            toggleFormat(
+              editor,
+              formats.find(v => v.name === key)
+            );
+            return;
+          }
         }
-        event.preventDefault();
-        toggleFormat(editor, renderFormat);
       }}
     />
   );

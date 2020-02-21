@@ -16,6 +16,14 @@ export default () => {
       onMouseDown={e => {
         e.preventDefault();
         e.stopPropagation();
+
+        editor.apply({
+          type: 'remove_node',
+          path: [1],
+          node: {
+            children: [],
+          },
+        });
         // editor.apply({
         //   type: 'insert_node',
         //   path: [0],
@@ -40,19 +48,19 @@ export default () => {
         // const t = ReactEditor.toDOMRange(editor, editor.selection);
 
         // Transforms.splitNodes(editor, { at: editor.selection.focus  })
-        console.log('lastSelection', lastSelection);
-
-        console.log('Editor.after(editor, editor.selection.focus)', Editor.after(editor, editor.selection.focus));
-
-        editor.apply({
-          type: 'set_selection',
-          properties: editor.selection,
-          newProperties: {
-            anchor: Editor.after(editor, editor.selection.focus),
-            focus: Editor.after(editor, editor.selection.focus),
-          },
-        });
-        console.log('editor', editor);
+        // console.log('lastSelection', lastSelection);
+        //
+        // console.log('Editor.after(editor, editor.selection.focus)', Editor.after(editor, editor.selection.focus));
+        //
+        // editor.apply({
+        //   type: 'set_selection',
+        //   properties: editor.selection,
+        //   newProperties: {
+        //     anchor: Editor.after(editor, editor.selection.focus),
+        //     focus: Editor.after(editor, editor.selection.focus),
+        //   },
+        // });
+        // console.log('editor', editor);
         // editor.insertBreak()
         // editor.apply({
         //   type: 'insert_node',
