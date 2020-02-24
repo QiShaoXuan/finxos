@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { OperationArea } from '@finxos/components';
 import { Range } from 'slate';
-import { useFocused, useSelected, useSlate } from 'slate-react';
+import { useFocused, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 import { IconButton } from '@finxos/ui-components';
 import { BlockList } from '@finxos/components';
@@ -21,21 +21,19 @@ export default props => {
   const editor = useSlate();
   const { selection } = editor;
 
-  const [position, setPosition] = useState({ left: -1000, top: -1000 });
-
-  useEffect(() => {
+  const position = useMemo(() => {
     if (focused && selection) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
-      setPosition({
+      return {
         top: `${domRect.top + (lineHeight - 24) / 2}px`,
         left: `${domRect.left - 40}px`,
-      });
+      };
     } else {
-      setPosition({ left: -1000, top: -1000 });
+      return { left: -1000, top: -1000 };
     }
-  }, [focused, selection && !Range.isCollapsed(selection)]);
+  }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 
   const currentBlockSetting = useMemo(() => {
     let blockSetting = null;
@@ -46,18 +44,18 @@ export default props => {
   }, [position, selectedBlocks]);
 
   return createPortal(
-    position.top === -1000 || position.left === -1000 ? null : (
+    currentBlockSetting && (currentBlockSetting.operation || currentBlockSetting.transform) ? (
       <div style={{ ...position }} className={`finxox-edit-bar`}>
         <IconButton icon={icon} className="finxox-edit-bar__edit-button" />
         <div className="edit-bar__popup-container">
           <div className="edit-bar__popup">
             <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
-            <Divider />
+            {currentBlockSetting && currentBlockSetting.transform ? <Divider /> : null}
             <BlockList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
           </div>
         </div>
       </div>
-    ),
+    ) : null,
     protal
   );
 };

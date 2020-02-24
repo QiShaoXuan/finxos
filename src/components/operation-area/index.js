@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSlate } from 'slate-react';
 import { useControls } from '@finxos/hooks';
 import { setBlockData } from '@finxos/tools';

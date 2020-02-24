@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused, ReactEditor } from 'slate-react';
@@ -14,21 +14,20 @@ export default props => {
   const { selectedBlocks } = useControls();
   const editor = useSlate();
   const focused = useFocused();
-  const [position, setPosition] = useState({ left: -100, top: -100 });
 
   const { selection } = editor;
 
-  useEffect(() => {
+  const position = useMemo(() => {
     if (focused && selection && !Range.isCollapsed(selection)) {
       const rect = ReactEditor.toDOMRange(editor, selection).getBoundingClientRect();
-      setPosition({
+      return {
         top: `${rect.top + window.pageYOffset}px`,
         left: `${rect.left + window.pageXOffset + rect.width / 2}px`,
-      });
+      };
     } else {
-      setPosition({ left: -100, top: -100 });
+      return { left: -100, top: -100 };
     }
-  }, [focused, selection && !Range.isCollapsed(selection)]);
+  }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position }}>
