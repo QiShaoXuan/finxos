@@ -21,14 +21,13 @@ export default props => {
   const editor = useSlate();
   const { selection } = editor;
 
-  const [position, setPosition] = useState({ left: -100, top: -100 });
+  const [position, setPosition] = useState({ left: -1000, top: -1000 });
 
   useEffect(() => {
     if (focused && selection) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
-
       setPosition({
         top: `${domRect.top + (lineHeight - 24) / 2}px`,
         left: `${domRect.left - 40}px`,
@@ -36,7 +35,7 @@ export default props => {
     } else {
       setPosition({ left: -1000, top: -1000 });
     }
-  }, [focused, selection, selection && !Range.isCollapsed(selection)]);
+  }, [focused, selection && !Range.isCollapsed(selection)]);
 
   const currentBlockSetting = useMemo(() => {
     let blockSetting = null;
@@ -44,19 +43,21 @@ export default props => {
       blockSetting = blocks.find(v => v.name === selectedBlocks[0].type);
     }
     return blockSetting;
-  }, [position.top, position.left]);
+  }, [position, selectedBlocks]);
 
   return createPortal(
-    <div style={{ ...position }} className={`finxox-edit-bar`}>
-      <IconButton icon={icon} className="finxox-edit-bar__edit-button" />
-      <div className="edit-bar__popup-container">
-        <div className="edit-bar__popup">
-          <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
-          <Divider />
-          <BlockList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
+    position.top === -1000 || position.left === -1000 ? null : (
+      <div style={{ ...position }} className={`finxox-edit-bar`}>
+        <IconButton icon={icon} className="finxox-edit-bar__edit-button" />
+        <div className="edit-bar__popup-container">
+          <div className="edit-bar__popup">
+            <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
+            <Divider />
+            <BlockList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
+          </div>
         </div>
       </div>
-    </div>,
+    ),
     protal
   );
 };

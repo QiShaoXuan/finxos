@@ -16,7 +16,7 @@ export default props => {
   const { selection } = editor;
 
   const { transform } = currentBlockSetting;
-  return transform.target ? (
+  return transform && transform.target ? (
     <ul className="finxos-transform-menu">
       {transform.target
         ? transform.target.map(tragetName => {
@@ -64,30 +64,3 @@ export default props => {
     </ul>
   ) : null;
 };
-// {transform.map(to => {
-//   const block = blocks.find(v => v.name === to.name);
-//   return (
-//     <li
-//       key={to.name}
-//       onMouseDown={e => {
-//         // e.preventDefault();
-//         to.before && to.before(editor);
-//         transformBlock(
-//           editor,
-//           {
-//             type: to.name,
-//             data: to.data
-//               ? typeof to.data === 'function'
-//                 ? to.data(deepClone(currentBlock.data))
-//                 : Object.assign(deepClone(block.data), to.data)
-//               : JSON.parse(deepClone(block.data)),
-//           },
-//           to.options
-//         );
-//         to.after && to.after(editor);
-//       }}
-//     >
-//       <IconButton icon={block.icon} />
-//     </li>
-//   );
-// })}

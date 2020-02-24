@@ -28,7 +28,7 @@ export default props => {
     } else {
       setPosition({ left: -100, top: -100 });
     }
-  }, [focused, selection, selection && !Range.isCollapsed(selection)]);
+  }, [focused, selection && !Range.isCollapsed(selection)]);
 
   return createPortal(
     <div className="finxos-toolbar" style={{ ...position }}>
