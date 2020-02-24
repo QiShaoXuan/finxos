@@ -1,0 +1,12 @@
+.finxos-transform {
+  position: relative;
+  &::after {
+    content: 'Enter "/" to select block.';
+    color: #ddd;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+}
