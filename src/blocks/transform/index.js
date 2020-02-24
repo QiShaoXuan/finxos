@@ -1,21 +1,30 @@
 import React from 'react';
+import { ReactEditor, useSlate } from 'slate-react';
 import __ from '@finxos/i18n';
-import { useSlate } from 'slate-react';
-import { Transforms } from 'slate';
 import { defaultBlock } from '@finxos/blocks';
-import { deepClone } from '@finxos/tools';
-
+import { deepClone, setBlockData, getBlock } from '@finxos/tools';
+import { BlockList } from '@finxos/components';
 import './style.scss';
+import { Transforms } from 'slate';
 
 export default {
   name: 'transform',
   title: __('Transform'),
-  onKeyDown: (event, editor, selectedBlocks) => {
+  noTransform: true,
+  onKeyDown: (event, editor) => {
     if (event.keyCode === 13 || event.keyCode === 8) {
       return;
     }
+    console.log('event.keyCode', event.keyCode);
+
     if (event.keyCode === 191) {
       event.preventDefault();
+      const path = editor.selection.anchor.path.slice(0, editor.selection.anchor.path.length - 1);
+      const {
+        data: { showList },
+      } = getBlock(editor, path);
+
+      setBlockData(editor, { showList: !showList });
       return;
     }
 
@@ -31,13 +40,18 @@ export default {
       }
     );
   },
-  transform:{
-
+  data: {
+    showList: false,
   },
+  transform: {},
   render: props => {
+    const {
+      data: { showList },
+    } = props;
     const editor = useSlate();
     return (
       <div {...props.attributes} className="finxos-transform">
+        <BlockList visible={showList} setVisible={() => setBlockData(editor, { showList: !showList })} />
         {props.children}
       </div>
     );

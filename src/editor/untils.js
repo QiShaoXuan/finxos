@@ -5,7 +5,6 @@ import { useSettings } from '../hooks';
 
 export const renderElement = props => {
   const { blocks } = useSettings();
-
   const {
     element: { type, data },
   } = props;

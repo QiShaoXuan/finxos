@@ -15,7 +15,7 @@ export default {
   title: __('List'),
   icon: Icon,
   data,
-  edit,
+  onKeyDown: edit,
   operation,
   transform,
   render: props => {

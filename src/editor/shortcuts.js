@@ -1,4 +1,6 @@
-import { Node, Editor } from 'slate';
+import { Editor } from 'slate';
+import { setSelection, deepClone } from '@finxos/tools';
+import { transformBlock } from '@finxos/blocks';
 
 export default (event, editor) => {
   if (event.keyCode === 13) {
@@ -10,8 +12,20 @@ export default (event, editor) => {
         type: 'insert_node',
         path,
         node: {
-          type: 'transform',
+          type: transformBlock.name,
           children: [{ text: '' }],
+          data: deepClone(transformBlock.data),
+        },
+      });
+
+      setSelection(editor, {
+        anchor: {
+          path: [...path, 0],
+          offset: 0,
+        },
+        focus: {
+          path: [...path, 0],
+          offset: 0,
         },
       });
     }

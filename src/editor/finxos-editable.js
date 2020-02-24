@@ -1,7 +1,5 @@
-import { Editor } from 'slate';
-import { Editable, useSlate } from 'slate-react';
-
 import React, { useCallback, useMemo } from 'react';
+import { Editable, useSlate } from 'slate-react';
 import { renderElement, renderLeaf } from './untils';
 import { toggleFormat } from '@finxos/tools';
 import { useSettings, useControls } from '@finxos/hooks';

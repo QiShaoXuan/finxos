@@ -16,14 +16,17 @@ export default () => {
       onMouseDown={e => {
         e.preventDefault();
         e.stopPropagation();
+        console.log('editor', editor);
+        ReactEditor.focus(editor);
 
-        editor.apply({
-          type: 'remove_node',
-          path: [1],
-          node: {
-            children: [],
-          },
-        });
+
+        // editor.apply({
+        //   type: 'remove_node',
+        //   path: [1],
+        //   node: {
+        //     children: [],
+        //   },
+        // });
         // editor.apply({
         //   type: 'insert_node',
         //   path: [0],

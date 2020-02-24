@@ -9,6 +9,7 @@ export default {
   name: 'list-item',
   title: __('ListItem'),
   icon: Icon,
+  noTransform: true,
   data,
   // split: () => {
   //   console.log('hi');

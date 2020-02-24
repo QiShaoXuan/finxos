@@ -5,7 +5,7 @@ import { Range } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
 import { IconButton } from '@finxos/ui-components';
-import { BlockList } from '@finxos/components';
+import { TransformList } from '@finxos/components';
 import { Divider } from '@finxos/ui-components';
 
 import icon from './icon.svg';
@@ -51,7 +51,7 @@ export default props => {
           <div className="edit-bar__popup">
             <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
             {currentBlockSetting && currentBlockSetting.transform ? <Divider /> : null}
-            <BlockList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
+            <TransformList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
           </div>
         </div>
       </div>

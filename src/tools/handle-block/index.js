@@ -31,7 +31,7 @@ const blockFocus = (parent, path) => {
   }
 };
 
-export const setBlockData = (editor, type, data, options = {}) => {
+export const setBlockData = (editor, data, options = {}) => {
   Transforms.setNodes(
     editor,
     {
@@ -40,7 +40,6 @@ export const setBlockData = (editor, type, data, options = {}) => {
     {
       mode: 'all',
       at: getBlockRange(editor),
-      match: n => n.type === type,
       ...options,
     }
   );

@@ -6,9 +6,7 @@ export default (editor, selection) => {
       throw Error('no selection');
     }
     setTimeout(() => {
-      if (!editor.selection) {
-        ReactEditor.focus(editor);
-      }
+      ReactEditor.focus(editor);
       editor.apply({
         type: 'set_selection',
         properties: editor.selection,

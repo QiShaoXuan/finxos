@@ -20,7 +20,7 @@ export default props => {
         {currentBlockSetting.operation({
           data: currentBlock.data,
           setBlockData: (data, options) => {
-            setBlockData(editor, currentBlockSetting.name, Object.assign({}, selectedBlocks[0].data, data), options);
+            setBlockData(editor, Object.assign({}, selectedBlocks[0].data, data), options);
           },
         })}
       </div>
