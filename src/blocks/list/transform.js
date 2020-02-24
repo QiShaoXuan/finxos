@@ -68,10 +68,23 @@ export default {
 
     return { children: items };
   },
-  to: () => {},
+  to: ({ children }) => {
+    let texts = [];
+    const helper = children => {
+      children.forEach(child => {
+        if (child.type === 'list-item') {
+          texts.push(...child.children);
+          texts.push({ text: '\n' });
+        } else {
+          helper(child.children);
+        }
+      });
+    };
+
+    helper(children);
+    texts.splice(texts.length - 1, 1);
+
+    return { children: texts };
+  },
   target: ['paragraph'],
 };
-
-const str = `adsklfj`;
-const reg = /\n/g;
-console.log([...str.matchAll(reg)]);

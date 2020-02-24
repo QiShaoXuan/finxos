@@ -19,18 +19,20 @@ export default props => {
   return transform.target ? (
     <ul className="finxos-transform-menu">
       {transform.target
-        ? transform.target.map(name => {
-            const targetBlockSetting = blocks.find(v => v.name === name);
+        ? transform.target.map(tragetName => {
+            const targetBlockSetting = blocks.find(v => v.name === tragetName);
             return (
               <li
-                key={name}
+                key={tragetName}
                 onMouseDown={e => {
                   // e.preventDefault();
                   const to = transform.to
                     ? transform.to({ children: currentBlock.children, data: currentBlock.data })
-                    : { children: currentBlock.children, data: currentBlock.data };
+                    : { children: currentBlock.children, data: currentBlock.data, to: tragetName };
 
-                  let from = targetBlockSetting.transform.from ? targetBlockSetting.transform.from(to) : to;
+                  let from = targetBlockSetting.transform.from
+                    ? targetBlockSetting.transform.from(Object.assign({}, to, { from: currentBlockSetting.name }))
+                    : to;
 
                   // Set default value if has no return
                   if (!from) {
@@ -48,7 +50,7 @@ export default props => {
                   }
 
                   transformBlock(editor, [selection.anchor.path[0]], {
-                    type: name,
+                    type: tragetName,
                     children: from.children,
                     data,
                   });
