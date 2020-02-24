@@ -7,12 +7,19 @@ import SettingsProvider from '@finxos/hooks/use-settings';
 import { mergeDefaultData } from '@finxos/tools';
 import { compose } from './untils';
 import withPaste from './with/paste';
+import withVoid from './with/void';
 import TestButton from '@finxos/components/test-button';
 
 export default props => {
   const { content, className = '', blocks = [], formats = [] } = props;
   const editor = useMemo(
-    () => compose(createEditor(), [withHistory, withReact, editor => withPaste(editor, blocks, formats)]),
+    () =>
+      compose(createEditor(), [
+        withHistory,
+        withReact,
+        editor => withPaste(editor, blocks, formats),
+        editor => withVoid(editor, blocks),
+      ]),
     []
   );
   const [value, setValue] = useState(compose(content, [content => mergeDefaultData(content, blocks)]));
