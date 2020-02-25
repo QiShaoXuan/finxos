@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import { FinxosSlate, FinxosEditable } from '@finxos/editor';
 import { Header } from '@finxos/ui-components';
-import { HistoryGroup, Toolbar, EditBar } from '@finxos/components';
+import { HistoryGroup, Toolbar, EditBar, BlockList } from '@finxos/components';
 
 import 'antd/dist/antd.css';
 import './style.scss';
@@ -118,6 +118,7 @@ class App extends React.Component {
               <>
                 {/*<BlockMenu BlockSettings={BlockSettings} />*/}
                 <HistoryGroup />
+                <BlockList style={{ marginLeft: 20 }} />
               </>
             }
           />

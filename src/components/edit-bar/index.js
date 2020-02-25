@@ -27,7 +27,7 @@ export default props => {
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
       return {
-        top: `${domRect.top + (lineHeight - 24) / 2}px`,
+        top: `${domRect.top + (lineHeight - 20) / 2}px`,
         left: `${domRect.left - 40}px`,
       };
     } else {

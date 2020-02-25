@@ -1,5 +1,5 @@
-import { transformBlock } from '@finxos/tools';
-export default (editor, blocks, currentBlock, targetName) => {
+import { deepClone } from '@finxos/tools';
+export default (editor, { blocks, currentBlock, targetName, path }) => {
   const currentBlockSetting = blocks.find(v => v.name === currentBlock.type);
 
   const { transform } = currentBlockSetting;
@@ -26,9 +26,23 @@ export default (editor, blocks, currentBlock, targetName) => {
     data[key] = from.data[key] || targetBlockSetting.data[key];
   }
 
-  transformBlock(editor, [editor.selection.anchor.path[0]], {
-    type: targetName,
-    children: from.children,
-    data,
+  let p = path || [deepClone(editor.selection.anchor.path[0])];
+
+  editor.apply({
+    type: 'remove_node',
+    path: p,
+    node: {
+      children: [],
+    },
+  });
+
+  editor.apply({
+    type: 'insert_node',
+    path: p,
+    node: {
+      type: targetName,
+      children: from.children,
+      data,
+    },
   });
 };

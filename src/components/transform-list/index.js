@@ -24,7 +24,7 @@ export default props => {
               <li
                 key={targetName}
                 onMouseDown={() => {
-                  convertBlock(editor, blocks, currentBlock, targetName);
+                  convertBlock(editor, { blocks, currentBlock, targetName });
                 }}
               >
                 <IconButton icon={targetBlockSetting.icon} />
