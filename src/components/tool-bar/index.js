@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused, ReactEditor } from 'slate-react';
@@ -17,15 +17,17 @@ export default props => {
 
   const { selection } = editor;
 
-  const position = useMemo(() => {
+  const [position, setPosition] = useState();
+
+  useEffect(() => {
     if (focused && selection && !Range.isCollapsed(selection)) {
       const rect = ReactEditor.toDOMRange(editor, selection).getBoundingClientRect();
-      return {
+      setPosition({
         top: `${rect.top + window.pageYOffset}px`,
         left: `${rect.left + window.pageXOffset + rect.width / 2}px`,
-      };
+      });
     } else {
-      return { left: -100, top: -100 };
+      setPosition({ left: -100, top: -100 });
     }
   }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 

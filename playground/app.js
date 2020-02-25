@@ -13,7 +13,7 @@ import './style.scss';
 const content = [
   {
     type: 'heading',
-    children: [{ text: 'outer code' }],
+    children: [{ text: '梦游天姥吟留别' }],
   },
   {
     type: 'paragraph',
