@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { OperationArea } from '@finxos/components';
 import { Range } from 'slate';
@@ -21,17 +21,19 @@ export default props => {
   const editor = useSlate();
   const { selection } = editor;
 
-  const position = useMemo(() => {
+  const [position, setPosition] = useState();
+
+  useEffect(() => {
     if (focused && selection) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
       const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
-      return {
+      setPosition({
         top: `${domRect.top + (lineHeight - 20) / 2}px`,
         left: `${domRect.left - 40}px`,
-      };
+      });
     } else {
-      return { left: -1000, top: -1000 };
+      setPosition({ left: -1000, top: -1000 });
     }
   }, [focused, selection, selection && !Range.isCollapsed(selection)]);
 
@@ -44,7 +46,8 @@ export default props => {
   }, [position, selectedBlocks]);
 
   return createPortal(
-    currentBlockSetting && (currentBlockSetting.operation || currentBlockSetting.transform) ? (
+    currentBlockSetting &&
+      (currentBlockSetting.operation || (currentBlockSetting.transform && currentBlockSetting.transform.target)) ? (
       <div style={{ ...position }} className={`finxox-edit-bar`}>
         <IconButton icon={icon} className="finxox-edit-bar__edit-button" />
         <div className="edit-bar__popup-container">

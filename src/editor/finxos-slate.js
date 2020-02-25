@@ -41,7 +41,6 @@ export default props => {
         >
           <ControlsProvider container={container} lastSelection={lastSelection}>
             {props.children}
-            <TestButton />
           </ControlsProvider>
         </Slate>
       </SettingsProvider>
