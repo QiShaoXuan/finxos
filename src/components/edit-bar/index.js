@@ -27,9 +27,9 @@ export default props => {
     if (focused && selection) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
       const domRect = domBlock.getBoundingClientRect();
-      const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
+      // const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
       setPosition({
-        top: `${domRect.top + (lineHeight - 20) / 2}px`,
+        top: `${domRect.top}px`,
         left: `${domRect.left - 40}px`,
       });
     } else {

@@ -1,14 +1,15 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+console.log('path', path.resolve(__dirname, '../dist'));
 
 module.exports = {
   entry: {
-    app: './playground/app.js',
+    app: path.resolve(__dirname, '../playground/app.js'),
   },
   output: {
-    path: path.resolve('../dist'),
+    path: path.resolve(__dirname, '../docs'),
     filename: 'js/[name].[hash].js',
-    publicPath: '/',
+    publicPath: './',
     chunkFilename: 'js/[name].chunk.[hash].js',
   },
   plugins: [
@@ -53,7 +54,7 @@ module.exports = {
             loader: 'sass-resources-loader',
             options: {
               sourceMap: true,
-              resources: [path.resolve(__dirname, '../_var/var.scss')], //一定是path.resolve的绝对路径
+              resources: [path.resolve(__dirname, '../_var/var.scss')],
             },
           },
         ],
@@ -93,7 +94,7 @@ module.exports = {
   resolve: {
     modules: ['src', 'node_modules'],
     alias: {
-      '@finxos': path.resolve('src/'),
+      '@finxos': path.resolve(__dirname, '../src/'),
     },
   },
 };
