@@ -11,6 +11,12 @@ const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = webpackMerge(baseWebpackConfig, {
   mode: 'production',
+  output: {
+    path: path.resolve(__dirname, '../docs'),
+    filename: 'js/[name].[hash].js',
+    publicPath: './',
+    chunkFilename: 'js/[name].chunk.[hash].js',
+  },
   plugins: [
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../docs/index.html'), // html模板的生成路径

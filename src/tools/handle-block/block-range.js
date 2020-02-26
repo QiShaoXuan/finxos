@@ -22,7 +22,18 @@ const blockFocus = (parent, path) => {
   }
 };
 
-export default (editor, start) => {
+export const getBlockFocus = (editor, start) => {
+  const path = start || [editor.selection.anchor.path[0]];
+  const block = Node.get(editor, path);
+
+  const focus = blockFocus(block, path);
+  return {
+    anchor: focus,
+    focus: focus,
+  };
+};
+
+export const getBlockRange = (editor, start) => {
   const path = start || [editor.selection.anchor.path[0]];
   const block = Node.get(editor, path);
 

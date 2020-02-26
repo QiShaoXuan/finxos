@@ -1,8 +1,11 @@
 import { deepClone } from '@finxos/tools';
-export default (editor, { blocks, currentBlock, targetName, path }) => {
+export default (editor, { currentBlock, targetName, path }) => {
+  const {
+    setting: { blocks },
+  } = editor;
   const currentBlockSetting = blocks.find(v => v.name === currentBlock.type);
 
-  const { transform } = currentBlockSetting;
+  const { transform = {} } = currentBlockSetting;
   const targetBlockSetting = blocks.find(v => v.name === targetName);
 
   const to = transform.to

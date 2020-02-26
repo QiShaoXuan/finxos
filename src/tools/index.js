@@ -9,4 +9,12 @@ export setSelection from './set-selection';
 export deepClone from './deep-clone';
 export { keyToCode, compositionKeyToCode } from './key-code';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
-export { setBlockData, insertBlock, removeBlock, getBlock, convertBlock, getBlockRange } from './handle-block';
+export {
+  setBlockData,
+  insertBlock,
+  removeBlock,
+  getBlock,
+  convertBlock,
+  getBlockRange,
+  getBlockFocus,
+} from './handle-block';

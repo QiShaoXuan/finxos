@@ -2,7 +2,7 @@ import React from 'react';
 import __ from '@finxos/i18n';
 import operation from './operation';
 import transform from './transform';
-import edit from './edit';
+import onKeyDown from './on-key-down';
 import data from './data';
 import Icon from './icons/list.svg';
 
@@ -15,7 +15,7 @@ export default {
   title: __('List'),
   icon: Icon,
   data,
-  onKeyDown: edit,
+  onKeyDown,
   operation,
   transform,
   render: props => {

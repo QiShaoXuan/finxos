@@ -1,0 +1,12 @@
+$blue: #3c55ff;
+
+$default-color: #bfc1c4;
+$disable-color: #cccccc;
+$active-gray-bg: #f6f6f6;
+$active-gray: #979797;
+
+@mixin svg-color($color) {
+  color: $color;
+  fill: $color;
+  //stroke: $color;
+}

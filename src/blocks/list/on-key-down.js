@@ -3,12 +3,6 @@ import { ReactEditor } from 'slate-react';
 import { getBlockRange } from '@finxos/tools';
 
 export default (event, editor, selectedBlocks) => {
-  // on tap 'enter' key
-  // overwrite global shortcut
-  if (event.keyCode === 13) {
-    event.preventDefault();
-    return;
-  }
   // on tap 'tab' key
   if (event.keyCode === 9) {
     event.preventDefault();

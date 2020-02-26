@@ -11,11 +11,7 @@ export default {
   icon: Icon,
   noTransform: true,
   data,
-  // split: () => {
-  //   console.log('hi');
-  //   const LIST_TYPES = ['numbered-list', 'bulleted-list']
-  //
-  // },
+  canEmpty: true,
   render: props => {
     const editor = useSlate();
     const path = useMemo(() => ReactEditor.findPath(editor, props.element), [props.element, useSelected()]);

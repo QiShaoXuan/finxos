@@ -10,9 +10,13 @@ export default props => {
   if (!props.currentBlockSetting) {
     return null;
   }
-  const { blocks } = useSettings();
+
   const { currentBlockSetting, currentBlock } = props;
   const editor = useSlate();
+
+  const {
+    setting: { blocks },
+  } = editor;
 
   const { transform } = currentBlockSetting;
   return transform && transform.target ? (
@@ -24,7 +28,7 @@ export default props => {
               <li
                 key={targetName}
                 onMouseDown={() => {
-                  convertBlock(editor, { blocks, currentBlock, targetName });
+                  convertBlock(editor, { currentBlock, targetName });
                 }}
               >
                 <IconButton icon={targetBlockSetting.icon} />

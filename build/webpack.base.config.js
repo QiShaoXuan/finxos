@@ -7,7 +7,7 @@ module.exports = {
     app: path.resolve(__dirname, '../playground/app.js'),
   },
   output: {
-    path: path.resolve(__dirname, '../docs'),
+    path: path.resolve(__dirname, '../dist'),
     filename: 'js/[name].[hash].js',
     publicPath: './',
     chunkFilename: 'js/[name].chunk.[hash].js',
@@ -54,7 +54,7 @@ module.exports = {
             loader: 'sass-resources-loader',
             options: {
               sourceMap: true,
-              resources: [path.resolve(__dirname, '../_var/var.scss')],
+              resources: [path.resolve(__dirname, '../src/var/var.scss')],
             },
           },
         ],

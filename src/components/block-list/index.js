@@ -2,7 +2,7 @@ import React from 'react';
 import { useSlate, useFocused } from 'slate-react';
 import { Menu, Dropdown, Button, Icon } from '@finxos/ui-components';
 import { useSettings } from '@finxos/hooks';
-import { getBlock, convertBlock, setSelection, getBlockRange, insertBlock } from '@finxos/tools';
+import { setSelection, getBlockRange, insertBlock } from '@finxos/tools';
 
 import './style.scss';
 export default props => {

@@ -2,13 +2,13 @@ import React from 'react';
 import { useSlate } from 'slate-react';
 import __ from '@finxos/i18n';
 import { defaultBlock } from '@finxos/blocks';
-import { deepClone, setBlockData, getBlock } from '@finxos/tools';
-import BlockList  from './block-list';
+import { deepClone, setBlockData, getBlock, convertBlock, setSelection, getBlockFocus } from '@finxos/tools';
+import BlockList from './block-list';
 import './style.scss';
-import { Transforms } from 'slate';
 
+export const name = 'transform';
 export default {
-  name: 'transform',
+  name,
   title: __('Transform'),
   noTransform: true,
   onKeyDown: (event, editor) => {
@@ -16,8 +16,9 @@ export default {
       return;
     }
 
+    event.preventDefault();
+    // on tap "/"
     if (event.keyCode === 191) {
-      event.preventDefault();
       const path = editor.selection.anchor.path.slice(0, editor.selection.anchor.path.length - 1);
       const {
         data: { showList },
@@ -26,18 +27,17 @@ export default {
       setBlockData(editor, { showList: !showList });
       return;
     }
-
-    Transforms.setNodes(
-      editor,
-      {
-        type: defaultBlock.name,
-        data: deepClone(defaultBlock.data),
+    // on tap other key
+    const memoPath = deepClone(editor.selection.anchor.path);
+    convertBlock(editor, {
+      currentBlock: {
+        type: name,
+        data: {},
+        children: [{ text: event.key }],
       },
-      {
-        mode: 'all',
-        at: editor.selection,
-      }
-    );
+      targetName: defaultBlock.name,
+    });
+    setSelection(editor, getBlockFocus(editor, memoPath));
   },
   data: {
     showList: false,
