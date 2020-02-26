@@ -1,0 +1,14 @@
+.finxos-blockquote {
+  position: relative;
+  padding-left: 15px;
+  color: #bfbfbf;
+  &::after {
+    content: '';
+    height: 100%;
+    width: 2px;
+    background: #e8e8e8;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

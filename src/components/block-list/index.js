@@ -23,7 +23,7 @@ export default props => {
       }}
     >
       {blocks.map(block => {
-        return block.noTransform === true ? null : (
+        return block.isBlock === false ? null : (
           <Menu.Item key={block.name}>
             <div className="finxos-block-list__item">
               {block.icon ? <block.icon /> : null}

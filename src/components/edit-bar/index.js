@@ -53,7 +53,7 @@ export default props => {
         <div className="edit-bar__popup-container">
           <div className="edit-bar__popup">
             <OperationArea currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
-            {currentBlockSetting && currentBlockSetting.transform ? <Divider /> : null}
+            {currentBlockSetting && currentBlockSetting.transform && currentBlockSetting.operation ? <Divider /> : null}
             <TransformList currentBlockSetting={currentBlockSetting} currentBlock={selectedBlocks[0]} />
           </div>
         </div>

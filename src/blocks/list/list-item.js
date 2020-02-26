@@ -9,9 +9,8 @@ export default {
   name: 'list-item',
   title: __('ListItem'),
   icon: Icon,
-  noTransform: true,
+  isBlock: false,
   data,
-  canEmpty: true,
   render: props => {
     const editor = useSlate();
     const path = useMemo(() => ReactEditor.findPath(editor, props.element), [props.element, useSelected()]);

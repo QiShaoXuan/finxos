@@ -4,9 +4,8 @@ interface Setting {
   name: string;
   title: string;
   icon(): ReactNode;
-  noTransform: boolean;
+  isBlock: boolean;
   preventFormats: string[];
-  canEmpty: boolean;
   data: {};
   on(): undefined;
   onKeyDown(): undefined;

@@ -101,11 +101,20 @@ const content = [
       },
     ],
   },
+  {
+    type: 'blockquote',
+    children: [{ text: '在 block 为空时，可输入 "/" 以转换 block' }],
+  },
   // {
   //   type: 'code',
   //   children: [{ text: 'outer code' }],
   // },
 ];
+
+// const content = [ {
+//   type: 'heading',
+//   children: [{ text: '梦游天姥吟留别' }],
+// },]
 
 class App extends React.Component {
   render() {

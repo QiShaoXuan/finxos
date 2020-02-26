@@ -17,35 +17,37 @@ export default {
     }
 
     event.preventDefault();
+
+    const path = editor.selection.anchor.path.slice(0, editor.selection.anchor.path.length - 1);
+    const {
+      data: { showList, lastBlockName },
+    } = getBlock(editor, path);
+
     // on tap "/"
     if (event.keyCode === 191) {
-      const path = editor.selection.anchor.path.slice(0, editor.selection.anchor.path.length - 1);
-      const {
-        data: { showList },
-      } = getBlock(editor, path);
-
       setBlockData(editor, { showList: !showList });
       return;
     }
     // on tap other key
-    const memoPath = deepClone(editor.selection.anchor.path);
-    convertBlock(editor, {
-      currentBlock: {
-        type: name,
-        data: {},
-        children: [{ text: event.key }],
-      },
-      targetName: defaultBlock.name,
-    });
-    setSelection(editor, getBlockFocus(editor, memoPath));
+    if (event.key && event.key.length === 1) {
+      convertBlock(editor, {
+        currentBlock: {
+          type: name,
+          data: {},
+          children: [{ text: event.key }],
+        },
+        targetName: lastBlockName || defaultBlock.name,
+      });
+    }
   },
   data: {
     showList: false,
+    lastBlockName: '',
   },
   transform: {},
   render: props => {
     const {
-      data: { showList },
+      data: { showList, lastBlock },
     } = props;
 
     const editor = useSlate();

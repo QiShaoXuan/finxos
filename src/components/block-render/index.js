@@ -1,39 +1,8 @@
-import React, { useEffect, useMemo } from 'react';
-import { defaultBlock, transformBlock } from '@finxos/blocks';
+import React, { useMemo } from 'react';
 import './style.scss';
-import { Transforms } from 'slate';
 import { useSlate } from 'slate-react';
-import { deepClone } from '@finxos/tools';
-
-export default props => {
-  const { RenderSetting, element } = props;
-  const editor = useSlate();
-
-  useEffect(() => {
-    if (RenderSetting.canEmpty) {
-      return;
-    }
-    if (isTransform(element)) {
-      Transforms.setNodes(editor, {
-        type: transformBlock.name,
-        data: deepClone(transformBlock.data),
-      });
-    }
-  }, [props]);
-
-  return (
-    <div className="fincos-block">
-      <RenderSetting.render {...props} />
-    </div>
-  );
-};
-
-const isTransform = ({ type, children }) => {
-  if (check(children) && type !== transformBlock.name) {
-    return true;
-  }
-  return false;
-};
+import { isHeighestBlock } from '@finxos/tools';
+import BlockList from './block-list';
 
 const check = children => {
   if (children.length !== 1) {
@@ -42,8 +11,32 @@ const check = children => {
   if (children[0].children) {
     return check(children[0].children);
   }
-  if (children[0].text.length === 0) {
+  if (children[0].text.length === 1 && children[0].text === '/') {
     return true;
   }
   return false;
+};
+
+export default props => {
+  const { RenderSetting, element } = props;
+  const editor = useSlate();
+
+  if (RenderSetting.isBlock === false) {
+    return <RenderSetting.render {...props} />;
+  }
+
+  const showList = useMemo(() => {
+    if (check(element.children)) {
+      return isHeighestBlock(editor, element);
+    }
+
+    return false;
+  }, [element.children]);
+
+  return (
+    <div className="fincos-block">
+      {showList ? <BlockList /> : null}
+      <RenderSetting.render {...props} />
+    </div>
+  );
 };

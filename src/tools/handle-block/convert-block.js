@@ -32,20 +32,19 @@ export default (editor, { currentBlock, targetName, path }) => {
   let p = path || [deepClone(editor.selection.anchor.path[0])];
 
   editor.apply({
-    type: 'remove_node',
-    path: p,
-    node: {
-      children: [],
-    },
-  });
-
-  editor.apply({
     type: 'insert_node',
     path: p,
     node: {
       type: targetName,
       children: from.children,
       data,
+    },
+  });
+  editor.apply({
+    type: 'remove_node',
+    path: [p[0] + 1],
+    node: {
+      children: [],
     },
   });
 };
