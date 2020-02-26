@@ -1,4 +1,9 @@
-export default (editor, { blocks, path, targetName, children = [{ text: '' }] }) => {
+import { Transforms } from 'slate';
+
+export default (editor, { path, targetName, children = [{ text: '' }] }) => {
+  const {
+    setting: { blocks },
+  } = editor;
   const targetBlockSetting = blocks.find(v => v.name === targetName);
   const to = { children: children, data: {}, to: null };
   let from = targetBlockSetting.transform.from
@@ -12,7 +17,6 @@ export default (editor, { blocks, path, targetName, children = [{ text: '' }] })
   for (let key in targetBlockSetting.data) {
     data[key] = from.data[key] || targetBlockSetting.data[key];
   }
-
 
   editor.apply({
     type: 'insert_node',

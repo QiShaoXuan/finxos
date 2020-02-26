@@ -18,7 +18,7 @@ export default props => {
         } else {
           path = [editor.children.length];
         }
-        insertBlock(editor, { blocks, path, targetName: key });
+        insertBlock(editor, { path, targetName: key });
         setSelection(editor, getBlockRange(editor, path));
       }}
     >

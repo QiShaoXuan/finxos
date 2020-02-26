@@ -2,7 +2,7 @@ import React from 'react';
 import { useSlate } from 'slate-react';
 import __ from '@finxos/i18n';
 import { defaultBlock } from '@finxos/blocks';
-import { deepClone, setBlockData, getBlock, convertBlock, setSelection, getBlockFocus } from '@finxos/tools';
+import { setBlockData, getBlock, convertBlock } from '@finxos/tools';
 import BlockList from './block-list';
 import './style.scss';
 

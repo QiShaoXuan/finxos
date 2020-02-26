@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 import { Dropdown, Select } from '@finxos/ui-components';
-import { deepClone, convertBlock, setSelection, getBlockFocus } from '@finxos/tools';
+import {  convertBlock } from '@finxos/tools';
 import { ZWNBSP } from '@finxos/var/special-characters';
 const { Option } = Select;
 import { name } from './index';
