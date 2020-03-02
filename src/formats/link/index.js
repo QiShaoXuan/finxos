@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useSlate } from 'slate-react';
+import React, { useMemo, useState } from 'react';
+import { Range } from 'slate';
+import { ReactEditor, useSlate } from 'slate-react';
 import { Tooltip } from '@finxos/ui-components';
-
 import { updateFormat, setSelection, deepClone } from '@finxos/tools';
 import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
@@ -26,15 +26,19 @@ export default {
   acrossBlock: false,
   toolbar: true,
   render: props => {
-    const {
-      controls: { isActive },
-      attributes,
-    } = props;
+    const { element, attributes } = props;
     const editor = useSlate();
-    const { editorDom, lastSelection } = useControls();
+    const { lastSelection } = useControls();
 
     const [visible, setVisible] = useState(false);
     const [addingLink, setAddingLink] = useState(!attributes.url);
+
+    const isActive = useMemo(() => {
+      if (!editor.selection) {
+        return false;
+      }
+      return Range.includes(editor.selection, ReactEditor.findPath(editor, element));
+    }, [editor.selection]);
 
     return (
       <Tooltip

@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { BlockRender } from '@finxos/components';
-import { useControls } from '@finxos/hooks';
 import { useSettings } from '../hooks';
 
 export const renderElement = props => {
@@ -19,8 +18,6 @@ export const renderElement = props => {
 
 export const renderLeaf = props => {
   const { formats } = useSettings();
-  const { currentFormats } = useControls();
-
   const ActiveFormats = useMemo(() => {
     let formatArr = [];
 
@@ -39,12 +36,7 @@ export const renderLeaf = props => {
     <span {...props.attributes}>
       {ActiveFormats.reduce((children, Format) => {
         return (
-          <Format.render
-            attributes={props.leaf[Format.name]}
-            controls={{
-              isActive: Boolean(currentFormats[Format.name] && props.leaf[Format.name] === currentFormats[Format.name]),
-            }}
-          >
+          <Format.render attributes={props.leaf[Format.name]} element={props.text}>
             {children}
           </Format.render>
         );
