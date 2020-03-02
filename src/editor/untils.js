@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { BlockRender } from '@finxos/components';
 import { useControls } from '@finxos/hooks';
 import { useSettings } from '../hooks';
@@ -21,16 +21,19 @@ export const renderLeaf = props => {
   const { formats } = useSettings();
   const { currentFormats } = useControls();
 
-  let ActiveFormats = [];
+  const ActiveFormats = useMemo(() => {
+    let formatArr = [];
 
-  for (let key in props.leaf) {
-    if (key !== 'text') {
-      let format = formats.find(v => v.name === key);
-      if (format) {
-        ActiveFormats.push(format);
+    for (let key in props.leaf) {
+      if (key !== 'text') {
+        let format = formats.find(v => v.name === key);
+        if (format) {
+          formatArr.push(format);
+        }
       }
     }
-  }
+    return formatArr;
+  });
 
   return (
     <span {...props.attributes}>
