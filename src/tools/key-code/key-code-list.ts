@@ -174,7 +174,7 @@ export const codeKeys = {
   255: 'toggle touchpad',
 };
 
-export const keyCodes = {
+export const keyCodes: { [key: string]: number } = {
   '0': 48,
   '1': 49,
   '2': 50,

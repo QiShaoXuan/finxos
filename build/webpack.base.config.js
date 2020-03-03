@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-console.log('path', path.resolve(__dirname, '../dist'));
 
 module.exports = {
   entry: {
@@ -24,6 +23,10 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.(ts|tsx)?$/,
+        loader: 'awesome-typescript-loader',
       },
       {
         test: /\.css/,
@@ -96,5 +99,7 @@ module.exports = {
     alias: {
       '@finxos': path.resolve(__dirname, '../src/'),
     },
+    extensions: ['.js', '.json', '.ts', '.tsx'],
+    // mainFiles: ['index.js', 'index.ts', 'index.tsx'],
   },
 };

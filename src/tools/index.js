@@ -7,7 +7,7 @@ export mergeDefaultData from './merge-default-data';
 export setSelection from './set-selection';
 export deepClone from './deep-clone';
 export isHeighestBlock from './is-highest-block';
-export { keyToCode, compositionKeyToCode } from './key-code';
+export { keyToCode, compositionKeyToCode } from './key-code/index.ts';
 export { applyFormat, removeFormat, updateFormat, toggleFormat } from './handle-format';
 export {
   setBlockData,
