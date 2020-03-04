@@ -1,12 +1,27 @@
+import { Editor, Node } from 'slate';
 import { deepClone } from '@finxos/tools';
-export default (editor, { currentBlock, targetName, path }) => {
+import { BlockSetting } from '@finxos/blocks/interface';
+
+export const convertBlock = (
+  editor: Editor,
+  params: {
+    currentBlock: Node;
+    targetName: string;
+    path: number[];
+  }
+) => {
+  if (editor.selection === null) {
+    return;
+  }
   const {
     setting: { blocks },
   } = editor;
-  const currentBlockSetting = blocks.find(v => v.name === currentBlock.type);
+  const { currentBlock, targetName, path } = params;
+
+  const currentBlockSetting = blocks.find((v: BlockSetting) => v.name === currentBlock.type);
 
   const { transform = {} } = currentBlockSetting;
-  const targetBlockSetting = blocks.find(v => v.name === targetName);
+  const targetBlockSetting = blocks.find((v: BlockSetting) => v.name === targetName);
 
   const to = transform.to
     ? transform.to({ children: currentBlock.children, data: currentBlock.data })

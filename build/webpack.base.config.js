@@ -100,6 +100,5 @@ module.exports = {
       '@finxos': path.resolve(__dirname, '../src/'),
     },
     extensions: ['.js', '.json', '.ts', '.tsx'],
-    // mainFiles: ['index.js', 'index.ts', 'index.tsx'],
   },
 };

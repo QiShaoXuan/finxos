@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface Setting {
+export interface BlockSetting {
   name: string;
   title: string;
   icon(): ReactNode;

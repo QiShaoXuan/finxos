@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "composite": true,
     "declaration": true,
@@ -12,6 +13,10 @@
     "sourceMap": true,
     "strict": true,
     "suppressImplicitAnyIndexErrors": true,
-    "target": "esnext"
+    "target": "esnext",
+    "baseUrl": "./",
+    "paths": {
+      "@finxos/*": ["./src/*"]
+    }
   }
 }

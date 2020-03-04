@@ -1,6 +1,6 @@
 import { ReactEditor } from 'slate-react';
 
-export default (editor, selection) => {
+export const setSelection = (editor, selection) => {
   return new Promise(resolve => {
     if (!selection) {
       throw Error('no selection');

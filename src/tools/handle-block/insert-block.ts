@@ -1,10 +1,15 @@
-import { Transforms } from 'slate';
+import { Editor, Path } from 'slate';
+import { BlockSetting } from '@finxos/blocks/interface';
 
-export default (editor, { path, targetName, children = [{ text: '' }] }) => {
+export const insertBlock = (
+  editor: Editor,
+  options: { path: Path; targetName: string; children: { text: string; [key: string]: any }[] }
+) => {
   const {
     setting: { blocks },
   } = editor;
-  const targetBlockSetting = blocks.find(v => v.name === targetName);
+  const { path, targetName, children } = options;
+  const targetBlockSetting = blocks.find((v: BlockSetting) => v.name === targetName);
   const to = { children: children, data: {}, to: null };
   let from = targetBlockSetting.transform.from
     ? targetBlockSetting.transform.from(Object.assign({}, to, { from: null }))

@@ -1,6 +1,6 @@
-import { Node } from 'slate';
+import { Node, Editor, Path } from 'slate';
 
-const blockAnchor = (parent, path) => {
+const blockAnchor = (parent: Node, path: Path): { path: Path; offset: number } => {
   if (parent.children) {
     return blockAnchor(parent.children[0], [...path, 0]);
   } else {
@@ -11,7 +11,7 @@ const blockAnchor = (parent, path) => {
   }
 };
 
-const blockFocus = (parent, path) => {
+const blockFocus = (parent: Node, path: Path): { path: Path; offset: number } => {
   if (parent.children) {
     return blockFocus(parent.children[parent.children.length - 1], [...path, parent.children.length - 1]);
   } else {
@@ -22,7 +22,10 @@ const blockFocus = (parent, path) => {
   }
 };
 
-export const getBlockFocus = (editor, start) => {
+export const getBlockFocus = (editor: Editor, start: Path) => {
+  if (editor.selection === null) {
+    return undefined;
+  }
   const path = start || [editor.selection.anchor.path[0]];
   const block = Node.get(editor, path);
 
@@ -33,7 +36,10 @@ export const getBlockFocus = (editor, start) => {
   };
 };
 
-export const getBlockRange = (editor, start) => {
+export const getBlockRange = (editor: Editor, start?: number[]) => {
+  if (editor.selection === null) {
+    return undefined;
+  }
   const path = start || [editor.selection.anchor.path[0]];
   const block = Node.get(editor, path);
 

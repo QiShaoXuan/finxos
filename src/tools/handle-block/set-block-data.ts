@@ -1,7 +1,7 @@
-import { Transforms } from 'slate';
+import { Transforms, Editor } from 'slate';
 import { getBlockRange } from '@finxos/tools';
 
-export default (editor, data, options = {}) => {
+export const setBlockData = (editor: Editor, data: {} = {}, options: {} = {}) => {
   Transforms.setNodes(
     editor,
     {

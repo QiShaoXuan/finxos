@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import './style.scss';
 import { useSlate } from 'slate-react';
-import { isHeighestBlock } from '@finxos/tools';
+import { isHighestBlock } from '@finxos/tools';
 import BlockList from './block-list';
 
 const check = children => {
@@ -27,7 +27,7 @@ export default props => {
 
   const showList = useMemo(() => {
     if (check(element.children)) {
-      return isHeighestBlock(editor, element);
+      return isHighestBlock(editor, element);
     }
 
     return false;

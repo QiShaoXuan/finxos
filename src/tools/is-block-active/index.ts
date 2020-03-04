@@ -1,8 +1,8 @@
 import { Editor } from 'slate';
 
-export default (editor, format) => {
+export const isBlockActive = (editor: Editor, blockName: string) => {
   const [match] = Editor.nodes(editor, {
-    match: n => n.type === format,
+    match: n => n.type === blockName,
     mode: 'all',
   });
 

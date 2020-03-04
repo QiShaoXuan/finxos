@@ -1,10 +1,13 @@
 import { deepClone } from '@finxos/tools';
-export default (content, blocks) => {
+import { Node } from 'slate';
+import { BlockSetting } from '@finxos/blocks/interface';
+
+export const mergeDefaultData = (content: Node[], blocks: BlockSetting[]) => {
   setData(content, blocks);
   return content;
 };
 
-const setData = (children, blocks) => {
+const setData = (children: Node[], blocks: BlockSetting[]) => {
   children.forEach(child => {
     if (child.type && !child.data) {
       const setting = blocks.find(v => v.name === child.type);
