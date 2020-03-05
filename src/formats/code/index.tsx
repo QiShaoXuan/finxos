@@ -1,13 +1,14 @@
 import React from 'react';
 import Icon from './code.svg';
 import __ from '@finxos/i18n';
+import { FormatRenderProps } from '../interface';
 
 import './style.scss';
 export default {
   name: 'code',
   title: __('Code'),
   icon: Icon,
-  render: props => {
+  render: (props: FormatRenderProps) => {
     return (
       <code className="finxos-line-code" {...props.attributes}>
         {props.children}
@@ -15,8 +16,8 @@ export default {
     );
   },
   shortcut: ['ctrl', '`'],
-  paste: el => {
+  paste: (el: HTMLElement) => {
     const { nodeName } = el;
-    return nodeName === 'CODE' && el.parentNode.nodeName !== 'PRE';
+    return nodeName === 'CODE' && el.parentNode && el.parentNode.nodeName !== 'PRE';
   },
 };

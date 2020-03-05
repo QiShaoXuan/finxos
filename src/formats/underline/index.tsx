@@ -1,12 +1,14 @@
 import React from 'react';
 import Icon from './underline.svg';
 import __ from '@finxos/i18n';
+import { FormatRenderProps } from '../interface';
+
 import './style.scss';
 export default {
   name: 'underline',
   title: __('Underline'),
   icon: Icon,
-  render: props => {
+  render: (props: FormatRenderProps) => {
     return (
       <span className="finxos-underline" {...props.attributes}>
         {props.children}
@@ -15,7 +17,7 @@ export default {
   },
   shortcut: ['ctrl', 'u'],
 
-  paste: el => {
+  paste: (el: HTMLElement) => {
     const { nodeName, style } = el;
     return nodeName === 'U' || style.textDecoration === 'underline';
   },

@@ -6,10 +6,17 @@ import { updateFormat, setSelection, deepClone } from '@finxos/tools';
 import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
 import TooltipContent from './popup';
-
 import LinkIcon from './link.svg';
+import { FormatRenderProps } from '../interface';
 
 import './style.scss';
+
+interface Props extends FormatRenderProps {
+  attributes: {
+    url: string;
+    blank: boolean;
+  };
+}
 
 export const name = 'link';
 
@@ -25,7 +32,7 @@ export default {
   attributes,
   acrossBlock: false,
   toolbar: true,
-  render: props => {
+  render: (props: Props) => {
     const { element, attributes } = props;
     const editor = useSlate();
     const { lastSelection } = useControls();
@@ -50,7 +57,7 @@ export default {
             onBlur={() => setVisible(false)}
             addingLink={addingLink}
             setAddingLink={setAddingLink}
-            onPressEnter={url => {
+            onPressEnter={(url: string) => {
               setSelection(editor, lastSelection).then(() => {
                 updateFormat(editor, name, attributes, { url });
                 setAddingLink(false);
@@ -70,11 +77,11 @@ export default {
     );
   },
   shortcut: ['ctrl', 'l'],
-  paste: el => {
-    const { nodeName, href } = el;
+  paste: (el: HTMLElement) => {
+    const { nodeName } = el;
     if (nodeName === 'A') {
       const attr = deepClone(attributes);
-      attr.url = href || '';
+      attr.url = el.getAttribute('href') || '';
       return attr;
     }
     return false;

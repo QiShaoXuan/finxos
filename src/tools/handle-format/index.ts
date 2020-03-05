@@ -1,12 +1,12 @@
 import { Editor } from 'slate';
-import deepClone from '../deep-clone';
+import { deepClone } from '@finxos/tools';
 
-export const getCurrentFormsts = (editor: Editor) => {
+export const getCurrentFormats = (editor: Editor) => {
   return Editor.marks(editor) || {};
 };
 
-export const isActiveFormat = (editor: Editor, formatName: string) => {
-  return Boolean(getCurrentFormsts(editor)[formatName]);
+export const isFormatActive = (editor: Editor, formatName: string) => {
+  return Boolean(getCurrentFormats(editor)[formatName]);
 };
 
 export const applyFormat = (editor: Editor, name: string, attributes: {} | boolean) => {
@@ -34,7 +34,7 @@ export const updateFormat = (editor: Editor, name: string, properties: {}, newPr
 };
 
 export const toggleFormat = (editor: any, formatSetting: { name: string; attributes: {} }) => {
-  return isActiveFormat(editor, formatSetting.name)
+  return isFormatActive(editor, formatSetting.name)
     ? removeFormat(editor, formatSetting.name)
     : applyFormat(editor, formatSetting.name, formatSetting.attributes);
 };

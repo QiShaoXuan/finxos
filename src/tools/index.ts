@@ -9,8 +9,8 @@ export {
   removeFormat,
   updateFormat,
   toggleFormat,
-  getCurrentFormsts,
-  isActiveFormat,
+  getCurrentFormats,
+  isFormatActive,
 } from './handle-format';
 export {
   setBlockData,

@@ -1,5 +1,11 @@
 import { keyCodes } from './key-code-list';
 
+export interface ketToCodeInterface {
+  keyCode?: number;
+  assist?: string[];
+  value: string[];
+}
+
 const assistMap: { [key: string]: string } = {
   ctrl: 'ctrlKey',
   shift: 'shiftKey',
@@ -15,7 +21,7 @@ export const keyToCode = (key: string | string[]): number | number[] => {
   return keyCodes[key.toUpperCase()];
 };
 
-export const compositionKeyToCode = (keys: string[]): { keyCode?: number; assist?: string[]; value: string[] } => {
+export const compositionKeyToCode = (keys: string[]): ketToCodeInterface => {
   let keyCode;
   let assist: string[] = [];
   keys.forEach(key => {
