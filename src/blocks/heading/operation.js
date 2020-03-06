@@ -10,7 +10,7 @@ import center from '@finxos/icons/center.svg';
 import right from '@finxos/icons/right.svg';
 
 export default props => {
-  const { data, setBlockData } = props;
+  const { currentData, setBlockData } = props;
   return (
     <div>
       <div className="finxos-heading__operation">
@@ -23,7 +23,7 @@ export default props => {
           return (
             <IconButton
               key={level}
-              className={level === data.level ? 'active' : ''}
+              className={level === currentData.level ? 'active' : ''}
               onMouseDown={e => {
                 e.preventDefault();
                 setBlockData({
@@ -45,7 +45,7 @@ export default props => {
           return (
             <IconButton
               key={align}
-              className={align === data.align ? 'active' : ''}
+              className={align === currentData.align ? 'active' : ''}
               onMouseDown={e => {
                 e.preventDefault();
                 setBlockData({

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-
+import { Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { getCurrentBlocks, getCurrentFormats } from '@finxos/tools';
 
@@ -7,8 +7,14 @@ export const ControlsContext = createContext({
   containerDom: null,
   editorDom: null,
   lastSelection: null,
-  selectedBlocks: {},
+  selectedBlocks: [],
   currentFormats: {},
+} as {
+  containerDom: null | HTMLElement;
+  editorDom: null | HTMLElement;
+  lastSelection: null | Range;
+  selectedBlocks: Node[];
+  currentFormats: { [key: string]: any };
 });
 
 export const useControls = () => {

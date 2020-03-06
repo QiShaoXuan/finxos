@@ -11,7 +11,7 @@ import { Divider } from '@finxos/ui-components';
 import icon from './icon.svg';
 import './style.scss';
 
-export default props => {
+export default (props: { protal?: HTMLElement }) => {
   const { protal = document.body } = props;
 
   const { blocks } = useSettings();
@@ -21,13 +21,15 @@ export default props => {
   const editor = useSlate();
   const { selection } = editor;
 
-  const [position, setPosition] = useState();
+  const [position, setPosition] = useState<{ left: string | number; top: string | number }>({
+    left: -1000,
+    top: -1000,
+  });
 
   useEffect(() => {
-    if (focused && selection) {
+    if (focused && selection && editorDom) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
-      const domRect = domBlock.getBoundingClientRect();
-      // const lineHeight = Number(window.getComputedStyle(domBlock)['line-height'].replace('px', ''));
+      const domRect = (domBlock as HTMLElement).getBoundingClientRect()
       setPosition({
         top: `${domRect.top}px`,
         left: `${domRect.left - 40}px`,

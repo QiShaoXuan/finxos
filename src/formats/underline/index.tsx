@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import Icon from './underline.svg';
 import __ from '@finxos/i18n';
 import { FormatRenderProps } from '../interface';
@@ -21,4 +21,14 @@ export default {
     const { nodeName, style } = el;
     return nodeName === 'U' || style.textDecoration === 'underline';
   },
+} as {
+  name: string;
+  title: string;
+  icon(): ReactNode;
+  render(): ReactNode;
+  shortcut?: string[];
+  paste(el: HTMLElement): boolean | {};
+  toolbar?: boolean;
+  acrossBlock?: boolean;
+  attributes?: { [key: string]: any };
 };

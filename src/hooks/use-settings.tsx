@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useMemo, ReactNode } from 'react';
-import { BlockSetting } from '@finxos/blocks/interface';
-import { FormatSettings } from '@finxos/formats';
+import { BlockSetting } from '@finxos/blocks';
+import { FormatSetting } from '@finxos/formats';
 
 import { compositionKeyToCode } from '@finxos/tools';
 
@@ -8,7 +8,7 @@ export const SettingsContext = createContext({
   blocks: [],
   formats: [],
   formatShortcuts: {},
-} as { formats: FormatSettings[]; blocks: BlockSetting[]; formatShortcuts: {} });
+} as { formats: FormatSetting[]; blocks: BlockSetting[]; formatShortcuts: {} });
 
 export const useSettings = () => {
   return useContext(SettingsContext);
@@ -16,7 +16,7 @@ export const useSettings = () => {
 
 export const SettingsProvider = (props: {
   settings: {
-    formats: FormatSettings[];
+    formats: FormatSetting[];
     blocks: BlockSetting[];
   };
   children: ReactNode;

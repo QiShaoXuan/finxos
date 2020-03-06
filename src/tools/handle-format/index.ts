@@ -1,5 +1,6 @@
 import { Editor } from 'slate';
 import { deepClone } from '@finxos/tools';
+import { FormatSetting } from '@finxos/formats';
 
 export const getCurrentFormats = (editor: Editor) => {
   return Editor.marks(editor) || {};
@@ -33,8 +34,8 @@ export const updateFormat = (editor: Editor, name: string, properties: {}, newPr
   });
 };
 
-export const toggleFormat = (editor: any, formatSetting: { name: string; attributes: {} }) => {
+export const toggleFormat = (editor: any, formatSetting: FormatSetting) => {
   return isFormatActive(editor, formatSetting.name)
     ? removeFormat(editor, formatSetting.name)
-    : applyFormat(editor, formatSetting.name, formatSetting.attributes);
+    : applyFormat(editor, formatSetting.name, formatSetting.attributes || false);
 };

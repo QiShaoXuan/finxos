@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react';
 import { BlockRender } from '@finxos/components';
 import { useSettings } from '../hooks';
+import {FormatSetting} from '@finxos/formats'
 
-export const renderElement = props => {
+export const renderElement = (props: { [key: string]: any }) => {
   const { blocks } = useSettings();
   const {
     element: { type, data },
@@ -16,7 +17,7 @@ export const renderElement = props => {
   return <BlockRender {...props} data={data} RenderSetting={RenderSetting} />;
 };
 
-export const renderLeaf = props => {
+export const renderLeaf = (props: { [key: string]: any }) => {
   const { formats } = useSettings();
   const ActiveFormats = useMemo(() => {
     let formatArr = [];
@@ -30,11 +31,11 @@ export const renderLeaf = props => {
       }
     }
     return formatArr;
-  });
+  }, [props.leaf]);
 
   return (
     <span {...props.attributes}>
-      {ActiveFormats.reduce((children, Format) => {
+      {ActiveFormats.reduce((children:any, Format:any) => {
         return (
           <Format.render attributes={props.leaf[Format.name]} element={props.text}>
             {children}
@@ -45,9 +46,12 @@ export const renderLeaf = props => {
   );
 };
 
-export const compose = (target, composeFns = []) => {
-  if (!target) {
-    return null;
-  }
+// export function compose <T>(target:any, composeFns:[] ) => {
+//   if (!target) {
+//     return null;
+//   }
+//   return composeFns.reduce((handler, fn) => fn(handler), target);
+// };
+export function compose<T>(target:T,composeFns:((target: T)=>T)[]):T{
   return composeFns.reduce((handler, fn) => fn(handler), target);
-};
+}

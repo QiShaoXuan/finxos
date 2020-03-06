@@ -1,19 +1,20 @@
 import React from 'react';
 import { useSlate, useFocused } from 'slate-react';
-import { Menu, Dropdown, Button, Icon } from '@finxos/ui-components';
+import { Menu, Dropdown, Button } from '@finxos/ui-components';
 import { useSettings } from '@finxos/hooks';
 import { setSelection, getBlockRange, insertBlock } from '@finxos/tools';
 
 import './style.scss';
-export default props => {
-  const { blocks } = useSettings();
+
+const menu = () => {
   const editor = useSlate();
+  const { blocks } = useSettings();
   const focused = useFocused();
-  const menu = (
+  return (
     <Menu
       onClick={({ key }) => {
         let path;
-        if (focused) {
+        if (focused && editor.selection) {
           path = [editor.selection.anchor.path[0] + 1];
         } else {
           path = [editor.children.length];
@@ -26,7 +27,7 @@ export default props => {
         return block.isBlock === false ? null : (
           <Menu.Item key={block.name}>
             <div className="finxos-block-list__item">
-              {block.icon ? <block.icon /> : null}
+              {block.icon ? <block.icon/> : null}
               <span className="finxos-block-list__item-name">{block.name}</span>
             </div>
           </Menu.Item>
@@ -34,6 +35,9 @@ export default props => {
       })}
     </Menu>
   );
+};
+
+export default (props: { style?: {}; [key: string]: any }) => {
   return (
     <Dropdown overlay={menu}>
       <div style={props.style}>

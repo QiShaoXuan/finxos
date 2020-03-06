@@ -11,7 +11,7 @@ import Ol2 from './icons/ol2.svg';
 import Ol3 from './icons/ol3.svg';
 
 export default props => {
-  const { data } = props;
+  const { currentData } = props;
   return (
     <div>
       <div className="finxos-list__operation">
@@ -26,7 +26,7 @@ export default props => {
             <IconButton
               size="small"
               key={type}
-              className={type === data.type ? 'active' : ''}
+              className={type === currentData.type ? 'active' : ''}
               onMouseDown={e => {
                 e.preventDefault();
                 // props.setBlockData({
@@ -58,7 +58,7 @@ export default props => {
             <IconButton
               size="small"
               key={type}
-              className={`list-special-btn ${type === data.type ? 'active' : ''}`}
+              className={`list-special-btn ${type === currentData.type ? 'active' : ''}`}
               onMouseDown={e => {
                 e.preventDefault();
                 // props.setBlockData({

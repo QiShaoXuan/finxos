@@ -1,9 +1,11 @@
 import { jsx } from 'slate-hyperscript';
-import { Editor, Transforms } from 'slate';
+import { Editor, Transforms, Node, Range } from 'slate';
 import { defaultBlock } from '@finxos/blocks';
 import { deepClone } from '@finxos/tools';
+import { BlockSetting } from '@finxos/blocks';
+import { FormatSetting } from '@finxos/formats';
 
-const deserialize = (el, blocks, formats) => {
+const deserialize = (el: HTMLElement, blocks: BlockSetting[], formats: FormatSetting[]) => {
   if (el.nodeType === 3) {
     return el.textContent;
   } else if (el.nodeType !== 1) {
@@ -18,8 +20,8 @@ const deserialize = (el, blocks, formats) => {
   //   parent = el.childNodes[0];
   // }
 
-  const children = Array.from(parent.childNodes)
-    .map(child => deserialize(child, blocks, formats))
+  const children: Node[] = Array.from(parent.childNodes)
+    .map(child => deserialize(child as HTMLElement, blocks, formats))
     .flat();
 
   if (el.nodeName === 'BODY') {
@@ -54,8 +56,8 @@ const deserialize = (el, blocks, formats) => {
   return children;
 };
 
-const findEndsOfChildren = editor => {
-  const findPath = (parent, last) => {
+const findEndsOfChildren = (editor: Editor) => {
+  const findPath = (parent: Node, last: number[]): number[] => {
     if (parent.children) {
       last.push(parent.children.length - 1);
       return findPath(parent.children[parent.children.length - 1], last);
@@ -64,6 +66,8 @@ const findEndsOfChildren = editor => {
   };
 
   let path = findPath(editor, []);
+
+  // @ts-ignore
   const { text } = path.reduce(
     (last, current, i) => (i === path.length - 1 ? last[current] : last[current].children),
     editor.children
@@ -75,11 +79,11 @@ const findEndsOfChildren = editor => {
   };
 };
 
-const handleFragment = fragment => {
+const handleFragment = (fragment: any) => {
   // 处理解析过的 fragment
   // 如果是开始存在的 text ，直接插入到当前 block 中
   // 如果是 block 之间的 text ，则创建一个默认 block 并插入（未识别的 block 也会转换为 text，同样的被转换为默认block）
-  const splitIndex = fragment.findIndex(v => v.type);
+  const splitIndex = fragment.findIndex((v: Node) => v.type);
   if (splitIndex === -1) {
     return [fragment];
   }
@@ -96,7 +100,7 @@ const handleFragment = fragment => {
           children: [fragment[i]],
         });
       } else {
-        group[group.length - 1].children.push(fragment[i]);
+        (group[group.length - 1] as Node).children.push(fragment[i]);
       }
     } else {
       group.push(fragment[i]);
@@ -105,10 +109,13 @@ const handleFragment = fragment => {
   return group;
 };
 
-export default (editor, blocks, formats) => {
+export default (editor: Editor, blocks: BlockSetting[], formats: FormatSetting[]) => {
   const { insertData } = editor;
 
-  editor.insertData = data => {
+  editor.insertData = (data: DataTransfer) => {
+    if (editor.selection === null) {
+      return;
+    }
     const html = data.getData('text/html');
 
     if (html) {
@@ -149,7 +156,7 @@ export default (editor, blocks, formats) => {
           }
           editor.apply({
             type: 'insert_node',
-            path: [editor.selection.focus.path[0] + endIndex],
+            path: [(editor.selection as Range).focus.path[0] + endIndex],
             node: child,
           });
         }

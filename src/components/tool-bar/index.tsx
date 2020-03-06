@@ -3,12 +3,11 @@ import { createPortal } from 'react-dom';
 import { Range } from 'slate';
 import { useSlate, useFocused, ReactEditor } from 'slate-react';
 import { useSettings, useControls } from '@finxos/hooks';
-
 import ToolbarButton from './toolbar-button';
 
 import './style.scss';
 
-export default props => {
+export default (props: { protal?: HTMLElement }) => {
   const { protal = document.body } = props;
   const { blocks, formats } = useSettings();
   const { selectedBlocks } = useControls();
@@ -17,7 +16,7 @@ export default props => {
 
   const { selection } = editor;
 
-  const [position, setPosition] = useState();
+  const [position, setPosition] = useState<{ left: number | string; top: number | string }>({ left: -100, top: -100 });
 
   useEffect(() => {
     if (focused && selection && !Range.isCollapsed(selection)) {
@@ -45,7 +44,7 @@ export default props => {
           for (let i = 0; i < selectedBlocks.length; i++) {
             const block = blocks.find(v => v.name === selectedBlocks[i].type);
 
-            if (block.preventFormats && block.preventFormats.includes(format.name)) {
+            if (block && block.preventFormats && block.preventFormats.includes(format.name)) {
               return null;
             }
           }

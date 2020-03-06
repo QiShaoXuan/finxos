@@ -1,11 +1,13 @@
 import React from 'react';
+import { Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { useControls } from '@finxos/hooks';
 import { setBlockData } from '@finxos/tools';
+import { BlockSetting } from '@finxos/blocks';
 
 import './style.scss';
 
-export default props => {
+export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }) => {
   if (!props.currentBlockSetting || !props.currentBlock) {
     return null;
   }
@@ -18,7 +20,7 @@ export default props => {
     <>
       <div className="finxos-operation-area">
         {currentBlockSetting.operation({
-          data: currentBlock.data,
+          currentData: currentBlock.data,
           setBlockData: (data, options) => {
             setBlockData(editor, Object.assign({}, selectedBlocks[0].data, data), options);
           },

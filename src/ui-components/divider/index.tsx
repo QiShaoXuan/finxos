@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss';
 
-export default props => {
+export default () => {
   return <div className="finxos-divider"></div>;
 };

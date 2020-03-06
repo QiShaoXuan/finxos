@@ -3,7 +3,7 @@ import { BlockSetting } from '@finxos/blocks/interface';
 
 export const insertBlock = (
   editor: Editor,
-  options: { path: Path; targetName: string; children: { text: string; [key: string]: any }[] }
+  options: { path: Path; targetName: string; children?: { text: string; [key: string]: any }[] }
 ) => {
   const {
     setting: { blocks },

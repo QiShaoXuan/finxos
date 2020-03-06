@@ -4,8 +4,10 @@ import codeSetting from './code';
 import heading from './heading';
 import list from './list';
 import blockquote from './blockquote';
+import { BlockSetting } from './interface';
 
 export const defaultBlock = paragraph;
-export const transformBlock = transform;
 
-export default [paragraph, heading, ...list, blockquote];
+export { BlockSetting } from './interface';
+
+export default <BlockSetting[]>[paragraph, heading, ...list, blockquote];

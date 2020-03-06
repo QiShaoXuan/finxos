@@ -1,17 +1,25 @@
-import React, { useMemo, useState, useRef } from 'react';
-import { createEditor } from 'slate';
+import React, { useMemo, useState, useRef, ReactNode } from 'react';
+import { createEditor, Node } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
-import {ControlsProvider} from '@finxos/hooks/use-controls';
-import {SettingsProvider} from '@finxos/hooks/use-settings';
+import { ControlsProvider } from '@finxos/hooks/use-controls';
+import { SettingsProvider } from '@finxos/hooks/use-settings';
 import { mergeDefaultData } from '@finxos/tools';
 import { compose } from './untils';
 
-import { withPaste, withVoid, withSetting } from './with';
-import TestButton from '@finxos/components/test-button';
+import { BlockSetting } from '@finxos/blocks';
+import { FormatSetting } from '@finxos/formats';
 
-export default props => {
-  const { content, className = '', blocks = [], formats = [] } = props;
+import { withPaste, withVoid, withSetting } from './with';
+
+export default (props: {
+  content: Node[];
+  className?: string;
+  blocks: BlockSetting[];
+  formats: FormatSetting[];
+  children: ReactNode;
+}) => {
+  const { content, className = '', blocks, formats, children } = props;
   const editor = useMemo(
     () =>
       compose(createEditor(), [
@@ -31,6 +39,7 @@ export default props => {
     <div className={`finxos-container ${className}`} ref={container}>
       <SettingsProvider settings={{ blocks, formats }}>
         <Slate
+          // @ts-ignore
           editor={editor}
           value={value}
           onChange={value => {
@@ -41,7 +50,7 @@ export default props => {
           }}
         >
           <ControlsProvider container={container} lastSelection={lastSelection}>
-            {props.children}
+            {children}
           </ControlsProvider>
         </Slate>
       </SettingsProvider>

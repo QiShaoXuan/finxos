@@ -6,8 +6,8 @@ export const convertBlock = (
   editor: Editor,
   params: {
     currentBlock: Node;
-    targetName: string;
-    path: number[];
+    targetName: any;
+    path?: number[];
   }
 ) => {
   if (editor.selection === null) {
@@ -16,7 +16,7 @@ export const convertBlock = (
   const {
     setting: { blocks },
   } = editor;
-  const { currentBlock, targetName, path } = params;
+  const { currentBlock, targetName, path = [deepClone(editor.selection.anchor.path[0])] } = params;
 
   const currentBlockSetting = blocks.find((v: BlockSetting) => v.name === currentBlock.type);
 
@@ -44,11 +44,11 @@ export const convertBlock = (
     data[key] = from.data[key] || targetBlockSetting.data[key];
   }
 
-  let p = path || [deepClone(editor.selection.anchor.path[0])];
+  // let p = path || [deepClone(editor.selection.anchor.path[0])];
 
   editor.apply({
     type: 'insert_node',
-    path: p,
+    path,
     node: {
       type: targetName,
       children: from.children,
@@ -57,7 +57,7 @@ export const convertBlock = (
   });
   editor.apply({
     type: 'remove_node',
-    path: [p[0] + 1],
+    path: [path[0] + 1],
     node: {
       children: [],
     },

@@ -4,8 +4,8 @@ import italic from './italic';
 import underline from './underline';
 import link from './link';
 import throughline from './linethrough';
-import { FormatSettings } from './interface';
+import { FormatSetting } from './interface';
 
-export { FormatSettings, FormatRenderProps } from './interface';
+export { FormatSetting, FormatRenderProps } from './interface';
 
-export default <FormatSettings[]>[bold, italic, underline, link, code, throughline];
+export default <FormatSetting[]>[bold, italic, underline, link, code, throughline];

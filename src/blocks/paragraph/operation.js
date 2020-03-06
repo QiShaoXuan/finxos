@@ -6,7 +6,7 @@ import center from '@finxos/icons/center.svg';
 import right from '@finxos/icons/right.svg';
 
 export default props => {
-  const { data, setBlockData } = props;
+  const { currentData, setBlockData } = props;
 
   return [
     { Icon: left, align: 'left' },
@@ -17,7 +17,7 @@ export default props => {
     return (
       <IconButton
         key={align}
-        className={align === data.align ? 'active' : ''}
+        className={align === currentData.align ? 'active' : ''}
         onMouseDown={e => {
           e.preventDefault();
           setBlockData({

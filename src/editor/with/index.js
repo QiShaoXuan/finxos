@@ -1,3 +1,5 @@
-export withPaste from './paste';
-export withVoid from './void';
-export withSetting from './setting';
+import withPaste from './paste';
+import withVoid from './void';
+import withSetting from './setting';
+
+export { withPaste, withVoid, withSetting };

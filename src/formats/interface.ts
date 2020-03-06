@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 import { Node } from 'slate';
 
-export interface FormatSettings {
+export interface FormatSetting {
   name: string;
   title: string;
   icon(): ReactNode;
   render(): ReactNode;
   shortcut?: string[];
-  paste(): boolean | {};
+  paste(el: HTMLElement): boolean | {};
   toolbar?: boolean;
   acrossBlock?: boolean;
   attributes?: { [key: string]: any };

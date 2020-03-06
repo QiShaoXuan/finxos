@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
-import { Editable, useSlate } from 'slate-react';
+import { Editable, Slate, useSlate } from 'slate-react';
 import { renderElement, renderLeaf } from './untils';
 import { toggleFormat } from '@finxos/tools';
 import { useSettings, useControls } from '@finxos/hooks';
 import globalShortcut from './shortcuts';
 import './style.scss';
 
-export default props => {
+export default () => {
   const editor = useSlate();
   const { selectedBlocks } = useControls();
   const { blocks, formats, formatShortcuts } = useSettings();
@@ -17,6 +17,7 @@ export default props => {
 
   return (
     <Editable
+      // @ts-ignore
       editor={editor}
       renderElement={useCallback(renderElement, [])}
       renderLeaf={useCallback(renderLeaf, [])}
@@ -34,13 +35,11 @@ export default props => {
         for (let key in formatShortcuts) {
           if (
             formatShortcuts[key].keyCode === event.keyCode &&
-            formatShortcuts[key].assist.map(v => event[v]).every(v => v)
+            formatShortcuts[key].assist.map((v: string) => event[v]).every((v:boolean) => v)
           ) {
             event.preventDefault();
-            toggleFormat(
-              editor,
-              formats.find(v => v.name === key)
-            );
+            const handleFormat = formats.find(v => v.name === key);
+            handleFormat && toggleFormat(editor, handleFormat);
             return;
           }
         }

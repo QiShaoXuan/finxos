@@ -1,12 +1,14 @@
 import React from 'react';
+import { Node } from 'slate';
+
 import { useSlate } from 'slate-react';
-import { useSettings } from '@finxos/hooks';
 import { convertBlock } from '@finxos/tools';
 import { IconButton } from '@finxos/ui-components';
+import { BlockSetting } from '@finxos/blocks';
 
 import './style.scss';
 
-export default props => {
+export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }) => {
   if (!props.currentBlockSetting) {
     return null;
   }
@@ -23,7 +25,7 @@ export default props => {
     <ul className="finxos-transform-menu">
       {transform.target
         ? transform.target.map(targetName => {
-            const targetBlockSetting = blocks.find(v => v.name === targetName);
+            const targetBlockSetting = blocks.find((v: BlockSetting) => v.name === targetName);
             return (
               <li
                 key={targetName}
