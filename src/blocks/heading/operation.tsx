@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { IconButton } from '@finxos/ui-components';
+import { Operation } from '@finxos/blocks';
 
 import H2 from './icons/h2.svg';
 import H3 from './icons/h3.svg';
@@ -9,7 +10,7 @@ import left from '@finxos/icons/left.svg';
 import center from '@finxos/icons/center.svg';
 import right from '@finxos/icons/right.svg';
 
-export default props => {
+export default (props => {
   const { currentData, setBlockData } = props;
   return (
     <div>
@@ -59,4 +60,4 @@ export default props => {
       </div>
     </div>
   );
-};
+}) as Operation;

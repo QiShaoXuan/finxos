@@ -8,6 +8,6 @@ import { BlockSetting } from './interface';
 
 export const defaultBlock = paragraph;
 
-export { BlockSetting } from './interface';
+export { BlockSetting, Transform, Operation } from './interface';
 
 export default <BlockSetting[]>[paragraph, heading, ...list, blockquote];

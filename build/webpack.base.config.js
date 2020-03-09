@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../playground/app.js'),
+    app: path.resolve(__dirname, '../playground/app.tsx'),
   },
   output: {
     path: path.resolve(__dirname, '../dist'),

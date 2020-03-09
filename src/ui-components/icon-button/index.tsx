@@ -4,7 +4,7 @@ export default (props: {
   onMouseDown?(e: MouseEvent): void;
   className?: string;
   disabled?: boolean;
-  icon: FunctionComponent<SVGAttributes<SVGElement>>;
+  icon?: FunctionComponent<SVGAttributes<SVGElement>>;
   children?: ReactNode;
 }) => {
   const { onMouseDown, className = '', disabled = false, children = null } = props;

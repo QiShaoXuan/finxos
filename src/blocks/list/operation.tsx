@@ -1,5 +1,6 @@
 import React from 'react';
 import { IconButton } from '@finxos/ui-components';
+import { Operation } from '@finxos/blocks';
 
 import Ul from './icons/ul.svg';
 import Ul1 from './icons/ul1.svg';
@@ -10,12 +11,12 @@ import Ol1 from './icons/ol1.svg';
 import Ol2 from './icons/ol2.svg';
 import Ol3 from './icons/ol3.svg';
 
-export default props => {
+export default (props => {
   const { currentData } = props;
   return (
     <div>
       <div className="finxos-list__operation">
-        <IconButton size="small" icon={Ul} disabled />
+        <IconButton icon={Ul} disabled />
         {[
           { Icon: Ul1, type: 'ul1' },
           { Icon: Ul2, type: 'ul2' },
@@ -24,7 +25,6 @@ export default props => {
           const { type, Icon } = Type;
           return (
             <IconButton
-              size="small"
               key={type}
               className={type === currentData.type ? 'active' : ''}
               onMouseDown={e => {
@@ -37,7 +37,7 @@ export default props => {
                     type,
                   },
                   {
-                    match: n => n.type === 'list-item' || n.type === 'list',
+                    match: (n: any) => n.type === 'list-item' || n.type === 'list',
                   }
                 );
               }}
@@ -47,7 +47,7 @@ export default props => {
         })}
       </div>
       <div className="finxos-list__operation">
-        <IconButton size="small" icon={Ol} disabled />
+        <IconButton icon={Ol} disabled />
         {[
           { Icon: '1', type: 'ol1' },
           { Icon: '一', type: 'ol2' },
@@ -56,7 +56,6 @@ export default props => {
           const { type, Icon } = Type;
           return (
             <IconButton
-              size="small"
               key={type}
               className={`list-special-btn ${type === currentData.type ? 'active' : ''}`}
               onMouseDown={e => {
@@ -69,7 +68,7 @@ export default props => {
                     type,
                   },
                   {
-                    match: n => n.type === 'list-item' || n.type === 'list',
+                    match: (n: any) => n.type === 'list-item' || n.type === 'list',
                   }
                 );
               }}
@@ -81,4 +80,4 @@ export default props => {
       </div>
     </div>
   );
-};
+}) as Operation;

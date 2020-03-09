@@ -7,3 +7,5 @@ import Toolbar from './tool-bar';
 import BlockList from './block-list';
 
 export { TransformList, BlockRender, EditBar, HistoryGroup, OperationArea, Toolbar, BlockList };
+
+

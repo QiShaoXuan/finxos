@@ -3,6 +3,7 @@ import __ from '@finxos/i18n';
 
 import Icon from './icons/heading.svg';
 import operation from './operation';
+import { BlockSetting } from '@finxos/blocks';
 import './style.scss';
 
 export default {
@@ -31,10 +32,11 @@ export default {
   paste: el => {
     const { nodeName } = el;
     if (/^H\d$/.test(nodeName)) {
+      // @ts-ignore
       const [level] = nodeName.match(/\d/);
       return {
         data: {
-          level: level > 4 ? 4 : level,
+          level: Number(level) > 4 ? 4 : level,
         },
       };
     }
@@ -49,4 +51,4 @@ export default {
       </Tag>
     );
   },
-};
+} as BlockSetting;

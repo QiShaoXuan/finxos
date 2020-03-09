@@ -1,24 +1,25 @@
-import { Transforms, Range } from 'slate';
+import { KeyboardEvent } from 'react';
+import { Transforms, Range, Editor, Node } from 'slate';
 import { ReactEditor } from 'slate-react';
-import {
-  removeBlock,
-  getBlock,
-  insertBlock,
-  setSelection, getBlockRange,
-} from '@finxos/tools'
+import { BlockSetting } from '@finxos/blocks';
+import { removeBlock, getBlock, insertBlock, setSelection, getBlockRange } from '@finxos/tools';
 import { defaultBlock } from '@finxos/blocks';
 
-export default (event, editor, selectedBlocks) => {
+export default (event: KeyboardEvent, editor: Editor, selectedBlocks: Node[]) => {
+  if (editor.selection === null) {
+    return;
+  }
   // on tap 'tab' key
   if (event.keyCode === 9) {
     event.preventDefault();
-    const listItem = selectedBlocks.find(v => v.type === 'list-item');
-    const path = ReactEditor.findPath(editor, listItem);
+    const listItem = selectedBlocks.find((v: Node) => v.type === 'list-item');
+    if (listItem) {
+      const path = ReactEditor.findPath(<ReactEditor>editor, listItem);
 
-    if (path[path.length - 1] !== 0) {
-      Transforms.wrapNodes(editor, { type: 'list', children: [], data: listItem.data });
+      if (path[path.length - 1] !== 0) {
+        Transforms.wrapNodes(editor, { type: 'list', children: [], data: listItem.data });
+      }
     }
-
     return;
   }
 
@@ -71,8 +72,8 @@ export default (event, editor, selectedBlocks) => {
   // }
 };
 
-const findUnwrapPath = (parent, path) => {
-  return parent.children.reduce((group, child, i) => {
+const findUnwrapPath = (parent: Node, path: number[]) => {
+  return parent.children.reduce((group: any[], child: Node, i: number) => {
     if (child.type === 'list-item') {
       group.push([...path, i]);
     }

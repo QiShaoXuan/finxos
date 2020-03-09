@@ -4,6 +4,7 @@ import operation from './operation';
 import transform from './transform';
 import onKeyDown from './on-key-down';
 import data from './data';
+import {BlockSetting} from '@finxos/blocks'
 import Icon from './icons/list.svg';
 
 import './style.scss';
@@ -44,4 +45,4 @@ export default {
         }
       : false;
   },
-};
+} as BlockSetting

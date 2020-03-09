@@ -3,6 +3,7 @@ import { useSelected, ReactEditor, useSlate } from 'slate-react';
 import { getItemPrefix, getListDeep } from './untils';
 import __ from '@finxos/i18n';
 import data from './data';
+import { BlockSetting } from '@finxos/blocks';
 import Icon from './icons/list.svg';
 
 export default {
@@ -31,7 +32,8 @@ export default {
   },
   paste: el => {
     const { nodeName } = el;
-    return nodeName === 'LI'
+
+    return el.parentNode && nodeName === 'LI'
       ? {
           data: {
             type: el.parentNode.nodeName === 'OL' ? 'ol1' : 'ul1',
@@ -39,4 +41,4 @@ export default {
         }
       : false;
   },
-};
+} as BlockSetting;

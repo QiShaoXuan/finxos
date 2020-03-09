@@ -1,41 +1,6 @@
 import { deepClone } from '@finxos/tools';
-
-// export default [
-//   {
-//     name: 'paragraph',
-//     data: data => {
-//       return {};
-//     },
-//     options: {
-//       match: n => n.type === 'list-item',
-//     },
-//     before: editor => {
-//       Transforms.unwrapNodes(editor, {
-//         match: n => n.type === 'list',
-//         split: true,
-//         mode: 'all',
-//         at: Range.isCollapsed(editor.selection) ? getBlockRange(editor) : editor.selection,
-//       });
-//     },
-//     after: editor => {
-//       editor.children.forEach((child, i) => {
-//         if (child.type === 'list-item') {
-//           Transforms.setNodes(
-//             editor,
-//             {
-//               type: 'paragraph',
-//             },
-//             {
-//               mode: 'highest',
-//               at: [i],
-//               match: n => n.type === 'list-item',
-//             }
-//           );
-//         }
-//       });
-//     },
-//   },
-// ];
+import { Node } from 'slate';
+import { Transform } from '@finxos/blocks';
 
 export default {
   from: ({ children }) => {
@@ -69,8 +34,8 @@ export default {
     return { children: items };
   },
   to: ({ children }) => {
-    let texts = [];
-    const helper = children => {
+    let texts: Node[] = [];
+    const helper = (children: Node[]) => {
       children.forEach(child => {
         if (child.type === 'list-item') {
           texts.push(...child.children);
@@ -87,4 +52,4 @@ export default {
     return { children: texts };
   },
   target: ['paragraph'],
-};
+} as Transform;

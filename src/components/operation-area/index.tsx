@@ -21,7 +21,7 @@ export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }
       <div className="finxos-operation-area">
         {currentBlockSetting.operation({
           currentData: currentBlock.data,
-          setBlockData: (data, options) => {
+          setBlockData: (data, options = {}) => {
             setBlockData(editor, Object.assign({}, selectedBlocks[0].data, data), options);
           },
         })}

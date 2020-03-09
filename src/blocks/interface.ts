@@ -1,6 +1,19 @@
 import React, { ReactNode, KeyboardEvent, ReactElement, FunctionComponent, SVGAttributes } from 'react';
 import { Editor, Node } from 'slate';
 
+export interface Operation {
+  (props: {
+    currentData: { [key: string]: any };
+    setBlockData(data: { [key: string]: any }, options?: { [key: string]: any }): void;
+  }): ReactNode;
+}
+
+export interface Transform {
+  from?: <T extends { children: Node[]; data?: { [key: string]: any } }>(props: T) => T;
+  to?: <T extends { children: Node[]; data?: { [key: string]: any } }>(props: T) => T;
+  target: string[];
+}
+
 export interface BlockSetting {
   name: string;
   title: string;
@@ -12,11 +25,7 @@ export interface BlockSetting {
   isBlock?: boolean;
   preventFormats?: string[];
   onKeyDown?(event: KeyboardEvent<HTMLDivElement>, editor: Editor, selectedBlocks: Node[]): undefined;
-  operation?(props: { currentData: { [key: string]: any }; setBlockData(data: {}, options: {}): void }): ReactNode;
-  transform?: {
-    to?(): { childre: []; data?: {} };
-    from?(): { childre: []; data?: {} };
-    target: string[];
-  };
+  operation?: Operation;
+  transform?: Transform;
   isVoid?: boolean;
 }

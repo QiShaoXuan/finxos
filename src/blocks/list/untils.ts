@@ -1,14 +1,14 @@
 import { Path } from 'slate';
-import { useSelected, ReactEditor, useSlate } from 'slate-react';
+import { Editor } from 'slate';
 import { getBlock } from '@finxos/tools';
 
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 
-export const getItemPrefix = (editor, path, type, deep) => {
+export const getItemPrefix = (editor: Editor, path: number[], type: string, deep: number) => {
   return type.indexOf('ul') === -1 ? getOlIcon(editor, path, type, deep) : getUlIcon(editor, path, type, deep);
 };
 
-export const getListDeep = (editor, itemPath) => {
+export const getListDeep = (editor: Editor, itemPath: number[]) => {
   let deep = -1;
   let path = itemPath;
 
@@ -22,7 +22,7 @@ export const getListDeep = (editor, itemPath) => {
   return deep;
 };
 
-const getItemIndex = (editor, itemPath) => {
+const getItemIndex = (editor: Editor, itemPath: number[]) => {
   let index = 0;
   let limit = 0;
   while (limit <= itemPath[itemPath.length - 1]) {
@@ -34,13 +34,13 @@ const getItemIndex = (editor, itemPath) => {
   return index;
 };
 
-const convertRoman = (num, upper = true) => {
-  var aArray = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
-  var rArray = upper
+const convertRoman = (num: number, upper: boolean = true) => {
+  const aArray = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+  const rArray = upper
     ? ['M', 'CM', 'D', 'CD', 'C', 'XC', 'L', 'XL', 'X', 'IX', 'V', 'IV', 'I']
     : ['m', 'cm', 'd', 'cd', 'c', 'xc', 'l', 'xl', 'x', 'ix', 'v', 'iv', 'i'];
-  var str = '';
-  for (var i = 0; i < aArray.length; i++) {
+  let str = '';
+  for (let i = 0; i < aArray.length; i++) {
     while (num >= aArray[i]) {
       str += rArray[i];
       num -= aArray[i];
@@ -49,18 +49,19 @@ const convertRoman = (num, upper = true) => {
   return str;
 };
 
-const getUlIcon = (editor, path, type, deep) => {
+const getUlIcon = (editor: Editor, path: number[], type: string, deep: number) => {
   const firstIndex = Number(type.replace('ul', '')) - 1;
   return '▶●■▶●■'.slice(firstIndex, firstIndex + 3)[deep % 3];
 };
 
-const getOlIcon = (editor, path, type, deep) => {
+const getOlIcon = (editor: Editor, path: number[], type: string, deep: number) => {
   switch (type) {
     case 'ol1':
       return (
         path
           .reduce((indexGroup, p, i) => {
             if (i > 0) {
+              // @ts-ignore
               indexGroup.push(getItemIndex(editor, path.slice(0, i + 1)));
             }
             return indexGroup;
@@ -72,6 +73,7 @@ const getOlIcon = (editor, path, type, deep) => {
         ? path
             .reduce((indexGroup, p, i) => {
               if (i > 1) {
+                // @ts-ignore
                 indexGroup.push(getItemIndex(editor, path.slice(0, i + 1)));
               }
               return indexGroup;
@@ -93,29 +95,29 @@ const getOlIcon = (editor, path, type, deep) => {
   }
 };
 
-function setTemplateOl3(uls, level = 0) {
-  const lis = getLis(uls);
-  lis.forEach((li, i) => {
-    const index = i + 1;
-    let prefix = '';
-    switch (level % 3) {
-      case 0:
-        prefix = `${index}.`;
-        break;
-      case 1:
-        for (let j = 0; j < Math.ceil(index / 26); j++) {
-          prefix += `${enWord[i % 26]}`;
-        }
-        prefix += '.';
-        break;
-      case 2:
-        prefix = `${convertToRomans(index)}.`;
-        break;
-    }
-    li.setAttribute('data-prefix', prefix);
-    const childUls = getChildUl(li);
-    if (childUls) {
-      setTemplateOl3(childUls, level + 1);
-    }
-  });
-}
+// function setTemplateOl3(uls, level = 0) {
+//   const lis = getLis(uls);
+//   lis.forEach((li, i) => {
+//     const index = i + 1;
+//     let prefix = '';
+//     switch (level % 3) {
+//       case 0:
+//         prefix = `${index}.`;
+//         break;
+//       case 1:
+//         for (let j = 0; j < Math.ceil(index / 26); j++) {
+//           prefix += `${enWord[i % 26]}`;
+//         }
+//         prefix += '.';
+//         break;
+//       case 2:
+//         prefix = `${convertToRomans(index)}.`;
+//         break;
+//     }
+//     li.setAttribute('data-prefix', prefix);
+//     const childUls = getChildUl(li);
+//     if (childUls) {
+//       setTemplateOl3(childUls, level + 1);
+//     }
+//   });
+// }
