@@ -1,10 +1,12 @@
 import React, { useMemo } from 'react';
 import './style.scss';
+import { Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { isHighestBlock } from '@finxos/tools';
 import BlockList from './block-list';
+import { BlockSetting } from '@finxos/blocks';
 
-const check = children => {
+const check = (children: Node[]): Node[] | boolean => {
   if (children.length !== 1) {
     return false;
   }
@@ -17,12 +19,15 @@ const check = children => {
   return false;
 };
 
-export default props => {
-  const { RenderSetting, element } = props;
+export default (props: { blockSetting: BlockSetting | undefined; [key: string]: any }) => {
+  const { blockSetting, element } = props;
+  if (blockSetting === undefined) {
+    return null;
+  }
   const editor = useSlate();
 
-  if (RenderSetting.isBlock === false) {
-    return <RenderSetting.render {...props} />;
+  if (blockSetting.isBlock === false) {
+    return <blockSetting.render {...props} />;
   }
 
   const showList = useMemo(() => {
@@ -36,7 +41,7 @@ export default props => {
   return (
     <div className="fincos-block">
       {showList ? <BlockList /> : null}
-      <RenderSetting.render {...props} />
+      <blockSetting.render {...props} />
     </div>
   );
 };

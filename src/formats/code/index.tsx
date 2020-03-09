@@ -1,14 +1,14 @@
 import React from 'react';
 import Icon from './code.svg';
 import __ from '@finxos/i18n';
-import { FormatRenderProps } from '../interface';
+import { FormatSetting } from '../interface';
 
 import './style.scss';
 export default {
   name: 'code',
   title: __('Code'),
   icon: Icon,
-  render: (props: FormatRenderProps) => {
+  render: props => {
     return (
       <code className="finxos-line-code" {...props.attributes}>
         {props.children}
@@ -20,4 +20,4 @@ export default {
     const { nodeName } = el;
     return nodeName === 'CODE' && el.parentNode && el.parentNode.nodeName !== 'PRE';
   },
-};
+} as FormatSetting;

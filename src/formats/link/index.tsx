@@ -7,7 +7,7 @@ import { useControls } from '@finxos/hooks';
 import __ from '@finxos/i18n';
 import TooltipContent from './popup';
 import LinkIcon from './link.svg';
-import { FormatRenderProps } from '../interface';
+import { FormatRenderProps, FormatSetting } from '@finxos/formats';
 
 import './style.scss';
 
@@ -86,4 +86,4 @@ export default {
     }
     return false;
   },
-};
+} as FormatSetting;

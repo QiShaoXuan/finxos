@@ -1,6 +1,6 @@
 import paragraph from './paragraph';
-import transform from './transform';
-import codeSetting from './code';
+// import transform from './transform';
+// import codeSetting from './code';
 import heading from './heading';
 import list from './list';
 import blockquote from './blockquote';

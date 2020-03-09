@@ -10,7 +10,7 @@ export const isFormatActive = (editor: Editor, formatName: string) => {
   return Boolean(getCurrentFormats(editor)[formatName]);
 };
 
-export const applyFormat = (editor: Editor, name: string, attributes: {} | boolean) => {
+export const applyFormat = (editor: Editor, name: string, attributes?: {} | boolean) => {
   Editor.addMark(editor, name, typeof attributes === 'object' ? deepClone(attributes) : true);
 };
 

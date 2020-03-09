@@ -1,11 +1,15 @@
-import { ReactNode } from 'react';
+import {
+  FunctionComponent, ReactElement,
+  ReactNode,
+  SVGAttributes,
+} from 'react'
 import { Node } from 'slate';
 
 export interface FormatSetting {
   name: string;
   title: string;
-  icon(): ReactNode;
-  render(): ReactNode;
+  icon: FunctionComponent<SVGAttributes<SVGElement>>;
+  render(props:FormatRenderProps): ReactElement;
   shortcut?: string[];
   paste(el: HTMLElement): boolean | {};
   toolbar?: boolean;

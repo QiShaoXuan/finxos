@@ -1,14 +1,13 @@
 import React from 'react';
 import Icon from './bold.svg';
-
 import __ from '@finxos/i18n';
-import { FormatRenderProps } from '../interface';
+import { FormatSetting } from '../interface';
 
 export default {
   name: 'bold',
   title: __('Bold'),
   icon: Icon,
-  render: (props: FormatRenderProps) => {
+  render: (props) => {
     return <strong {...props.attributes}>{props.children}</strong>;
   },
   shortcut: ['ctrl', 'b'],
@@ -16,4 +15,4 @@ export default {
     const { nodeName, style } = el;
     return nodeName === 'B' || nodeName === 'STRONG' || style.fontWeight === 'bold';
   },
-};
+} as FormatSetting

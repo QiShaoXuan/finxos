@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useRef, ReactNode } from 'react';
-import { createEditor, Node } from 'slate';
+import { createEditor, Node,Range } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { ControlsProvider } from '@finxos/hooks/use-controls';
