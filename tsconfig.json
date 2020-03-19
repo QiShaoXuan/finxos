@@ -18,5 +18,8 @@
     "paths": {
       "@finxos/*": ["./src/*"]
     }
-  }
+  },
+  "files": ["custom.d.ts", "./src/formats/code/index.d.ts"],
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }
