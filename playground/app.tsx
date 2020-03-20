@@ -131,8 +131,6 @@ class App extends React.Component {
               </>
             }
           />
-          <Toolbar />
-          <EditBar />
           <FinxosEditable />
         </FinxosSlate>
       </div>
