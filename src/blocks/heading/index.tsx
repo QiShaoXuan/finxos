@@ -43,7 +43,9 @@ export default {
     return false;
   },
   render: props => {
-    const { data } = props;
+    const {
+      element: { data },
+    } = props;
     const Tag = `h${data.level}`;
     return (
       <Tag className={`finxos-heading finxos-heading--${data.align}`} {...props.attributes}>

@@ -17,7 +17,9 @@ export default {
     const path = useMemo(() => ReactEditor.findPath(editor, props.element), [props.element, useSelected()]);
     const deep = useMemo(() => getListDeep(editor, path), [path]);
     const {
-      data: { type },
+      element: {
+        data: { type },
+      },
     } = props;
 
     return (

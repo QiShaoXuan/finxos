@@ -6,7 +6,7 @@ export const insertBlock = (
   options: { path: Path; targetName: string; children?: { text: string; [key: string]: any }[] }
 ) => {
   const {
-    setting: { blocks },
+    settings: { blocks },
   } = editor;
   const { path, targetName, children } = options;
   const targetBlockSetting = blocks.find((v: BlockSetting) => v.name === targetName);

@@ -1,8 +1,0 @@
-.finxos-block {
-  position: relative;
-  display: flex;
-  .finxos-block-placeholder::after {
-    content: attr(data-placeholder);
-    color: #e8e8e8;
-  }
-}

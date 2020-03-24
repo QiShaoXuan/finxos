@@ -1,4 +1,3 @@
-import FinxosSlate from './finxos-slate';
-import FinxosEditable from './finxos-editable';
+import Finxos from './finxos-slate';
 
-export { FinxosSlate, FinxosEditable };
+export default Finxos;

@@ -14,7 +14,7 @@ export const convertBlock = (
     return;
   }
   const {
-    setting: { blocks },
+    settings: { blocks },
   } = editor;
   const { currentBlock, targetName, path = [deepClone(editor.selection.anchor.path[0])] } = params;
 

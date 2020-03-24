@@ -1,20 +1,19 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { Node } from 'slate';
+import { Node, Range } from 'slate';
 import { useSlate } from 'slate-react';
 import { getCurrentBlocks, getCurrentFormats } from '@finxos/tools';
 
 export const ControlsContext = createContext({
-  containerDom: null,
-  editorDom: null,
-  lastSelection: null,
-  selectedBlocks: [],
   currentFormats: {},
+  showBlockList: false,
+  showToolBar: false,
+  showEditBar: false,
 } as {
-  containerDom: null | HTMLElement;
-  editorDom: null | HTMLElement;
-  lastSelection: null | Range;
   selectedBlocks: Node[];
   currentFormats: { [key: string]: any };
+  showBlockList: boolean;
+  showToolBar: boolean;
+  showEditBar: boolean;
 });
 
 export const useControls = () => {
@@ -23,16 +22,17 @@ export const useControls = () => {
 
 export const ControlsProvider = (props: { container: any; lastSelection: any; children: ReactNode }) => {
   const editor = useSlate();
-  const { container, lastSelection } = props;
+  const showToolBar = Boolean(editor.selection && !Range.isCollapsed(editor.selection));
+  // showBlockList, , showEditBar
 
   return (
     <ControlsContext.Provider
       value={{
-        containerDom: container.current,
-        editorDom: container.current ? container.current.querySelector('[contenteditable=true]') : container.current,
-        lastSelection,
-        selectedBlocks: getCurrentBlocks(editor),
+        selectedBlocks: [],
         currentFormats: getCurrentFormats(editor),
+        showBlockList: false,
+        showToolBar,
+        showEditBar: false,
       }}
     >
       {props.children}

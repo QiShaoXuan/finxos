@@ -17,7 +17,9 @@ export default {
   },
   operation,
   render: props => {
-    const { data } = props;
+    const {
+      element: { data },
+    } = props;
     return (
       <p {...props.attributes} className={`finxos-paragraph finxos-paragraph--${data.align}`}>
         {props.children}

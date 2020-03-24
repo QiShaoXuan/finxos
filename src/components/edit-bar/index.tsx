@@ -3,10 +3,11 @@ import { createPortal } from 'react-dom';
 import { OperationArea } from '@finxos/components';
 import { Range } from 'slate';
 import { useFocused, useSlate } from 'slate-react';
-import { useSettings, useControls } from '@finxos/hooks';
+import { useControls } from '@finxos/hooks';
 import { IconButton } from '@finxos/ui-components';
 import { TransformList } from '@finxos/components';
 import { Divider } from '@finxos/ui-components';
+import { BlockSetting } from '@finxos/blocks';
 
 import icon from './icon.svg';
 import './style.scss';
@@ -14,12 +15,15 @@ import './style.scss';
 export default (props: { protal?: HTMLElement }) => {
   const { protal = document.body } = props;
 
-  const { blocks } = useSettings();
-  const { editorDom, selectedBlocks } = useControls();
+  const { selectedBlocks } = useControls();
+  const editorDom = document.body;
 
   const focused = useFocused();
   const editor = useSlate();
-  const { selection } = editor;
+  const {
+    selection,
+    settings: { blocks },
+  } = editor;
 
   const [position, setPosition] = useState<{ left: string | number; top: string | number }>({
     left: -1000,
@@ -29,7 +33,7 @@ export default (props: { protal?: HTMLElement }) => {
   useEffect(() => {
     if (focused && selection && editorDom) {
       const domBlock = editorDom.childNodes[selection.anchor.path[0]];
-      const domRect = (domBlock as HTMLElement).getBoundingClientRect()
+      const domRect = (domBlock as HTMLElement).getBoundingClientRect();
       setPosition({
         top: `${domRect.top}px`,
         left: `${domRect.left - 40}px`,
@@ -42,7 +46,7 @@ export default (props: { protal?: HTMLElement }) => {
   const currentBlockSetting = useMemo(() => {
     let blockSetting = null;
     if (selectedBlocks.length) {
-      blockSetting = blocks.find(v => v.name === selectedBlocks[0].type);
+      blockSetting = blocks.find((v: BlockSetting) => v.name === selectedBlocks[0].type);
     }
     return blockSetting;
   }, [position, selectedBlocks]);

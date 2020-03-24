@@ -1,30 +1,41 @@
 import React, { useMemo } from 'react';
-import { BlockRender } from '@finxos/components';
-import { useSettings } from '../hooks';
+import { useSlate } from 'slate-react';
+import { BlockSetting } from '@finxos/blocks';
 import { FormatSetting } from '@finxos/formats';
 
 export const renderElement = (props: { [key: string]: any }) => {
-  const { blocks } = useSettings();
   const {
-    element: { type, data },
+    settings: { defaultBlock, blocks },
+  } = useSlate();
+
+  const {
+    element: { type },
   } = props;
 
-  const blockSetting =
-    blocks.find(v => {
-      return v.name === type;
-    }) || blocks.find(v => v.name === 'paragraph');
+  const currentBlockSetting = blocks.find((v: BlockSetting) => v.name === type) || defaultBlock;
 
-  return <BlockRender {...props} data={data} blockSetting={blockSetting} />;
+  if (currentBlockSetting.isBlock === false) {
+    return <currentBlockSetting.render {...props} />;
+  }
+
+  return (
+    <div className="fincos-block">
+      <currentBlockSetting.render {...props} />
+    </div>
+  );
 };
 
 export const renderLeaf = (props: { [key: string]: any }) => {
-  const { formats } = useSettings();
+  const {
+    settings: { formats },
+  } = useSlate();
+
   const ActiveFormats = useMemo(() => {
     let formatArr = [];
 
     for (let key in props.leaf) {
       if (key !== 'text') {
-        let format = formats.find(v => v.name === key);
+        let format = formats.find((v: FormatSetting) => v.name === key);
         if (format) {
           formatArr.push(format);
         }
@@ -46,12 +57,6 @@ export const renderLeaf = (props: { [key: string]: any }) => {
   );
 };
 
-// export function compose <T>(target:any, composeFns:[] ) => {
-//   if (!target) {
-//     return null;
-//   }
-//   return composeFns.reduce((handler, fn) => fn(handler), target);
-// };
 export function compose<T>(target: T, composeFns: ((target: T) => T)[]): T {
   return composeFns.reduce((handler, fn) => fn(handler), target);
 }

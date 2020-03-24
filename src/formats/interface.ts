@@ -12,7 +12,7 @@ export interface FormatSetting {
   render(props:FormatRenderProps): ReactElement;
   shortcut?: string[];
   paste(el: HTMLElement): boolean | {};
-  toolbar?: boolean;
+  toolbar?: boolean; // 是否显示在 toolbar  中
   acrossBlock?: boolean;
   attributes?: { [key: string]: any };
 }

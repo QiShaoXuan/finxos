@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-import { FinxosSlate, FinxosEditable } from '@finxos/editor';
+import Finxos from '@finxos/editor';
 import { Header } from '@finxos/ui-components';
-import { HistoryGroup, Toolbar, EditBar, BlockList } from '@finxos/components';
-
+import { HistoryGroup, BlockList } from '@finxos/components';
+import { EditBar, Toolbar } from '@finxos/components';
 import 'antd/dist/antd.css';
 import './style.scss';
 import BlockSettings from '@finxos/blocks';
@@ -120,19 +120,20 @@ class App extends React.Component {
   render() {
     return (
       <div className="editor-container">
-        <FinxosSlate content={content} blocks={BlockSettings} formats={FormatSettings}>
+        <Finxos content={content} blocks={BlockSettings} formats={FormatSettings}>
           <Header
             portal={document.body}
             left={
               <>
                 {/*<BlockMenu BlockSettings={BlockSettings} />*/}
                 <HistoryGroup />
+                {/*<EditBar /> */}
                 <BlockList style={{ marginLeft: 20 }} />
               </>
             }
           />
-          <FinxosEditable />
-        </FinxosSlate>
+          <Toolbar />
+        </Finxos>
       </div>
     );
   }

@@ -17,7 +17,7 @@ export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }
   const editor = useSlate();
 
   const {
-    setting: { blocks },
+    settings: { blocks },
   } = editor;
 
   const { transform } = currentBlockSetting;

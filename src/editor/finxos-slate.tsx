@@ -1,15 +1,15 @@
-import React, { useMemo, useState, useRef, ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { createEditor, Node, Editor, Location } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 import { ControlsProvider } from '@finxos/hooks/use-controls';
 import { SettingsProvider } from '@finxos/hooks/use-settings';
 import { mergeDefaultData } from '@finxos/tools';
-import { EditBar, Toolbar } from '@finxos/components/index';
+import FinxosEditable from './finxos-editable';
 
 import { compose } from './untils';
 
-import { BlockSetting } from '@finxos/blocks';
+import { BlockSetting, defaultBlock } from '@finxos/blocks';
 import { FormatSetting } from '@finxos/formats';
 
 import { withPaste, withVoid, withSetting } from './with';
@@ -19,7 +19,8 @@ interface Props {
   className?: string;
   blocks: BlockSetting[];
   formats: FormatSetting[];
-  children: ReactNode;
+  children?: ReactNode | null;
+  defaultBlock?: BlockSetting;
 }
 interface State {
   value: any[];
@@ -30,9 +31,18 @@ class FinxosSlate extends React.Component<Props, State> {
   private container: React.RefObject<HTMLDivElement>;
   private editor: Editor;
 
+  static defaultProps = {
+    content: [],
+    className: '',
+    blocks: [],
+    formats: [],
+    children: null,
+    defaultBlock: defaultBlock,
+  };
+
   constructor(props: Readonly<Props>) {
     super(props);
-    const { blocks, formats, content } = this.props;
+    const { blocks, formats, content, defaultBlock } = this.props;
 
     this.container = React.createRef();
 
@@ -41,7 +51,7 @@ class FinxosSlate extends React.Component<Props, State> {
       withReact,
       editor => withPaste(editor, blocks, formats),
       editor => withVoid(editor, blocks),
-      editor => withSetting(editor, blocks, formats),
+      editor => withSetting(editor, { blocks, formats, defaultBlock }),
     ]);
 
     this.state = {
@@ -56,29 +66,32 @@ class FinxosSlate extends React.Component<Props, State> {
 
     return (
       <div className={`finxos-container ${className}`} ref={this.container}>
-        <SettingsProvider settings={{ blocks, formats }}>
-          <Slate
-            // @ts-ignore
-            editor={this.editor}
-            value={value}
-            onChange={value => {
-              if (this.editor.selection !== null) {
-                this.setState({
-                  lastSelection: this.editor.selection,
-                });
-              }
-              this.setState({
-                value,
-              });
-            }}
+        <Slate
+          // @ts-ignore
+          editor={this.editor}
+          value={value}
+          onChange={value => {
+            console.log('change', value);
+
+            // if (this.editor.selection !== null) {
+            //   this.setState({
+            //     lastSelection: this.editor.selection,
+            //   });
+            // }
+
+            this.setState({
+              value,
+            });
+          }}
+        >
+          <ControlsProvider
+            container={this.container}
+            lastSelection={lastSelection}
           >
-            <ControlsProvider container={this.container} lastSelection={lastSelection}>
-              <Toolbar />
-              <EditBar />
-              {children}
-            </ControlsProvider>
-          </Slate>
-        </SettingsProvider>
+            <FinxosEditable />
+            {children}
+          </ControlsProvider>
+        </Slate>
       </div>
     );
   }

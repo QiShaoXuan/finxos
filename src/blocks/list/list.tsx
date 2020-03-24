@@ -4,7 +4,7 @@ import operation from './operation';
 import transform from './transform';
 import onKeyDown from './on-key-down';
 import data from './data';
-import {BlockSetting} from '@finxos/blocks'
+import { BlockSetting } from '@finxos/blocks';
 import Icon from './icons/list.svg';
 
 import './style.scss';
@@ -20,7 +20,9 @@ export default {
   operation,
   transform,
   render: props => {
-    const { data } = props;
+    const {
+      element: { data },
+    } = props;
     const Tag = data.type.indexOf('ul') === -1 ? 'ol' : 'ul';
 
     return (
@@ -45,4 +47,4 @@ export default {
         }
       : false;
   },
-} as BlockSetting
+} as BlockSetting;

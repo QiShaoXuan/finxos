@@ -35,7 +35,7 @@ export default {
   render: (props: Props) => {
     const { element, attributes } = props;
     const editor = useSlate();
-    const { lastSelection } = useControls();
+    // const { lastSelection } = useControls();
 
     const [visible, setVisible] = useState(false);
     const [addingLink, setAddingLink] = useState(!attributes.url);
@@ -58,11 +58,11 @@ export default {
             addingLink={addingLink}
             setAddingLink={setAddingLink}
             onPressEnter={(url: string) => {
-              setSelection(editor, lastSelection).then(() => {
-                updateFormat(editor, name, attributes, { url });
-                setAddingLink(false);
-                setVisible(false);
-              });
+              // setSelection(editor, lastSelection).then(() => {
+              //   updateFormat(editor, name, attributes, { url });
+              //   setAddingLink(false);
+              //   setVisible(false);
+              // });
             }}
           />
         )}
