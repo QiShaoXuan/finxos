@@ -1,4 +1,3 @@
-export { getCurrentBlocks } from './get-current-blocks';
 export { mergeDefaultData } from './merge-default-data';
 export { setSelection } from './set-selection';
 export { deepClone } from './deep-clone';

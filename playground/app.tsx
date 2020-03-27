@@ -127,7 +127,7 @@ class App extends React.Component {
               <>
                 {/*<BlockMenu BlockSettings={BlockSettings} />*/}
                 <HistoryGroup />
-                {/*<EditBar /> */}
+                <EditBar />
                 <BlockList style={{ marginLeft: 20 }} />
               </>
             }

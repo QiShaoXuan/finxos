@@ -71,8 +71,6 @@ class FinxosSlate extends React.Component<Props, State> {
           editor={this.editor}
           value={value}
           onChange={value => {
-            console.log('change', value);
-
             // if (this.editor.selection !== null) {
             //   this.setState({
             //     lastSelection: this.editor.selection,

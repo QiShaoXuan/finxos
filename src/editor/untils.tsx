@@ -43,7 +43,6 @@ export const renderLeaf = (props: { [key: string]: any }) => {
     }
     return formatArr;
   }, [props.leaf]);
-
   return (
     <span {...props.attributes}>
       {ActiveFormats.reduce((children: any, Format: any) => {

@@ -10,7 +10,7 @@ export default {
   name: 'list-item',
   title: __('ListItem'),
   icon: Icon,
-  isBlock: false,
+  isInline: true,
   data,
   render: props => {
     const editor = useSlate();

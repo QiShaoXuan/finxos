@@ -11,6 +11,13 @@
     background: #fff;
     border-radius: 4px;
     padding: 5px;
+    transition: transform 0.2s, opacity 0.2s;
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  .toolbar-wrapper--open {
+    transform: scale(1);
+    opacity: 1;
   }
   .toolbar-button {
     width: 28px;

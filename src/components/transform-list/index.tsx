@@ -7,18 +7,21 @@ import { IconButton } from '@finxos/ui-components';
 import { BlockSetting } from '@finxos/blocks';
 
 import './style.scss';
+import { useControls } from '@finxos/hooks';
 
-export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }) => {
-  if (!props.currentBlockSetting) {
+export default () => {
+  const editor = useSlate();
+  const { selectedBlocks, selectedBlockSettings } = useControls();
+
+  if (!selectedBlocks.length || !selectedBlocks.slice(1).every(v => v[0].type === selectedBlocks[0][0].type)) {
     return null;
   }
-
-  const { currentBlockSetting, currentBlock } = props;
-  const editor = useSlate();
 
   const {
     settings: { blocks },
   } = editor;
+  const [currentBlockSetting] = selectedBlockSettings;
+  const [currentBlock] = selectedBlocks[0];
 
   const { transform } = currentBlockSetting;
   return transform && transform.target ? (
@@ -30,7 +33,9 @@ export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }
               <li
                 key={targetName}
                 onMouseDown={() => {
-                  convertBlock(editor, { currentBlock, targetName });
+                  console.log('currentBlock, targetName', currentBlock, targetName);
+
+                  // convertBlock(editor, { currentBlock, targetName });
                 }}
               >
                 <IconButton icon={targetBlockSetting.icon} />

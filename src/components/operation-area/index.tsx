@@ -1,31 +1,30 @@
 import React from 'react';
-import { Node } from 'slate';
 import { useSlate } from 'slate-react';
 import { useControls } from '@finxos/hooks';
 import { setBlockData } from '@finxos/tools';
-import { BlockSetting } from '@finxos/blocks';
 
 import './style.scss';
 
-export default (props: { currentBlockSetting: BlockSetting; currentBlock: Node }) => {
-  if (!props.currentBlockSetting || !props.currentBlock) {
+export default () => {
+  const { selectedBlocks, selectedBlockSettings } = useControls();
+
+  if (!selectedBlocks.length || !selectedBlocks.slice(1).every(v => v[0].type === selectedBlocks[0][0].type)) {
     return null;
   }
 
-  const { selectedBlocks } = useControls();
-  const { currentBlockSetting, currentBlock } = props;
+  const [currentBlockSetting] = selectedBlockSettings;
+  const [currentBlock] = selectedBlocks[0];
+
   const editor = useSlate();
 
-  return currentBlockSetting && currentBlockSetting.operation ? (
-    <>
-      <div className="finxos-operation-area">
-        {currentBlockSetting.operation({
-          currentData: currentBlock.data,
-          setBlockData: (data, options = {}) => {
-            setBlockData(editor, Object.assign({}, selectedBlocks[0].data, data), options);
-          },
-        })}
-      </div>
-    </>
+  return currentBlockSetting.operation ? (
+    <div className="finxos-operation-area">
+      {currentBlockSetting.operation({
+        currentData: currentBlock.data,
+        setBlockData: (data, options = {}) => {
+          setBlockData(editor, Object.assign({}, currentBlock.data, data), options);
+        },
+      })}
+    </div>
   ) : null;
 };

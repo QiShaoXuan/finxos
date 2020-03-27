@@ -1,15 +1,24 @@
 import React, { createContext, useContext, ReactNode } from 'react';
-import { Node, Range } from 'slate';
-import { useSlate } from 'slate-react';
-import { getCurrentBlocks, getCurrentFormats } from '@finxos/tools';
+import { Range, NodeEntry } from 'slate';
+import { useSlate, ReactEditor } from 'slate-react';
+import { getCurrentFormats } from '@finxos/tools';
+import { getSelected } from '@finxos/hooks/utils';
+import { BlockSetting } from '@finxos/blocks';
 
 export const ControlsContext = createContext({
+  selectedNodes: [],
+  selectedBlocks: [],
+  selectedTexts: [],
+  selectedBlockSettings: [],
   currentFormats: {},
   showBlockList: false,
   showToolBar: false,
   showEditBar: false,
 } as {
-  selectedBlocks: Node[];
+  selectedNodes: NodeEntry[];
+  selectedBlocks: NodeEntry[];
+  selectedTexts: NodeEntry[];
+  selectedBlockSettings: BlockSetting[];
   currentFormats: { [key: string]: any };
   showBlockList: boolean;
   showToolBar: boolean;
@@ -22,16 +31,19 @@ export const useControls = () => {
 
 export const ControlsProvider = (props: { container: any; lastSelection: any; children: ReactNode }) => {
   const editor = useSlate();
-  const showToolBar = Boolean(editor.selection && !Range.isCollapsed(editor.selection));
-  // showBlockList, , showEditBar
+
+  const { selectedNodes, selectedBlocks, selectedTexts, selectedBlockSettings } = getSelected(editor);
 
   return (
     <ControlsContext.Provider
       value={{
-        selectedBlocks: [],
+        selectedNodes,
+        selectedBlocks,
+        selectedTexts,
+        selectedBlockSettings,
         currentFormats: getCurrentFormats(editor),
         showBlockList: false,
-        showToolBar,
+        showToolBar: Boolean(editor.selection && !Range.isCollapsed(editor.selection)),
         showEditBar: false,
       }}
     >

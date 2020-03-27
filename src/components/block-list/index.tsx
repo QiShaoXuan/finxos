@@ -26,7 +26,7 @@ const menu = () => {
       }}
     >
       {blocks.map((block: BlockSetting) => {
-        return block.isBlock === false ? null : (
+        return block.isInline === true ? null : (
           <Menu.Item key={block.name}>
             <div className="finxos-block-list__item">
               {block.icon ? <block.icon /> : null}

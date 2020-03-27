@@ -22,7 +22,7 @@ export interface BlockSetting {
   data: { [key: string]: any };
   render: (props: { [key: string]: any }) => ReactElement;
   paste(el: HTMLElement): boolean | {};
-  isBlock?: boolean;
+  isInline?: boolean;
   preventFormats?: string[];
   onKeyDown?(event: KeyboardEvent<HTMLDivElement>, editor: Editor, selectedBlocks: Node[]): undefined;
   operation?: Operation;
