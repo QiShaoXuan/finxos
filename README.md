@@ -6,7 +6,7 @@
 
 ## Why
 
-`slate.js` 是一个富文本开发工具，相较之下像是 `jQuery` 一样，为开发者统一封装了富文本的处理方法，我希望做一个 `Bootstrap` 之于 `jQuery` 的框架，于是`finxos` 应运而生。
+在我看来 `slate.js` 是一个富文本开发工具库，如同 `vue` 或者 `react` 之于浏览器一样，为开发者提供了统一富文本处理方式，我希望做一个 `vue-admin` 之于 `vue` 一样的框架（扩展？），于是`finxos` 应运而生。
 
 ## Feature
 
@@ -17,3 +17,14 @@
 - 一个已经设计好的富文本编辑逻辑。
 
 - 一个已经设计好的 UI 组件库。
+
+
+
+
+
+setBlockData 可优化
+convertBlock 可优化
+
+
+
+
